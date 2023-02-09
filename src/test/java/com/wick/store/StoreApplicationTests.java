@@ -36,7 +36,8 @@ class StoreApplicationTests {
 		UserEntity user=new UserEntity();
 		user.setUsername("john");
 		user.setPassword("12345");
-		
+		userService.reg(user);
+		System.out.println("ok");
 	}
 
 }

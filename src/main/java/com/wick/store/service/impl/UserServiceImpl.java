@@ -5,6 +5,7 @@ import com.wick.store.repository.UserMapper;
 import com.wick.store.service.UserService;
 import com.wick.store.service.ex.InsertException;
 import com.wick.store.service.ex.UserNameDuplicatedException;
+import com.wick.store.util.GetPassWord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,12 @@ public class UserServiceImpl implements UserService {
         if (result !=null){
             throw new UserNameDuplicatedException("用户已经被注册了");
         }
+        //加密操作
+        String oldPassword =userEntity.getPassword();
+        String salt=userEntity.getSalt();
+        String md5Password=GetPassWord.getmd5PassWord(oldPassword,salt);
+        userEntity.setPassword(md5Password);
+        userEntity.setSalt(salt);
         userEntity.setIsDelete(0);
         userEntity.setCreatedUser(userEntity.getUsername());
         userEntity.setCreatedTime(new Date());
