@@ -1,5 +1,6 @@
 package com.wick.store.service.ex;
 
+//基类的异常
 public class ServiceException extends RuntimeException{
     public ServiceException() {
         super();
