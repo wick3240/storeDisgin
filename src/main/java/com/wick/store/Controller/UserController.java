@@ -1,6 +1,7 @@
 package com.wick.store.Controller;
 
 import com.wick.store.domain.entiey.UserEntity;
+import com.wick.store.util.JsonResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
     @PostMapping("/org")
-    public void org(UserEntity user){
-
+    public JsonResult org(UserEntity user){
+        return new JsonResult();
     }
 }
