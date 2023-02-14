@@ -1,6 +1,7 @@
 package com.wick.store.domain.entiey;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -10,8 +11,8 @@ import java.io.Serializable;
 @Data
 @TableName(value ="t_user")
 public class UserEntity extends BaseEntity implements Serializable {
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
-    private Integer uid;
+    @TableId(value = "uid", type = IdType.ASSIGN_UUID)
+    private String uid;
     /**
      * 用户账号
      */
@@ -40,6 +41,8 @@ public class UserEntity extends BaseEntity implements Serializable {
      *头像
      */
     private String avatar;
+
+    @TableField(value = "is_delete")
     private Integer isDelete;
 }
     //实体类省略了三个方法，一个是get，set方法，一个是equals和hashCode()方法，一个是toString方法。

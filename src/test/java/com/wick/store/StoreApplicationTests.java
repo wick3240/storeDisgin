@@ -3,6 +3,7 @@ package com.wick.store;
 import com.wick.store.domain.entiey.UserEntity;
 import com.wick.store.repository.UserMapper;
 import com.wick.store.service.UserService;
+import com.wick.store.service.ex.ServiceException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,11 +34,16 @@ class StoreApplicationTests {
 	}
 	@Test
 	void userRegistration(){
-		UserEntity user=new UserEntity();
-		user.setUsername("john");
-		user.setPassword("12345");
-		userService.reg(user);
-		System.out.println("ok");
+		try {
+			UserEntity user = new UserEntity();
+			user.setUsername("john wick");
+			user.setPassword("12345");
+			userService.reg(user);
+			System.out.println("ok");
+		}catch (ServiceException e){
+			System.out.println(e.getClass().getSimpleName());
+			System.out.println(e.getMessage());
+		}
 	}
 
 }
