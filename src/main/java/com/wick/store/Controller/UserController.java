@@ -21,4 +21,9 @@ public class UserController extends BaseController{
         userService.reg(user);
         return new JsonResult<>(OK);
     }
+    @PostMapping("/login")
+    public JsonResult<UserEntity> login(String username,String password){
+        UserEntity data=userService.login(username,password);
+        return new JsonResult<UserEntity>(OK,data);
+    }
 }
