@@ -7,6 +7,7 @@ import com.wick.store.util.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 
+import javax.servlet.http.HttpSession;
 import java.rmi.ServerException;
 public class BaseController {
     public static final int OK=200;
@@ -30,5 +31,16 @@ public class BaseController {
             result.setMessage("用户密码错误异常");
         }
         return result;
+    }
+    /**
+     * 获取session对象中的uid
+     * @param session session对象
+     * @return 当前登录用户的uid的值
+     */
+    public final String getUidFromSession(HttpSession session){
+        return session.getAttribute("uid").toString();
+    }
+    public final String getUserNameFromSession(HttpSession session){
+        return session.getAttribute("username").toString();
     }
 }

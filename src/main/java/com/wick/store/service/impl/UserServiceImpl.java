@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
         }
         //加密操作
         String oldPassword =userEntity.getPassword();
-        String salt=userEntity.getSalt();
+        String salt = UUID.randomUUID().toString().toUpperCase();
         String md5Password=GetPassWord.getmd5PassWord(oldPassword,salt);
         userEntity.setPassword(md5Password);
         userEntity.setSalt(salt);

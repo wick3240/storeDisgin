@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/user")
 public class UserController extends BaseController{
@@ -22,8 +24,12 @@ public class UserController extends BaseController{
         return new JsonResult<>(OK);
     }
     @PostMapping("/login")
-    public JsonResult<UserEntity> login(String username,String password){
+    public JsonResult<UserEntity> login(String username, String password, HttpSession session){
         UserEntity data=userService.login(username,password);
+        session.setAttribute("uid",data.getUid());
+        session.setAttribute("uaername",data.getUsername());
+        System.out.println(getUserNameFromSession(session));
+        System.out.println(getUidFromSession(session));
         return new JsonResult<UserEntity>(OK,data);
     }
 }
