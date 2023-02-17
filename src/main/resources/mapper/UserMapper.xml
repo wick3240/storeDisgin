@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wick.store.repository.UserMapper">
+    <update id="updatePasswordByUid">
+        update t_user set
+        password=#{password}
+        where uid=#{uid}
+    </update>
 
 
-<!--resultType：表示查询结果集类型，只需要指定对应映射类的类型，并且包含完整包接口-->
+    <!--resultType：表示查询结果集类型，只需要指定对应映射类的类型，并且包含完整包接口-->
     <select id="findByUserName" resultType="com.wick.store.domain.entiey.UserEntity">
         select * from t_user where username=#{username}
+    </select>
+    <select id="findByUid" resultType="com.wick.store.domain.entiey.UserEntity">
+        select * from t_user where uid=#{uid}
     </select>
 </mapper>

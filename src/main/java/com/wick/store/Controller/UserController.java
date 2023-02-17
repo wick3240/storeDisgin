@@ -4,6 +4,7 @@ import com.wick.store.domain.entiey.UserEntity;
 import com.wick.store.service.UserService;
 import com.wick.store.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,4 +33,17 @@ public class UserController extends BaseController{
         System.out.println(getUidFromSession(session));
         return new JsonResult<UserEntity>(OK,data);
     }
+    @PostMapping("/changePassword")
+    public JsonResult<Void> changePassword(String oldPassword,String newPassword,HttpSession session){
+        String  uid=getUidFromSession(session);
+        String username=getUserNameFromSession(session);
+        userService.changePassword(uid,username,oldPassword,newPassword);
+        return new JsonResult<>(OK);
+    }
+    @GetMapping("/findByUid")
+    public JsonResult<UserEntity> findByUid(HttpSession session){
+        UserEntity data=userService.findByUid(getUidFromSession(session));
+        return new JsonResult<UserEntity>(OK,data);
+    }
+
 }

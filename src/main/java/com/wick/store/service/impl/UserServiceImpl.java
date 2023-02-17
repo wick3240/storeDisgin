@@ -5,6 +5,7 @@ import com.wick.store.repository.UserMapper;
 import com.wick.store.service.UserService;
 import com.wick.store.service.ex.InsertException;
 import com.wick.store.service.ex.PasswordNotMatchException;
+import com.wick.store.service.ex.UpdateException;
 import com.wick.store.service.ex.UserNameDuplicatedException;
 import com.wick.store.util.GetPassWord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,39 @@ public class UserServiceImpl implements UserService {
         user.setUsername(result.getUsername());
         user.setUid(result.getUid());
         user.setAvatar(result.getAvatar());
+        return user;
+    }
+
+    @Override
+    public void changePassword(String uid, String username, String oldPassword, String newPassword) {
+        UserEntity result=userMapper.findByUid(uid);
+        if (result==null || result.getIsDelete()==1){
+            throw new UserNameDuplicatedException("用户数据不存在");
+        }
+        String oldMd5Password=GetPassWord.getmd5PassWord(oldPassword,result.getSalt());
+        if (!result.getPassword().equals(oldPassword)){
+            throw new PasswordNotMatchException("密码错误");
+        }
+        String newMd5Password=GetPassWord.getmd5PassWord(newPassword,result.getSalt());
+        Integer row=userMapper.updatePasswordByUid(uid,username,newPassword);
+        if (row !=1){
+            throw  new UpdateException("更新密码错误");
+
+        }
+
+    }
+
+    @Override
+    public UserEntity findByUid(String uid) {
+        UserEntity result =userMapper.findByUid(uid);
+        if (result==null || result.getIsDelete()==1){
+            throw new UserNameDuplicatedException("用户数据不存在");
+        }
+        UserEntity user=new UserEntity();
+        user.setUsername(result.getUsername());
+        user.setPhone(result.getPhone());
+        user.setEmail(result.getEmail());
+        user.setGender(result.getGender());
         return user;
     }
 }

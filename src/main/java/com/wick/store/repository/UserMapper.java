@@ -20,4 +20,8 @@ public interface UserMapper extends BaseMapper<UserEntity> {
      * @return 如果找到的话，返回对应的用户的数据，没有就返回null
      */
     UserEntity findByUserName(String username);
+
+    UserEntity findByUid(String uid);
+
+    Integer updatePasswordByUid(String uid, String username, String newPassword);
 }
