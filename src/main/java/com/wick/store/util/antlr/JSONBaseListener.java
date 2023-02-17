@@ -1,4 +1,4 @@
-// Generated from D:/work/Marketplace/srcRef/repo_group_marketplace_be/mp-common/src/main/java/com/marketplace/common/util/antlr\JSON.g4 by ANTLR 4.10.1
+
 package com.wick.store.util.antlr;
 
 import org.antlr.v4.runtime.ParserRuleContext;
