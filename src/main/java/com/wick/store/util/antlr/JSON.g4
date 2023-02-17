@@ -1,7 +1,7 @@
 // Derived from http://json.org
 grammar JSON;
 
-@header {package com.marketplace.common.util.antlr;}
+@header {package com.wick.store.util.antlr;}
 
 json:   object
     |   array
