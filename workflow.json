@@ -1,0 +1,26 @@
+{
+    "parallelNode": [
+        {
+            "serialNode": [
+                {
+                    "handleNode": {
+                        "nodeId": "44f6c79c-6615-11ed-959d-3b55e3b780b8",
+                        "userIdList": [
+                            "5d0c71ccb34347879e3aa98c3b59f512",
+                            ""
+                        ]
+                    }
+                },
+                {
+                    "handleNode": {
+                        "nodeId": "2d773492-6617-11ed-aa4f-c3809fb3f27f",
+                        "userIdList": [
+                            "599bb811a5ec4848a05cc586fa88e950",
+                            "d6c302b193fb28e501c261a6dedf9164"
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
