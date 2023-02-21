@@ -24,4 +24,8 @@ public interface UserMapper extends BaseMapper<UserEntity> {
     UserEntity findByUid(String uid);
 
     Integer updatePasswordByUid(String uid, String username, String newPassword);
+
+    Integer updateInfoByUid(UserEntity user);
+
+    Integer updateAvatarByUid(String uid, String avatar, String username);
 }

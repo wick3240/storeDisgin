@@ -6,6 +6,26 @@
         password=#{password}
         where uid=#{uid}
     </update>
+    <update id="updateInfoByUid">
+        update t_user set
+        <if test="phone!=null">phone=#{phone}</if>
+        <if test="phone!=null">email=#{email}</if>
+        <if test="phone!=null">gender=#{gender}</if>
+        where uid=#{uid}
+    </update>
+    <update id="updateAvatarByUid">
+        update t_user
+        set
+        avatar=#{avatar}
+        where uid=#{uid}
+    </update>
+    <!--    另外的update代码，先注释，以自己的逻辑操作先-->
+<!--    <update id="updateOtherPasswordByUid">-->
+<!--        update t_user set password=#{password},-->
+<!--        modified_user=#{modifiedUser},-->
+<!--        modified_time=#{modifiedTime},-->
+<!--        where uid=#{uid}-->
+<!--    </update>-->
 
 
     <!--resultType：表示查询结果集类型，只需要指定对应映射类的类型，并且包含完整包接口-->

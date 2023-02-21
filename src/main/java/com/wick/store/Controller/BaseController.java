@@ -4,6 +4,7 @@ import com.wick.store.service.ex.InsertException;
 import com.wick.store.service.ex.PasswordNotMatchException;
 import com.wick.store.service.ex.UpdateException;
 import com.wick.store.service.ex.UserNameDuplicatedException;
+import com.wick.store.service.ex.fileEx.*;
 import com.wick.store.util.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.rmi.ServerException;
 public class BaseController {
     public static final int OK=200;
-    @ExceptionHandler(ServerException.class)
+    @ExceptionHandler({ServerException.class,FileUploadException.class})
     public JsonResult<Void> handleException(Throwable e){
         JsonResult<Void> result=new JsonResult<>(e);
         if (e instanceof UserNameDuplicatedException){
@@ -34,6 +35,17 @@ public class BaseController {
             result.setState(5001);
             result.setMessage("更新数据是产生未知异常");
 
+        }
+        else if (e instanceof FileEmptyException) {
+            result.setState(6000);
+        } else if (e instanceof FileSizeException) {
+            result.setState(6001);
+        } else if (e instanceof FileTypeException) {
+            result.setState(6002);
+        } else if (e instanceof FileStateException) {
+            result.setState(6003);
+        } else if (e instanceof FileUploadIOException) {
+            result.setState(6004);
         }
         return result;
     }
