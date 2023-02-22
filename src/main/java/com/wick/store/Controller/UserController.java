@@ -3,6 +3,7 @@ package com.wick.store.Controller;
 import com.wick.store.domain.entiey.UserEntity;
 import com.wick.store.service.UserService;
 import com.wick.store.util.JsonResult;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 @RestController
+@Api(tags = "注册登录模块")
 @RequestMapping("/user")
 public class UserController extends BaseController{
 
@@ -24,9 +26,9 @@ public class UserController extends BaseController{
 
     @ApiOperation(value = "注册操作",notes = "注册操作")
     @PostMapping("/org")
-    public JsonResult<Void> org(UserEntity user){
+    public JsonResult org(UserEntity user){
         userService.reg(user);
-        return new JsonResult<>(OK);
+        return new JsonResult();
     }
     @ApiOperation(value = "登录操作",notes = "登录操作")
     @PostMapping("/login")
@@ -36,28 +38,28 @@ public class UserController extends BaseController{
         session.setAttribute("uaername",data.getUsername());
         System.out.println(getUserNameFromSession(session));
         System.out.println(getUidFromSession(session));
-        return new JsonResult<UserEntity>(OK,data);
+        return new JsonResult<UserEntity>(data);
     }
     @ApiOperation(value = "修改密码",notes = "修改密码")
     @PostMapping("/changePassword")
-    public JsonResult<Void> changePassword(String oldPassword,String newPassword,HttpSession session){
+    public JsonResult changePassword(String oldPassword,String newPassword,HttpSession session){
         String  uid=getUidFromSession(session);
         String username=getUserNameFromSession(session);
         userService.changePassword(uid,username,oldPassword,newPassword);
-        return new JsonResult<>(OK);
+        return new JsonResult<>();
     }
     @ApiOperation("查找用户的uid")
     @GetMapping("/findByUid")
     public JsonResult<UserEntity> findByUid(HttpSession session){
         UserEntity data=userService.findByUid(getUidFromSession(session));
-        return new JsonResult<UserEntity>(OK,data);
+        return new JsonResult(data);
     }
     @ApiOperation(value = "修改当前用户的信息",notes = "修改当前用户的信息")
     @PostMapping("/changeInfo")
-    public JsonResult<Void> changeInfoUser(UserEntity user,HttpSession session){
+    public JsonResult changeInfoUser(UserEntity user,HttpSession session){
         String  uid=getUidFromSession(session);
         userService.changeInfoUser(uid,user);
-        return new JsonResult<>(OK);
+        return new JsonResult();
     }
 
     @ApiOperation(value = "上传头像",notes = "上传头像")
@@ -66,7 +68,7 @@ public class UserController extends BaseController{
         String uid=getUidFromSession(session);
         String username=getUserNameFromSession(session);
         userService.updateAvatar(session,uid,username,file);
-        return new JsonResult<>(OK);
+        return new JsonResult();
 
     }
 }

@@ -12,40 +12,40 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import javax.servlet.http.HttpSession;
 import java.rmi.ServerException;
 public class BaseController {
-    public static final int OK=200;
+
     @ExceptionHandler({ServerException.class,FileUploadException.class})
     public JsonResult<Void> handleException(Throwable e){
         JsonResult<Void> result=new JsonResult<>(e);
         if (e instanceof UserNameDuplicatedException){
-            result.setState(4000);
-            result.setMessage("用户已经被注册了");
+            result.setCode(4000);
+            result.setMsg("用户已经被注册了");
         }
         else if(e instanceof InsertException){
-            result.setState(5000);
-            result.setMessage("注册发生异常");
+            result.setCode(5000);
+            result.setMsg("注册发生异常");
         } else if (e instanceof UserNameDuplicatedException) {
-            result.setState(4001);
-            result.setMessage("用户数据不存在的异常");
+            result.setCode(4001);
+            result.setMsg("用户数据不存在的异常");
 
         }
         else if(e instanceof PasswordNotMatchException){
-            result.setState(4002);
-            result.setMessage("用户密码错误异常");
+            result.setCode(4002);
+            result.setMsg("用户密码错误异常");
         } else if (e instanceof UpdateException) {
-            result.setState(5001);
-            result.setMessage("更新数据是产生未知异常");
+            result.setCode(5001);
+            result.setMsg("更新数据是产生未知异常");
 
         }
         else if (e instanceof FileEmptyException) {
-            result.setState(6000);
+            result.setCode(6000);
         } else if (e instanceof FileSizeException) {
-            result.setState(6001);
+            result.setCode(6001);
         } else if (e instanceof FileTypeException) {
-            result.setState(6002);
+            result.setCode(6002);
         } else if (e instanceof FileStateException) {
-            result.setState(6003);
+            result.setCode(6003);
         } else if (e instanceof FileUploadIOException) {
-            result.setState(6004);
+            result.setCode(6004);
         }
         return result;
     }
