@@ -159,7 +159,7 @@ public class UserServiceImpl implements UserService {
             throw new FileTypeException("文件类型不支持");
         }
         String parent=session.getServletContext().getRealPath("/upload");
-        log.info("测试调用===="+parent);
+        log.info("测试调用====",parent);
         //File对象指向这个路径，通过判断file是否存在得到该路径是否存在
         File dir=new File(parent);
         if (!dir.exists()){

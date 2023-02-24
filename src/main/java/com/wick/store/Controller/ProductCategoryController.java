@@ -33,9 +33,9 @@ public class ProductCategoryController extends BaseController{
         return new JsonResult<>(productCategoryService.save(productCategoryDto));
     }
     @ApiOperation(value = "删除分类", notes = "删除分类")
-    @PostMapping("/batch/delete")
-    public JsonResult delete(@RequestBody List<String> ids) {
-        productCategoryService.delete(ids);
+    @PostMapping("/delete/{cid}")
+    public JsonResult delete(@PathVariable String id) {
+        productCategoryService.delete(id);
         return new JsonResult();
     }
     @ApiOperation(value = "修改", notes = "修改")

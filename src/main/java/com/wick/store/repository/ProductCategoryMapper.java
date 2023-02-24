@@ -10,4 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ProductCategoryMapper extends BaseMapper<ProductCategoryEntity> {
     Page<ProductCategoryVo> queryPage(Page<ProductCategoryVo> page, ProductCategoryDto productCategoryDto);
+
+    void deleteByCid(String id);
 }

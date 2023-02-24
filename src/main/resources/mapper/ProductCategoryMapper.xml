@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wick.store.repository.ProductCategoryMapper">
+    <delete id="deleteByCid">
+        update product_category set is_delete=1 where id=#{id}
+    </delete>
     <select id="queryPage" resultType="com.wick.store.domain.vo.ProductCategoryVo">
         select * from t_product_category
     </select>

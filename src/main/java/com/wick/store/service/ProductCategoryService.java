@@ -11,7 +11,7 @@ public interface ProductCategoryService {
 
     ProductCategoryVo save(ProductCategoryDto productCategoryDto);
 
-    void delete(List<String> ids);
+    void delete(String id);
 
     void update(ProductCategoryDto productCategoryDto);
 }
