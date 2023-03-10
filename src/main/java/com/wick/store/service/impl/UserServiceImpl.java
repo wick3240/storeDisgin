@@ -1,6 +1,7 @@
 package com.wick.store.service.impl;
 
 import com.wick.store.domain.entiey.UserEntity;
+import com.wick.store.eums.AccountType;
 import com.wick.store.repository.UserMapper;
 import com.wick.store.service.UserService;
 import com.wick.store.service.ex.*;
@@ -8,6 +9,7 @@ import com.wick.store.service.ex.fileEx.*;
 import com.wick.store.util.GetPassWord;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -192,5 +194,11 @@ public class UserServiceImpl implements UserService {
             throw new UpdateException("更新用户头像时产生未知异常");
         }
 
+    }
+
+    @Override
+    @CacheEvict(key = "#accountType.name() + '-' + #username")
+    public void removeUser(AccountType accountType, String username) {
+        log.info("remove user from cache, {}, {}", accountType, username);
     }
 }
