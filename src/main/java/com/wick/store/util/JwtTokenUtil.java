@@ -1,66 +1,47 @@
 package com.wick.store.util;
 
-import com.wick.store.config.MpSsoConfig;
 
-import com.wick.store.exception.JwtTokenException;
-import io.jsonwebtoken.*;
-import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.wick.store.domain.entiey.UserEntity;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
 
-/**
- * @author liyong
- */
 @Component
-public class JwtTokenUtil implements Serializable {
-    @Autowired
-    private MpSsoConfig config;
+public class JwtTokenUtil   {
+    private static final String SECRET_KEY = "FWD_store";
 
-
-    public Claims getAllClaimsFromToken(String token) throws JwtTokenException {
+    //生成token
+    public  String createToken(Authentication authentication) {
+        final UserEntity user = (UserEntity) authentication.getPrincipal();
+        return Jwts.builder()
+                .setSubject(user.getUsername())
+                .setExpiration(new Date(System.currentTimeMillis() + 3600 * 1000))
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .compact();
+    }
+    //校验token
+    public static boolean validateToken(String token) {
         try {
-            return Jwts.parser().setSigningKey(config.getJwtSecret()).parseClaimsJws(token).getBody();
-        } catch (ExpiredJwtException e) {
-            throw new JwtTokenException("JWT Token has expired", e);
-        } catch (UnsupportedJwtException
-                | MalformedJwtException
-                | IllegalArgumentException
-                | SignatureException e) {
-            throw new JwtTokenException("JWT Token is invalid.", e);
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
-
-
-    public String generateToken(UserDetails userDetails, Map<String, Object> claims, String id) {
-        return doGenerateToken(claims, userDetails.getUsername(), id);
+    //获取token
+    public static String getSubject(String token) {
+        Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+        return claims.getSubject();
     }
-
-    private String doGenerateToken(Map<String, Object> claims, String subject, String id) {
-
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(DateTime.now().plusSeconds(config.getJwtTokenValidity()).toDate())
-                .setId(id)
-                .signWith(SignatureAlgorithm.HS512, config.getJwtSecret())
-                .compact();
-    }
-
-    public String createToken(Map<String, Object> claims, String subject, String id) {
-
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(DateTime.now().plusSeconds(config.getJwtTokenValidity()).toDate())
-                .setId(id)
-                .signWith(SignatureAlgorithm.HS512, config.getJwtSecret())
-                .compact();
+    //判断token是否过期
+    private boolean isTokenExpired(String token) {
+        Date expirationDate = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getExpiration();
+        return expirationDate.before(new Date());
     }
 }
+
+

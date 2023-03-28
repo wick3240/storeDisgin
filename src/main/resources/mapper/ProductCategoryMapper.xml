@@ -4,7 +4,26 @@
     <delete id="deleteByCid">
         update product_category set is_delete=1 where id=#{id}
     </delete>
-    <select id="queryPage" resultType="com.wick.store.domain.vo.ProductCategoryVo">
-        select * from t_product_category
+     <select id="queryPage" resultType="com.wick.store.domain.vo.ProductCategoryVo">
+         select * from product_category pc
+         where is_deleted=0
+         <if test="productCategoryDto != null">
+             <if test="productCategoryDto.name != null and formPageDto.name  != ''">
+                 AND pc.name like (CONCAT('%', #{formPageDto.name,jdbcType=VARCHAR}, '%'))
+             </if>
+             <if test="productCategoryDto.workflow_id != null and formPageDto.productType != ''">
+                 AND pc.workflow_id = #{formPageDto.productType,jdbcType=VARCHAR}
+             </if>
+         </if>
+         order by pc.created_date
+    </select>
+    <select id="selectTop" resultType="com.wick.store.domain.vo.ProductCategoryListVo">
+
+    </select>
+    <select id="selectByWorkflow" resultType="java.lang.String">
+        select pc.workflow_formula ,pc.worflow_id from product_category pc where pc.id=#{cid}
+    </select>
+    <select id="selectByCidList" resultType="com.wick.store.domain.vo.ProductCategoryListVo">
+        select * from product_category where is_deleted=0
     </select>
 </mapper>

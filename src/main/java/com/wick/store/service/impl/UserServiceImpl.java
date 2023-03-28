@@ -61,9 +61,9 @@ public class UserServiceImpl implements UserService {
         userEntity.setSalt(salt);
         userEntity.setIsDelete(0);
         userEntity.setCreatedUser(userEntity.getUsername());
-        userEntity.setCreatedTime(new Date());
-        userEntity.setModifiedTime(new Date());
-        userEntity.setModifiedUser(userEntity.getUsername());
+        userEntity.setCreatedDate(new Date());
+        userEntity.setUpdateDate(new Date());
+        userEntity.setUpdateUser(userEntity.getUsername());
         Integer row = userMapper.insert(userEntity);
         if (row != 1) {
             throw new InsertException("用户在注册过程中产生为止异常");
@@ -196,9 +196,5 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    @CacheEvict(key = "#accountType.name() + '-' + #username")
-    public void removeUser(AccountType accountType, String username) {
-        log.info("remove user from cache, {}, {}", accountType, username);
-    }
+
 }

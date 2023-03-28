@@ -9,8 +9,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wick.store.domain.Dto.ProductCategoryDto;
 import com.wick.store.domain.entiey.ProductCategoryEntity;
 import com.wick.store.domain.vo.PageVO;
+import com.wick.store.domain.vo.ProductCategoryListVo;
 import com.wick.store.domain.vo.ProductCategoryVo;
 import com.wick.store.repository.ProductCategoryMapper;
+import com.wick.store.repository.ProductInfoMapper;
 import com.wick.store.service.ProductCategoryService;
 import com.wick.store.service.ex.CategoryNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -29,12 +32,14 @@ public class ProductCategoryImpl extends ServiceImpl<ProductCategoryMapper,Produ
         implements ProductCategoryService {
     @Autowired
     private ProductCategoryMapper productCategoryMapper;
+    @Autowired
+    private ProductInfoMapper productInfoMapper;
 
     @Override
     public PageVO<ProductCategoryVo> queryPage(ProductCategoryDto productCategoryDto) {
         PageVO<ProductCategoryVo> data=new PageVO();
         int current = productCategoryDto.getPage() == null ? 1 : productCategoryDto.getPage();
-        int size = productCategoryDto.getRow() == null ? 10 : productCategoryDto.getRow();
+        int size = productCategoryDto.getRow() == null ? 5 : productCategoryDto.getRow();
         Page<ProductCategoryVo> page=new Page<>(current,size);
         Page<ProductCategoryVo> pages=productCategoryMapper.queryPage(page,productCategoryDto);
         data.setList(pages.getRecords());
@@ -70,6 +75,12 @@ public class ProductCategoryImpl extends ServiceImpl<ProductCategoryMapper,Produ
     @Override
     public void update(ProductCategoryDto productCategoryDto) {
 
+    }
+
+    @Override
+    public List<ProductCategoryListVo> listProductCategory() {
+        List<ProductCategoryListVo> productCategoryListVos =productCategoryMapper.selectByCidList();
+        return productCategoryListVos;
     }
 
 

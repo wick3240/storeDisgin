@@ -32,18 +32,16 @@ public class UserController extends BaseController{
     }
     @ApiOperation(value = "登录操作",notes = "登录操作")
     @PostMapping("/login")
-    public JsonResult<UserEntity> login(String username, String password, HttpSession session){
+    public JsonResult login(String username, String password, HttpSession session){
         UserEntity data=userService.login(username,password);
         session.setAttribute("uid",data.getUid());
         session.setAttribute("uaername",data.getUsername());
-        System.out.println(getUserNameFromSession(session));
-        System.out.println(getUidFromSession(session));
-        return new JsonResult<UserEntity>(data);
+        return new JsonResult(data);
     }
     @ApiOperation(value = "修改密码",notes = "修改密码")
     @PostMapping("/changePassword")
     public JsonResult changePassword(String oldPassword,String newPassword,HttpSession session){
-        String  uid=getUidFromSession(session);
+        String uid=getUidFromSession(session);
         String username=getUserNameFromSession(session);
         userService.changePassword(uid,username,oldPassword,newPassword);
         return new JsonResult<>();

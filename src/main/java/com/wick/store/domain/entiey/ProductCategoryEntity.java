@@ -11,11 +11,7 @@ import java.io.Serializable;
 @Data
 @TableName("t_product_category")
 public class ProductCategoryEntity extends BaseEntity implements Serializable {
-    /**
-     * 分类编号
-     */
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
-    private String id;
+
 
     /**
      * 分类名称

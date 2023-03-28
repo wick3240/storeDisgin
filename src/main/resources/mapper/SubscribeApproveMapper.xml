@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wick.store.repository.SubscribeApproveMapper">
+
+    <select id="selectPageData" resultType="com.wick.store.domain.vo.SubscribeRecordAndProductVO">
+        select sa.*,pc.name from subscribe_approve sa
+    inner join product_category  pc on pc.id=sa.cid
+    where user_id=#{userId}
+    AND sa.is_deleted=0
+    <if test="param.subCode != null and param.subCode != '' ">
+        AND sa.sub_code = #{param.subCode,jdbcType=VARCHAR}
+    </if>
+    <if test="param.productName != null and param.productName != '' ">
+        AND sa.product_name = #{param.productName,jdbcType=VARCHAR}
+    </if>
+    <if test="param.cidName != null and param.cidName != '' ">
+        AND pc.name = #{param.cidName,jdbcType=VARCHAR}
+    </if>
+    <if test="param.createBy  != null and param.createBy != ''">
+        AND t.create_by = #{param.createBy,jdbcType=VARCHAR}
+    </if>
+
+    order by sa.created_date
+    </select>
+</mapper>

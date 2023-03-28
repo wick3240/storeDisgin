@@ -28,4 +28,5 @@ public interface UserMapper extends BaseMapper<UserEntity> {
     Integer updateInfoByUid(UserEntity user);
 
     Integer updateAvatarByUid(String uid, String avatar, String username);
+
 }
