@@ -13,7 +13,7 @@ public class PublishWorkflowApproveEntity extends BaseEntity implements Serializ
     /** 节点审批状态 */
     private Integer nodeApproveStatus;
     /** 节点审批人 */
-    private String nodeApprover;
+    private String approver;
     /** 分类id */
     private String cid;
     /** node节点审批人 */

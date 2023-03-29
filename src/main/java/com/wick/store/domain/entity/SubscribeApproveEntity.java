@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@TableName("t_subscribe_approve")
+@TableName("subscribe_approve")
 public class SubscribeApproveEntity extends BaseEntity implements Serializable {
     /** 订阅单号 */
     private String subCode;
@@ -23,8 +23,5 @@ public class SubscribeApproveEntity extends BaseEntity implements Serializable {
     private String cid;
     /** 审批通过时 */
     private Date approveTime;
-    /**
-     * 订阅者id
-     */
-    private String userId;
+
 }

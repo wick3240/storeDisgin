@@ -20,10 +20,10 @@ public class BaseEntity implements Serializable {
      @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
      private Date createdDate ;
 
-     @TableField(value = "modified_user", fill = FieldFill.INSERT)
-     private String updateUser ;
+     @TableField(value = "update_user", fill = FieldFill.INSERT)
+     private String updateUser;
 
-     @TableField(value = "modified_time", fill = FieldFill.INSERT)
+     @TableField(value = "update_date", fill = FieldFill.INSERT)
      @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
      private Date updateDate;
 

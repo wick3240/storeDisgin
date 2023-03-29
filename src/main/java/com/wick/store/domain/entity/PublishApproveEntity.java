@@ -19,8 +19,6 @@ public class PublishApproveEntity extends BaseEntity implements Serializable {
     private String approver;
     /** 产品名字 */
     private String productName;
-    /** 发布者id */
-    private String userId;
     /** 分类id */
     private String cid;
     /** 审批通过时间 */
