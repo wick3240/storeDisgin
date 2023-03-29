@@ -1,7 +1,7 @@
 package com.wick.store.repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wick.store.domain.entiey.UserEntity;
+import com.wick.store.domain.entity.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

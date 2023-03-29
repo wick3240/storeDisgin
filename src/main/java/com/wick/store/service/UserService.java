@@ -1,6 +1,6 @@
 package com.wick.store.service;
 
-import com.wick.store.domain.entiey.UserEntity;
+import com.wick.store.domain.entity.UserEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;

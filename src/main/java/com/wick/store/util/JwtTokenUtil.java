@@ -1,7 +1,7 @@
 package com.wick.store.util;
 
 
-import com.wick.store.domain.entiey.UserEntity;
+import com.wick.store.domain.entity.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

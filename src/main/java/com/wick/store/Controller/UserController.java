@@ -1,10 +1,9 @@
 package com.wick.store.Controller;
 
-import com.wick.store.domain.entiey.UserEntity;
+import com.wick.store.domain.entity.UserEntity;
 import com.wick.store.service.UserService;
 import com.wick.store.util.JsonResult;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.util.UUID;
 
 @RestController
 @Api(tags = "注册登录模块")

@@ -1,6 +1,6 @@
 package com.wick.store;
 
-import com.wick.store.domain.entiey.UserEntity;
+import com.wick.store.domain.entity.UserEntity;
 import com.wick.store.repository.UserMapper;
 import com.wick.store.service.UserService;
 import com.wick.store.service.ex.ServiceException;

@@ -2,10 +2,9 @@ package com.wick.store.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wick.store.domain.entiey.ProductInfoEntity;
+import com.wick.store.domain.entity.ProductInfoEntity;
 import com.wick.store.domain.vo.ProductBannerProductVo;
 import com.wick.store.domain.vo.ProductHotVo;
-import com.wick.store.repository.ProductCategoryMapper;
 import com.wick.store.repository.ProductInfoMapper;
 import com.wick.store.service.ProductBannerService;
 import lombok.extern.slf4j.Slf4j;

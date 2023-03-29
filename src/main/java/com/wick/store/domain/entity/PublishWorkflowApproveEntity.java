@@ -1,4 +1,4 @@
-package com.wick.store.domain.entiey;
+package com.wick.store.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-@TableName("t_publish_workflow")
+@TableName("workflow_publish_approve")
 public class PublishWorkflowApproveEntity extends BaseEntity implements Serializable {
     /** 发布单号 */
     private String pubCode;

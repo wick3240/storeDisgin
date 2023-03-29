@@ -1,14 +1,17 @@
 package com.wick.store.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wick.store.domain.Dto.PublishApproveDto;
 import com.wick.store.domain.Dto.PublishWorkflowApproveDto;
 import com.wick.store.domain.Dto.WorkflowHandleNodeDto;
-import com.wick.store.domain.entiey.ProductInfoEntity;
-import com.wick.store.domain.entiey.PublishWorkflowApproveEntity;
+import com.wick.store.domain.entity.PublishWorkflowApproveEntity;
 import com.wick.store.domain.vo.PageVO;
 import com.wick.store.domain.vo.ProductPublishApproveVo;
+import com.wick.store.enums.ProductStatusType;
+import com.wick.store.repository.ProductCategoryMapper;
+import com.wick.store.repository.ProductInfoMapper;
 import com.wick.store.repository.PublishApproveMapper;
 import com.wick.store.repository.PublishWorkflowApproveMapper;
 import com.wick.store.service.PublishApproveService;
@@ -28,6 +31,10 @@ public class PublishApproveServiceImpl implements PublishApproveService {
     private PublishApproveMapper approveMapper;
     @Autowired
     private PublishWorkflowApproveMapper publishWorkflowApproveMapper;
+    @Autowired
+    private ProductCategoryMapper productCategoryMapper;
+    @Autowired
+    private ProductInfoMapper productInfoMapper;
 
 
     @Override
@@ -91,16 +98,10 @@ public class PublishApproveServiceImpl implements PublishApproveService {
             String approveUser = publishWorkflowApproveDto.getNodeApprover();
             Set<String> pubCodeSet = new HashSet<>();
             pubCodeSet.add(pubCode);
-            List<String> productIds = approveMapper.getProductIdsByPubCode(pubCodeSet);
-            // get wf_node_status
+            List<String> productIds = productInfoMapper.getProductIdsByPubCode(pubCodeSet);
             List<PublishWorkflowApproveEntity> handledNodeList = publishWorkflowApproveMapper.selectByPubCodeAndUserList(pubCode);
             log.info("查看数据====>" + handledNodeList);
-            String wfMasterId = null;
 
-
-
-//            String wfMasterId = handledNodeList.get(0).getWorkflowMasterId();
-//            long wfVersionNum = handledNodeList.get(0).getWfVersionNumber();
 
             // 通过pub_code 拿所有handled_node 数据。新增一个list拿全部数据
             Set<String> handledApprovalNodeIdsSet = new HashSet<>();
@@ -133,7 +134,7 @@ public class PublishApproveServiceImpl implements PublishApproveService {
                 publishWorkflowApproveMapper.updatePublishStatus(2, approveUser, approveTime, pubCode, nodeId, cid);
                 approveMapper.updateByApproveStatus(2, approveUser, approveTime, pubCode);
                 //todo 更新产品的状态，拒绝就是没有上架
-                approveMapper.updateBatchProductStatus(productIds, ProductStatusType.UN_APPROVAL.getCode());
+                productInfoMapper.updateBatchProductStatus(productIds, ProductStatusType.UN_APPROVAL.getCode());
                 nodeHandledCount++;
                 wfHandleFinish++;
 
@@ -144,10 +145,10 @@ public class PublishApproveServiceImpl implements PublishApproveService {
             publishWorkflowApproveMapper.updatePublishStatus(1, approveUser, approveTime, pubCode, nodeId, cid);
 
             handledApprovalNodeIdsSet.add(nodeId);
-
-            WorkflowJsonListener listener = new WorkflowJsonListener(approvalWorkflowVoBaseResponse.getData().getWorkflowFormula(), true);
+            String workflowFormula=productCategoryMapper.selectByWorkflow(cid);
+            WorkflowJsonListener listener = new WorkflowJsonListener(workflowFormula, true);
             List<WorkflowHandleNodeDto> nextPendingHandleNodeList = listener.nextPendingHandleNode(handledApprovalNodeIdsSet);
-            if (com.baomidou.mybatisplus.core.toolkit.CollectionUtils.isNotEmpty(nextPendingHandleNodeList)) {
+            if (CollectionUtils.isNotEmpty(nextPendingHandleNodeList)) {
                 Set<String> nodeIdSet = new HashSet<>();
                 for (WorkflowHandleNodeDto workflowHandleNodeDto : nextPendingHandleNodeList) {
                     if (!handledNodeList.stream().map(PublishWorkflowApproveEntity::getNodeId)
@@ -159,14 +160,13 @@ public class PublishApproveServiceImpl implements PublishApproveService {
                         nodeIdSet.add(workflowHandleNodeDto.getNodeId());
 
                         List<String> wfHandleUserList = workflowHandleNodeDto.getUserIdList();
-                        PublishWorkflowApproveEntity publishWorkflowApprove = new PublishWorkflowApproveEntity();
-                        publishWorkflowApprove.setNodeApproveStatus(0);
-                        publishWorkflowApprove.setCid(cid);
-                        publishWorkflowApprove.setWorkflowId(wfMasterId);
-                        publishWorkflowApprove.setPubCode(pubCode);
-                        publishWorkflowApprove.setNodeId(workflowHandleNodeDto.getNodeId());
-                        publishWorkflowApprove.setUserList(JSON.toJSONString(wfHandleUserList));
-                        publishWorkflowApproveMapper.insert(publishWorkflowApprove);
+                        PublishWorkflowApproveEntity publishWorkflowApproveEntity=new PublishWorkflowApproveEntity();
+                        publishWorkflowApproveEntity.setCid(cid);
+                        publishWorkflowApproveEntity.setNodeId(workflowHandleNodeDto.getNodeId());
+                        publishWorkflowApproveEntity.setNodeApproveStatus(0);
+                        publishWorkflowApproveEntity.setUserList(JSON.toJSONString(wfHandleUserList));
+                        publishWorkflowApproveEntity.setPubCode(pubCode);
+                        publishWorkflowApproveMapper.insert(publishWorkflowApproveEntity);
 
 
                     }
@@ -174,17 +174,15 @@ public class PublishApproveServiceImpl implements PublishApproveService {
                 //添加新的pendingnode，需要 判断 新pending node 是否在handled_node
                 //保存padding状态
             } else {
-                int countPendingStatus = productClassificationMapper.selectCountPendingStatus(pubCode);
-                if(countPendingStatus == 0){
                     //TODO:用sql去判断唯一订单是否还有pending状态，有的话就继续，没有就执行更新操作
                     approveMapper.updateByApproveStatus(1, approveUser, approveTime, pubCode);
                     // TODO: 2023/3/25 如果没有找到下一个节点，直接更新状态和产品的状态
-                    approveMapper.updateBatchProductStatus(productIds, ProductStatusType.PUBLISHED.getCode());
+                    productInfoMapper.updateBatchProductStatus(productIds, ProductStatusType.PUBLISHED.getCode());
                     wfHandleFinish++;
 
                 }
             }
 
-        }
+
     }
 }

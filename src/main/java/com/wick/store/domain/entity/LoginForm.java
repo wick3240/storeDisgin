@@ -1,4 +1,4 @@
-package com.wick.store.domain.entiey;
+package com.wick.store.domain.entity;
 
 import lombok.Data;
 

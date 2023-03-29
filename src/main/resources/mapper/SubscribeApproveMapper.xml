@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wick.store.repository.SubscribeApproveMapper">
 
+
+    <update id="updateByApproveStatus">
+        update subscribe_approve set approve_status=#{approveStatus},
+        approver=#{approveUser},
+        approved_message=#{approvalReason},
+        approved_time=#{approvalTime}
+        where subscribe_code=#{subscribeCode}
+    </update>
+
     <select id="selectPageData" resultType="com.wick.store.domain.vo.SubscribeRecordAndProductVO">
         select sa.*,pc.name from subscribe_approve sa
     inner join product_category  pc on pc.id=sa.cid
@@ -21,5 +30,15 @@
     </if>
 
     order by sa.created_date
+    </select>
+    <select id="selectApproveNodePageData" resultType="com.wick.store.domain.vo.SubscribeRecordAndProductVO">
+        select * from subscribe_workflow sw
+        inner join(select * from subscribe_approve sa2 where sa2.id in (select max(id) as id from subscribe_approve as sa1 group by sa1.sub_code)) as sa on sa.sub_code=sw.sub_code
+        where sw.id in( select sw.id  from subscribe_workflow CROSS APPLY OPENJSON(user_list)
+        where value= #{userId} and sa .approve_status in
+        <foreach collection ="statusList" open="(" close=")" item="item" separator=",">
+            #{item}
+        </foreach>)
+        order by sw.create_date
     </select>
 </mapper>

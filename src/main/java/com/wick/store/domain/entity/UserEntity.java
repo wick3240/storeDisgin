@@ -1,4 +1,4 @@
-package com.wick.store.domain.entiey;
+package com.wick.store.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

@@ -1,4 +1,4 @@
-package com.wick.store.domain.entiey;
+package com.wick.store.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-@TableName("t_product_info")
+@TableName("product_info")
 public class ProductInfoEntity extends BaseEntity implements Serializable {
     /** 产品名字 */
     private String name;

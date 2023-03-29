@@ -2,12 +2,10 @@ package com.wick.store.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wick.store.domain.Dto.ProductCategoryDto;
-import com.wick.store.domain.entiey.ProductCategoryEntity;
+import com.wick.store.domain.entity.ProductCategoryEntity;
 import com.wick.store.domain.vo.PageVO;
 import com.wick.store.domain.vo.ProductCategoryListVo;
 import com.wick.store.domain.vo.ProductCategoryVo;
@@ -16,14 +14,11 @@ import com.wick.store.repository.ProductInfoMapper;
 import com.wick.store.service.ProductCategoryService;
 import com.wick.store.service.ex.CategoryNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 
 @Slf4j

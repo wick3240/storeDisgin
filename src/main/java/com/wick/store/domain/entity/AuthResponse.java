@@ -1,6 +1,4 @@
-package com.wick.store.domain.entiey;
-
-import lombok.Data;
+package com.wick.store.domain.entity;
 
 
 public class AuthResponse {

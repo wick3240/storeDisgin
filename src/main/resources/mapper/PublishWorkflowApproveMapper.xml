@@ -2,4 +2,14 @@
 <mapper namespace="com.wick.store.repository.PublishWorkflowApproveMapper">
 
 
+    <update id="updatePublishStatus">
+        update publish_workflow_approve set node_approval_status=#{approveStatus},
+        node_approval_user=#{approveUser},node_approval_time=#{approveTime}
+        where request_no=#{pubCode} and wf_handle_node_id=#{nodeId} and cid=#{cid}
+    </update>
+    <select id="selectByPubCodeAndUserList"
+            resultType="com.wick.store.domain.entity.PublishWorkflowApproveEntity">
+        select * from publish_workflow_approve where
+        pub_code = #{pubCode}
+    </select>
 </mapper>

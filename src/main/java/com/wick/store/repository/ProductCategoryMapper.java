@@ -3,10 +3,9 @@ package com.wick.store.repository;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wick.store.domain.Dto.ProductCategoryDto;
-import com.wick.store.domain.entiey.ProductCategoryEntity;
+import com.wick.store.domain.entity.ProductCategoryEntity;
 import com.wick.store.domain.vo.ProductCategoryListVo;
 import com.wick.store.domain.vo.ProductCategoryVo;
-import com.wick.store.domain.vo.WorkFlowVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

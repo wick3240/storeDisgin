@@ -2,7 +2,7 @@ package com.wick.store.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wick.store.domain.Dto.ProductInfoDto;
-import com.wick.store.domain.entiey.ProductInfoEntity;
+import com.wick.store.domain.entity.ProductInfoEntity;
 import com.wick.store.domain.vo.PageVO;
 import com.wick.store.domain.vo.ProductInfoVo;
 

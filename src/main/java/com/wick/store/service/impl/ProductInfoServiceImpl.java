@@ -6,12 +6,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wick.store.domain.Dto.ProductInfoDto;
 import com.wick.store.domain.Dto.WorkflowHandleNodeDto;
-import com.wick.store.domain.entiey.ProductInfoEntity;
-import com.wick.store.domain.entiey.PublishApproveEntity;
-import com.wick.store.domain.entiey.PublishWorkflowApproveEntity;
+import com.wick.store.domain.entity.ProductInfoEntity;
+import com.wick.store.domain.entity.PublishApproveEntity;
+import com.wick.store.domain.entity.PublishWorkflowApproveEntity;
 import com.wick.store.domain.vo.PageVO;
 import com.wick.store.domain.vo.ProductInfoVo;
-import com.wick.store.domain.vo.WorkFlowVo;
+import com.wick.store.enums.ProductStatusType;
 import com.wick.store.repository.ProductCategoryMapper;
 import com.wick.store.repository.ProductInfoMapper;
 import com.wick.store.repository.PublishApproveMapper;
@@ -91,7 +91,7 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
     @Override
     public void updateByStatus(String productId) {
         log.info("下架产品=====>",productId);
-        productInfoMapper.updateByStatus(productId);
+        productInfoMapper.updateByStatus(productId, ProductStatusType.UNDERCARRIAGE.getCode());
     }
 
     @Override
@@ -99,7 +99,6 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
     public void batchPublish(List<ProductInfoDto> productInfoDto) {
         singleClassificationProcess(productInfoDto);
     }
-    //将相应的字段set进表中
     private void singleClassificationProcess(List<ProductInfoDto> productInfoDto){
         String cid = productInfoDto.get(0).getCid();
         List<String> productIds = productInfoDto.stream().map(ProductInfoDto::getId).collect(Collectors.toList());

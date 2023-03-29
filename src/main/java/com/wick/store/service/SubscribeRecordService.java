@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.wick.store.domain.Dto.CreateSubscribeRecordDto;
 import com.wick.store.domain.Dto.SubscribeRecordRequstDto;
 import com.wick.store.domain.Dto.SubscribeWorkflowApproveDto;
-import com.wick.store.domain.entiey.SubscribeApproveEntity;
+import com.wick.store.domain.entity.SubscribeApproveEntity;
 import com.wick.store.domain.vo.PageVO;
 import com.wick.store.domain.vo.SubscribeRecordAndProductVO;
 

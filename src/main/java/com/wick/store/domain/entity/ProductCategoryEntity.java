@@ -1,15 +1,13 @@
-package com.wick.store.domain.entiey;
+package com.wick.store.domain.entity;
 
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
-@TableName("t_product_category")
+@TableName("product_category")
 public class ProductCategoryEntity extends BaseEntity implements Serializable {
 
 
@@ -21,7 +19,7 @@ public class ProductCategoryEntity extends BaseEntity implements Serializable {
     /**
      * workflow公式
      */
-    private String workflow;
+    private String workflowFormula;
 
     /**
      *分类描述

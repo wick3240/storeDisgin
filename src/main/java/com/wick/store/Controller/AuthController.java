@@ -1,14 +1,12 @@
 package com.wick.store.Controller;
 
-import com.wick.store.domain.entiey.AuthResponse;
-import com.wick.store.domain.entiey.LoginForm;
-import com.wick.store.domain.entiey.UserEntity;
+import com.wick.store.domain.entity.AuthResponse;
+import com.wick.store.domain.entity.LoginForm;
+import com.wick.store.domain.entity.UserEntity;
 import com.wick.store.repository.UserMapper;
 import com.wick.store.util.JsonResult;
 import com.wick.store.util.JwtTokenUtil;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

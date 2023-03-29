@@ -21,7 +21,7 @@
 
     </select>
     <select id="selectByWorkflow" resultType="java.lang.String">
-        select pc.workflow_formula ,pc.worflow_id from product_category pc where pc.id=#{cid}
+        select pc.workflow_formula from product_category pc where pc.id=#{cid}
     </select>
     <select id="selectByCidList" resultType="com.wick.store.domain.vo.ProductCategoryListVo">
         select * from product_category where is_deleted=0
