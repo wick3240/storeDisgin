@@ -17,7 +17,7 @@
     </delete>
 
     <select id="queryHotProduct" resultType="com.wick.store.domain.vo.ProductHotVo">
-        select * from product_info pi where pi.cid=#{cid}
+        select * from product_info pi where pi.cid=#{cid} and is_deleted=0 and status=2
     </select>
     <select id="selectByProduct" resultType="com.wick.store.domain.vo.ProductInfoVo">
         select * from product_info where pi.id=#{productId}

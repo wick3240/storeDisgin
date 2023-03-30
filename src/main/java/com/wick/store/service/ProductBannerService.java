@@ -7,7 +7,7 @@ import com.wick.store.domain.vo.ProductHotVo;
 import java.util.List;
 
 public interface ProductBannerService {
-    List<ProductBannerProductVo> listProductBanner(String productType);
+    List<ProductBannerProductVo> listProductBanner();
 
     List<ProductHotVo> queryHotProduct(String cid);
 

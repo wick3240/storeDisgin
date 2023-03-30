@@ -22,8 +22,7 @@ public class ProductBannerServiceImpl extends ServiceImpl<ProductInfoMapper, Pro
     private ProductInfoMapper productInfoMapper;
 
     @Override
-    public List<ProductBannerProductVo> listProductBanner(String productType) {
-        log.info("listProductBanner根据产品类型查找轮播图 productType===>{}", productType);
+    public List<ProductBannerProductVo> listProductBanner() {
         QueryWrapper<ProductInfoEntity> qw = new QueryWrapper<ProductInfoEntity>().eq("is_deleted", "0").eq("status", "1").orderByAsc("sort");
         List<ProductInfoEntity> productInfoEntities = list(qw);
         return productInfoEntities.stream().map(productInfoEntity -> {

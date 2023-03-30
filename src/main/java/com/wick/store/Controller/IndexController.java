@@ -34,8 +34,8 @@ public class IndexController {
 
     @ApiOperation(value = "轮播图展示", notes = "轮播图展示")
     @GetMapping("/banner/list")
-    public JsonResult<List<ProductBannerProductVo>> listProductBanner(@RequestParam String productType) {
-        return new JsonResult<List<ProductBannerProductVo>>(productBannerService.listProductBanner(productType));
+    public JsonResult<List<ProductBannerProductVo>> listProductBanner() {
+        return new JsonResult<List<ProductBannerProductVo>>(productBannerService.listProductBanner());
     }
     @ApiOperation(value = "热门产品推荐（按订阅数）", notes = "热门产品推荐（按订阅数）")
     @GetMapping("/queryHotProduct")
