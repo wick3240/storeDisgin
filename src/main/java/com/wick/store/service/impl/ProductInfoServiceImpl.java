@@ -143,7 +143,6 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
             PublishApproveEntity publishApproveEntity = new PublishApproveEntity();
             publishApproveEntity.setProductId(entity.getId());
             publishApproveEntity.setPubCode(entity.getPubCode());
-            publishApproveEntity.setUserId(entity.getCreatedUser());
             publishApproveEntity.setApproveStatus(0);
             publishApproveEntity.setPubCode(entity.getPubCode());
             publishApproveMapper.insert(publishApproveEntity);

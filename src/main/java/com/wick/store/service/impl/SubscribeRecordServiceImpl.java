@@ -220,7 +220,6 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
             subscribeApprove.setProductId(createSubscribeRecordDto.getProductId());
             subscribeApprove.setApproveStatus(0);
             subscribeApprove.setSubCode(subCode);
-            subscribeApprove.setUserId(userId);
             subscribeApprove.setProductName(createSubscribeRecordDto.getProductName());
             subscribeApprove.setCid(createSubscribeRecordDto.getCid());
             subscribeApproveRecords.add(subscribeApprove);

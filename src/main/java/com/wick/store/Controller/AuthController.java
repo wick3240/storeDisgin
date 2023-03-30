@@ -4,6 +4,7 @@ import com.wick.store.domain.entity.AuthResponse;
 import com.wick.store.domain.entity.LoginForm;
 import com.wick.store.domain.entity.UserEntity;
 import com.wick.store.repository.UserMapper;
+import com.wick.store.service.UserService;
 import com.wick.store.util.JsonResult;
 import com.wick.store.util.JwtTokenUtil;
 import io.swagger.annotations.Api;
@@ -25,7 +26,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserMapper userRepository;
+    private UserService userService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -42,7 +43,7 @@ public class AuthController {
         final String token = jwtTokenUtil.createToken(authentication);
 
         //从数据库中查找用户信息
-        UserEntity user = userRepository.findByUsername(loginForm.getUsername());
+        UserEntity user = userService.findByUid(loginForm.getUsername());
 
         //返回JWT和用户信息
         return new JsonResult(new AuthResponse(token,user));
