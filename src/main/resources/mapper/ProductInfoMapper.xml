@@ -20,7 +20,7 @@
         select * from product_info pi where pi.cid=#{cid} and is_deleted=0 and status=2
     </select>
     <select id="selectByProduct" resultType="com.wick.store.domain.vo.ProductInfoVo">
-        select * from product_info where pi.id=#{productId}
+        select * from product_info where pi.id=#{productId} and is_deleted=0
     </select>
     <select id="queryPage" resultType="com.wick.store.domain.vo.ProductInfoVo">
         select * from product_info where is_deleted=0

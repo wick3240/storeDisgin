@@ -69,7 +69,9 @@ public class ProductCategoryImpl extends ServiceImpl<ProductCategoryMapper,Produ
 
     @Override
     public void update(ProductCategoryDto productCategoryDto) {
-
+        ProductCategoryEntity productCategoryEntity=new ProductCategoryEntity();
+        BeanUtils.copyProperties(productCategoryDto, productCategoryEntity);
+        this.updateById(productCategoryEntity);
     }
 
     @Override

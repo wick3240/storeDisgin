@@ -17,9 +17,7 @@
          </if>
          order by pc.created_date
     </select>
-    <select id="selectTop" resultType="com.wick.store.domain.vo.ProductCategoryListVo">
 
-    </select>
     <select id="selectByWorkflow" resultType="java.lang.String">
         select pc.workflow_formula from product_category pc where pc.id=#{cid}
     </select>

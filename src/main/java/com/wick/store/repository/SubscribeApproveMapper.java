@@ -16,9 +16,32 @@ import java.util.List;
 @Mapper
 @Component
 public interface SubscribeApproveMapper extends BaseMapper<SubscribeApproveEntity> {
+    /**
+     * 订阅者分页查询订阅者的单号
+     * @param page
+     * @param param
+     * @return
+     */
     Page<SubscribeRecordAndProductVO> selectPageData(Page<SubscribeRecordVO> page, @Param("param") SubscribeRecordRequstDto param);
+
+    /**
+     * 审批者分页查询订单
+     * @param page
+     * @param approver
+     * @param approveStatusList
+     * @param nodeStatusList
+     * @param requstDto
+     * @return
+     */
 
     Page<SubscribeRecordAndProductVO> selectApproveNodePageData(Page<SubscribeRecordVO> page, String approver, List<Integer> approveStatusList, List<Integer> nodeStatusList, SubscribeRecordRequstDto requstDto);
 
+    /**
+     * 更新订阅审批表的状态
+     * @param approveStatus
+     * @param subscribeCode
+     * @param approvalTime
+     * @param approveUser
+     */
     void updateByApproveStatus(Integer approveStatus, String subscribeCode, Date approvalTime, String approveUser);
 }

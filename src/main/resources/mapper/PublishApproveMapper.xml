@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wick.store.repository.PublishApproveMapper">
     <update id="updateByApproveStatus">
-
+        update publish_approve set approve_status = #{approveStatus},approver = #{approver}
+        ,approved_time = #{approvedTime} where pub_code = #{pubCode}
     </update>
     <select id="selectPublisherApproveNodeData" resultType="com.wick.store.domain.vo.ProductPublishApproveVo">
-        update publish_approve set approve_status=#{approveStatus},approver=#{approver},approved_time=#{approveTime} where pub_code=#{pubCode}
+
     </select>
 </mapper>

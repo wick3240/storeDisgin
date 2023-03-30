@@ -14,8 +14,24 @@ import java.util.List;
 @Mapper
 @Component
 public interface PublishApproveMapper extends BaseMapper<PublishApproveEntity> {
+    /**
+     * 审批者分页查询订阅者的订单
+     * @param page
+     * @param approver
+     * @param statusList
+     * @param nodeStatusList
+     * @param requestDto
+     * @return
+     */
     Page<ProductPublishApproveVo> selectPublisherApproveNodeData(Page<ProductPublishApproveVo> page, String approver, List<Integer> statusList, List<Integer> nodeStatusList, PublishApproveDto requestDto);
 
+    /**
+     * 更新发布者审批表的状态
+     * @param approveStatus
+     * @param approveUser
+     * @param approveTime
+     * @param pubCode
+     */
     void updateByApproveStatus(Integer approveStatus, String approveUser, Date approveTime, String pubCode);
 
 }

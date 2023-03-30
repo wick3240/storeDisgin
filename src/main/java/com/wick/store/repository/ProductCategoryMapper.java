@@ -14,13 +14,30 @@ import java.util.List;
 @Mapper
 @Component
 public interface ProductCategoryMapper extends BaseMapper<ProductCategoryEntity> {
+    /**
+     * 分页查询分类表
+     * @param page
+     * @param productCategoryDto
+     * @return
+     */
     Page<ProductCategoryVo> queryPage(Page<ProductCategoryVo> page, ProductCategoryDto productCategoryDto);
 
+    /**
+     * 根据id删除分类
+     * @param id
+     */
     void deleteByCid(String id);
 
-    List<ProductCategoryListVo> selectTop(String cid);
-
+    /**
+     * 根据分类找公式
+     * @param cid
+     * @return
+     */
     String selectByWorkflow(String cid);
 
+    /**
+     * 找cidList，用于展示
+     * @return
+     */
     List<ProductCategoryListVo> selectByCidList();
 }
