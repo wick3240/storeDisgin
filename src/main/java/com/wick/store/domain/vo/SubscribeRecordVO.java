@@ -37,18 +37,8 @@ public class SubscribeRecordVO extends PageVO{
     @ApiModelProperty(value = "订阅编码")
     private String subscribeCode;
 
-    @ApiModelProperty(value = "审批信息")
-    private String approvedMessage;
-
     @ApiModelProperty(value = "产品品类ID")
     private String cid;
-
-    @ApiModelProperty(value = "订阅用途")
-    private String subscribeUsage;
-
-    @ApiModelProperty(value = "用户名称")
-    private String nickName;
-
 
 
 }
