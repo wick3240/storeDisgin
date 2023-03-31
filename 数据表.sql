@@ -109,6 +109,36 @@ CREATE TABLE `workflow_publish_approve` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+上传图片
+CREATE TABLE `workflow_publish_approve` (
+  `id` VARCHAR(64) NOT NULL COMMENT '产品分类id',
+  `created_user` VARCHAR(32) NOT NULL COMMENT '创建者',
+  `created_time` DATE NOT NULL COMMENT '创建时间',
+  `update_user` VARCHAR(32) NOT NULL COMMENT '更新者',
+  `update_by` DATE NOT NULL COMMENT '更新日期',
+  `is_deleted` INT NOT NULL COMMENT '是否删除',
+  `image_data` image  NULL COMMENT '图片',
+  `file_type` varchar(255)  NULL COMMENT '文件类型',
+  `file_name` VARCHAR(255) NOT NULL COMMENT '文件名字',
+  `file_size` float NULL,
+  `is_compress` bit DEFAULT 0 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+图片的修改表
+CREATE TABLE `workflow_publish_approve` (
+  `id` VARCHAR(64) NOT NULL COMMENT '产品分类id',
+  `created_user` VARCHAR(32) NOT NULL COMMENT '创建者',
+  `created_time` DATE NOT NULL COMMENT '创建时间',
+  `update_user` VARCHAR(32) NOT NULL COMMENT '更新者',
+  `update_by` DATE NOT NULL COMMENT '更新日期',
+  `is_deleted` INT NOT NULL COMMENT '是否删除',
+  `name` varchar(100)  NULL COMMENT '图片名字',
+  `address` VARCHAR(100) NOT NULL COMMENT 'url地址',
+  `status` INT NOT NULL COMMENT '图片转态',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 
