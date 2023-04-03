@@ -21,7 +21,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @Api(tags = "产品订阅和订阅审批")
-@RequestMapping("api/subscribe")
+@RequestMapping("/api/subscribe")
 public class ProductSubscribeController {
     @Autowired
     private SubscribeRecordService subscribeRecordService;

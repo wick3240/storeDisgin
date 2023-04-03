@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 @Api(tags = "首页模块")
 @RestController
-@RequestMapping("api/Index")
+@RequestMapping("/api/Index")
 public class IndexController {
     @Autowired
     private ProductBannerService productBannerService;

@@ -17,6 +17,7 @@ import java.util.List;
 
 @Slf4j
 @Api(tags = "图片上传服务")
+@RestController("/api/upload")
 public class SystemImageFileController {
     @Autowired
     private SystemImageService systemImageService;

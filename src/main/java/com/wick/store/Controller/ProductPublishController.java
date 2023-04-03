@@ -21,7 +21,7 @@ import java.util.List;
 @Slf4j
 @Api(tags = "产品发布和产品审批")
 @RestController
-@RequestMapping("api/publish")
+@RequestMapping("/api/publish")
 public class ProductPublishController {
     @Autowired
     private PublishApproveService approveService;

@@ -16,7 +16,7 @@ import java.util.List;
 
 @Api(tags = "请求图片服务")
 @RestController
-@RequestMapping("api/cover")
+@RequestMapping("/api/cover")
 public class ProductCoverController {
     @Autowired
     private ProductCoverService productCoverService;

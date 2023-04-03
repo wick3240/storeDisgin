@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @Api(tags = "产品模块")
-@RequestMapping("api/productInfo")
+@RequestMapping("/api/productInfo")
 public class ProductInfoController {
     @Autowired
     private ProductInfoService productInfoService;
