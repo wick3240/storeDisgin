@@ -13,15 +13,10 @@ import java.util.Date;
 public class BaseEntity implements Serializable {
      @TableId(value = "id", type = IdType.ASSIGN_UUID)
      private String id;
-     @TableField(value = "created_user", fill = FieldFill.INSERT)
-     private String createdUser;
 
-     @TableField(value = "created_time", fill = FieldFill.INSERT)
+     @TableField(value = "created_date", fill = FieldFill.INSERT)
      @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
      private Date createdDate ;
-
-     @TableField(value = "update_user", fill = FieldFill.INSERT)
-     private String updateUser;
 
      @TableField(value = "update_date", fill = FieldFill.INSERT)
      @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

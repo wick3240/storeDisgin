@@ -57,11 +57,9 @@ public class UserServiceImpl implements UserService {
         String md5Password = GetPassWord.getmd5PassWord(oldPassword, salt);
         userEntity.setPassword(md5Password);
         userEntity.setSalt(salt);
-        userEntity.setIsDelete(0);
-        userEntity.setCreatedUser(userEntity.getUsername());
+        userEntity.setIsDeleted(true);
         userEntity.setCreatedDate(new Date());
         userEntity.setUpdateDate(new Date());
-        userEntity.setUpdateUser(userEntity.getUsername());
         Integer row = userMapper.insert(userEntity);
         if (row != 1) {
             throw new InsertException("用户在注册过程中产生为止异常");
@@ -88,13 +86,13 @@ public class UserServiceImpl implements UserService {
         if (!newMd5Password.equals(oldPassword)) {
             throw new PasswordNotMatchException("用户密码错误");
         }
-        if (result.getIsDelete() == 1) {
+        if (result.getIsDeleted() == false) {
             throw new UserNameDuplicatedException("用户数据不存在");
 
         }
         UserEntity user = new UserEntity();
         user.setUsername(result.getUsername());
-        user.setUid(result.getUid());
+        user.setId(result.getId());
         user.setAvatar(result.getAvatar());
         return user;
     }
@@ -102,7 +100,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changePassword(String uid, String username, String oldPassword, String newPassword) {
         UserEntity result = userMapper.findByUid(uid);
-        if (result == null || result.getIsDelete() == 1) {
+        if (result == null || result.getIsDeleted() == false) {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
         String oldMd5Password = GetPassWord.getmd5PassWord(oldPassword, result.getSalt());
@@ -121,7 +119,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity findByUid(String uid) {
         UserEntity result = userMapper.findByUid(uid);
-        if (result == null || result.getIsDelete() == 1) {
+        if (result == null || result.getIsDeleted() == false) {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
         UserEntity user = new UserEntity();
@@ -135,10 +133,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changeInfoUser(String uid, UserEntity user) {
         UserEntity result = userMapper.findByUid(uid);
-        if (result == null || result.getIsDelete() == 1) {
+        if (result == null || result.getIsDeleted() == false) {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
-        user.setUid(uid);
+        user.setId(uid);
         Integer rows = userMapper.updateInfoByUid(user);
         if (rows != 1) {
             throw new UpdateException("更新数据时产生异常");
@@ -184,7 +182,7 @@ public class UserServiceImpl implements UserService {
         }
         String avatar="/upload/"+filename;
         UserEntity result=userMapper.findByUid(uid);
-        if (result == null || result.getIsDelete() == 1) {
+        if (result == null || result.getIsDeleted() == false) {
             throw new UsernameNotFoundException("用户数据不存在");
         }
         Integer row=userMapper.updateAvatarByUid(uid,avatar,username);

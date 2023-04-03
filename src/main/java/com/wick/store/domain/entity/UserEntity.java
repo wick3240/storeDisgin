@@ -11,8 +11,6 @@ import java.io.Serializable;
 @Data
 @TableName(value ="t_user")
 public class UserEntity extends BaseEntity implements Serializable {
-    @TableId(value = "uid", type = IdType.ASSIGN_UUID)
-    private String uid;
     /**
      * 用户账号
      */
@@ -42,8 +40,6 @@ public class UserEntity extends BaseEntity implements Serializable {
      */
     private String avatar;
 
-    @TableField(value = "is_delete")
-    private Integer isDelete;
 }
     //实体类省略了三个方法，一个是get，set方法，一个是equals和hashCode()方法，一个是toString方法。
 

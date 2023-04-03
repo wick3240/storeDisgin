@@ -7,9 +7,7 @@ CREATE TABLE `product_info` (
   `description` TEXT NOT NULL COMMENT '描述',
   `cid` VARCHAR(64) NOT NULL COMMENT '分类id',
   `status` INT NOT NULL COMMENT '产品状态',
-  `created_user` VARCHAR(32) NOT NULL COMMENT '创建者',
-  `created_time` DATE NOT NULL COMMENT '创建时间',
-  `update_user` VARCHAR(32) NOT NULL COMMENT '更新者',
+  `created_date` DATE NOT NULL COMMENT '创建时间',
   `update_date` DATE NOT NULL COMMENT '更新日期',
   `is_deleted` INT NOT NULL COMMENT '是否删除',
   `sort` INT NOT NULL COMMENT '用于轮播图的排序',
@@ -22,10 +20,8 @@ CREATE TABLE `product_info` (
 CREATE TABLE `product_category` (
   `id` VARCHAR(64) NOT NULL COMMENT '产品分类id',
   `name` VARCHAR(255) NOT NULL COMMENT '产品分类名字',
-  `created_user` VARCHAR(32) NOT NULL COMMENT '创建者',
-  `created_time` DATE NOT NULL COMMENT '创建时间',
-  `update_user` VARCHAR(32) NOT NULL COMMENT '更新者',
-  `update_by` DATE NOT NULL COMMENT '更新日期',
+  `created_date` DATE NOT NULL COMMENT '创建时间',
+  `update_date` DATE NOT NULL COMMENT '更新日期',
   `is_deleted` INT NOT NULL COMMENT '是否删除',
   `workflow_id` VARCHAR(64) NOT NULL COMMENT '分类对应审批流程id',
   `workflow_formula` TEXT NOT NULL COMMENT '审批流程公式',
@@ -36,10 +32,8 @@ CREATE TABLE `product_category` (
 产品发布表
 CREATE TABLE `publish_approve` (
   `id` VARCHAR(64) NOT NULL COMMENT 'id',
-  `created_user` VARCHAR(32) NOT NULL COMMENT '创建者',
-  `created_time` DATE NOT NULL COMMENT '创建时间',
-  `update_user` VARCHAR(32) NOT NULL COMMENT '更新者',
-  `update_by` DATE NOT NULL COMMENT '更新日期',
+  `created_date` DATE NOT NULL COMMENT '创建时间',
+  `update_date` DATE NOT NULL COMMENT '更新日期',
   `is_deleted` INT NOT NULL COMMENT '是否删除',
   `pub_code` VARCHAR(64) NOT NULL COMMENT '产品单号',
   `product_id` VARCHAR(64) NOT NULL COMMENT '产品id',
@@ -55,10 +49,8 @@ CREATE TABLE `publish_approve` (
 订阅产品表
 CREATE TABLE `subscribe_approve` (
   `id` VARCHAR(64) NOT NULL COMMENT 'id',
-  `created_user` VARCHAR(32) NOT NULL COMMENT '创建者',
-  `created_time` DATE NOT NULL COMMENT '创建时间',
-  `update_user` VARCHAR(32) NOT NULL COMMENT '更新者',
-  `update_by` DATE NOT NULL COMMENT '更新日期',
+  `created_date` DATE NOT NULL COMMENT '创建时间',
+  `update_date` DATE NOT NULL COMMENT '更新日期',
   `is_deleted` INT NOT NULL COMMENT '是否删除',
   `sub_code` VARCHAR(64) NOT NULL COMMENT '订阅单号',
   `product_id` VARCHAR(64) NOT NULL COMMENT '产品id',
@@ -74,10 +66,8 @@ CREATE TABLE `subscribe_approve` (
 订阅审批表
 CREATE TABLE `workflow_subscribe_approve` (
   `id` VARCHAR(64) NOT NULL COMMENT 'id',
-  `created_user` VARCHAR(32) NOT NULL COMMENT '创建者',
-  `created_time` DATE NOT NULL COMMENT '创建时间',
-  `update_user` VARCHAR(32) NOT NULL COMMENT '更新者',
-  `update_by` DATE NOT NULL COMMENT '更新日期',
+  `created_date` DATE NOT NULL COMMENT '创建时间',
+  `update_date` DATE NOT NULL COMMENT '更新日期',
   `is_deleted` INT NOT NULL COMMENT '是否删除',
   `sub_code` VARCHAR(64) NOT NULL COMMENT '订阅单号',
   `node_approval_status` INT NOT NULL COMMENT '节点审批状态',
@@ -93,10 +83,8 @@ CREATE TABLE `workflow_subscribe_approve` (
 发布审批表
 CREATE TABLE `workflow_publish_approve` (
   `id` VARCHAR(64) NOT NULL COMMENT '产品分类id',
-  `created_user` VARCHAR(32) NOT NULL COMMENT '创建者',
-  `created_time` DATE NOT NULL COMMENT '创建时间',
-  `update_user` VARCHAR(32) NOT NULL COMMENT '更新者',
-  `update_by` DATE NOT NULL COMMENT '更新日期',
+  `created_date` DATE NOT NULL COMMENT '创建时间',
+  `update_date` DATE NOT NULL COMMENT '更新日期',
   `is_deleted` INT NOT NULL COMMENT '是否删除',
   `pub_code` VARCHAR(64) NOT NULL COMMENT '发布单号',
   `node_approve_status` INT NOT NULL COMMENT '节点审批状态',
@@ -112,9 +100,7 @@ CREATE TABLE `workflow_publish_approve` (
 上传图片
 CREATE TABLE `workflow_publish_approve` (
   `id` VARCHAR(64) NOT NULL COMMENT '产品分类id',
-  `created_user` VARCHAR(32) NOT NULL COMMENT '创建者',
-  `created_time` DATE NOT NULL COMMENT '创建时间',
-  `update_user` VARCHAR(32) NOT NULL COMMENT '更新者',
+  `created_date` DATE NOT NULL COMMENT '创建时间',
   `update_by` DATE NOT NULL COMMENT '更新日期',
   `is_deleted` INT NOT NULL COMMENT '是否删除',
   `image_data` image  NULL COMMENT '图片',
@@ -128,10 +114,8 @@ CREATE TABLE `workflow_publish_approve` (
 图片的修改表
 CREATE TABLE `workflow_publish_approve` (
   `id` VARCHAR(64) NOT NULL COMMENT '产品分类id',
-  `created_user` VARCHAR(32) NOT NULL COMMENT '创建者',
-  `created_time` DATE NOT NULL COMMENT '创建时间',
-  `update_user` VARCHAR(32) NOT NULL COMMENT '更新者',
-  `update_by` DATE NOT NULL COMMENT '更新日期',
+  `created_date` DATE NOT NULL COMMENT '创建时间',
+  `update_date` DATE NOT NULL COMMENT '更新日期',
   `is_deleted` INT NOT NULL COMMENT '是否删除',
   `name` varchar(100)  NULL COMMENT '图片名字',
   `address` VARCHAR(100) NOT NULL COMMENT 'url地址',

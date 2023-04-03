@@ -32,7 +32,7 @@ public class UserController extends BaseController{
     @PostMapping("/login")
     public JsonResult login(String username, String password, HttpSession session){
         UserEntity data=userService.login(username,password);
-        session.setAttribute("uid",data.getUid());
+        session.setAttribute("uid",data.getId());
         session.setAttribute("uaername",data.getUsername());
         return new JsonResult(data);
     }
