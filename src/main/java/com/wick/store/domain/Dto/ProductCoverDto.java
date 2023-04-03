@@ -21,5 +21,9 @@ public class ProductCoverDto extends BasePageDto{
      * 分类排序
      */
     private Integer sort;
+    /**
+     * 图片地址
+     */
+    private String url;
 
 }

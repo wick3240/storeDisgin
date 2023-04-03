@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -25,10 +26,9 @@ public class SystemImageFileController {
 
     @ApiOperation(value = "上传文件数据", notes = "上传文件数据")
     @PostMapping("/uploadfile/data")
-    public JsonResult saveFileData(@RequestParam("file") MultipartFile file){
-        JsonResult jsonResult = new JsonResult();
-        jsonResult.setData(systemImageService.saveFileData(file));
-        return jsonResult;
+    public JsonResult saveFileData(@RequestParam("file") MultipartFile file) throws IOException {
+        systemImageService.saveFileData(file);
+        return new JsonResult();
     }
 
 

@@ -97,22 +97,9 @@ CREATE TABLE `workflow_publish_approve` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-上传图片
-CREATE TABLE `workflow_publish_approve` (
-  `id` VARCHAR(64) NOT NULL COMMENT '产品分类id',
-  `created_date` DATE NOT NULL COMMENT '创建时间',
-  `update_by` DATE NOT NULL COMMENT '更新日期',
-  `is_deleted` INT NOT NULL COMMENT '是否删除',
-  `image_data` image  NULL COMMENT '图片',
-  `file_type` varchar(255)  NULL COMMENT '文件类型',
-  `file_name` VARCHAR(255) NOT NULL COMMENT '文件名字',
-  `file_size` float NULL,
-  `is_compress` bit DEFAULT 0 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 图片的修改表
-CREATE TABLE `workflow_publish_approve` (
+CREATE TABLE `product_cover` (
   `id` VARCHAR(64) NOT NULL COMMENT '产品分类id',
   `created_date` DATE NOT NULL COMMENT '创建时间',
   `update_date` DATE NOT NULL COMMENT '更新日期',
