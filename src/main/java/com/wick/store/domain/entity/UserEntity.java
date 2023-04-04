@@ -33,6 +33,7 @@ public class UserEntity extends BaseEntity implements Serializable {
     private String email;
     /**
      * 性别
+     * 0是女，1是男
      */
     private Integer gender;
     /**

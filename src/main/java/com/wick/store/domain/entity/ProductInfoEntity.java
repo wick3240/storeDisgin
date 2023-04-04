@@ -1,5 +1,6 @@
 package com.wick.store.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -19,8 +20,10 @@ public class ProductInfoEntity extends BaseEntity implements Serializable {
     /** 用于轮播图的排序 */
     private Integer sort;
     /** 产品单号 */
+    @TableField(value = "pub_code")
     private String pubCode;
     /** 产品图 */
+    @TableField(value = "cover_url")
     private String coverUrl;
     /**
      * 权重，用于热门推荐

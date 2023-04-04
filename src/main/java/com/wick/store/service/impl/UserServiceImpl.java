@@ -1,6 +1,7 @@
 package com.wick.store.service.impl;
 
 import com.wick.store.domain.entity.UserEntity;
+import com.wick.store.domain.vo.UserVo;
 import com.wick.store.repository.UserMapper;
 import com.wick.store.service.UserService;
 import com.wick.store.service.ex.*;
@@ -57,9 +58,6 @@ public class UserServiceImpl implements UserService {
         String md5Password = GetPassWord.getmd5PassWord(oldPassword, salt);
         userEntity.setPassword(md5Password);
         userEntity.setSalt(salt);
-        userEntity.setIsDeleted(true);
-        userEntity.setCreatedDate(new Date());
-        userEntity.setUpdateDate(new Date());
         Integer row = userMapper.insert(userEntity);
         if (row != 1) {
             throw new InsertException("用户在注册过程中产生为止异常");
@@ -86,7 +84,7 @@ public class UserServiceImpl implements UserService {
         if (!newMd5Password.equals(oldPassword)) {
             throw new PasswordNotMatchException("用户密码错误");
         }
-        if (result.getIsDeleted() == false) {
+        if (result.getIsDeleted() == true) {
             throw new UserNameDuplicatedException("用户数据不存在");
 
         }
@@ -99,16 +97,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changePassword(String uid, String username, String oldPassword, String newPassword) {
-        UserEntity result = userMapper.findByUid(uid);
-        if (result == null || result.getIsDeleted() == false) {
+        UserVo result = userMapper.findByUid(uid);
+        if (result == null || result.getIsDeleted() == 1) {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
         String oldMd5Password = GetPassWord.getmd5PassWord(oldPassword, result.getSalt());
-        if (!result.getPassword().equals(oldPassword)) {
+        if (!result.getPassword().equals(oldMd5Password)) {
             throw new PasswordNotMatchException("密码错误");
         }
         String newMd5Password = GetPassWord.getmd5PassWord(newPassword, result.getSalt());
-        Integer row = userMapper.updatePasswordByUid(uid, username, newPassword);
+        Integer row = userMapper.updatePasswordByUid(uid, username, newMd5Password);
         if (row != 1) {
             throw new UpdateException("更新密码错误");
 
@@ -118,8 +116,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity findByUid(String uid) {
-        UserEntity result = userMapper.findByUid(uid);
-        if (result == null || result.getIsDeleted() == false) {
+        UserVo result = userMapper.findByUid(uid);
+        if (result == null || result.getIsDeleted() == 1) {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
         UserEntity user = new UserEntity();
@@ -132,8 +130,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeInfoUser(String uid, UserEntity user) {
-        UserEntity result = userMapper.findByUid(uid);
-        if (result == null || result.getIsDeleted() == false) {
+        UserVo result = userMapper.findByUid(uid);
+        if (result == null || result.getIsDeleted() == 1) {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
         user.setId(uid);
@@ -181,8 +179,8 @@ public class UserServiceImpl implements UserService {
             throw new FileUploadIOException("文件读写异常");
         }
         String avatar="/upload/"+filename;
-        UserEntity result=userMapper.findByUid(uid);
-        if (result == null || result.getIsDeleted() == false) {
+        UserVo result=userMapper.findByUid(uid);
+        if (result == null || result.getIsDeleted() == 1) {
             throw new UsernameNotFoundException("用户数据不存在");
         }
         Integer row=userMapper.updateAvatarByUid(uid,avatar,username);

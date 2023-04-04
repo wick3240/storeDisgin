@@ -13,6 +13,7 @@ CREATE TABLE `product_info` (
   `sort` INT NOT NULL COMMENT '用于轮播图的排序',
   `pub_code` VARCHAR(64) NOT NULL COMMENT '产品单号',
   `weight` INT NOT NULL COMMENT '权重',
+  `cover_url` varchar(100) DEFAULT NULL COMMENT '图片地址',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

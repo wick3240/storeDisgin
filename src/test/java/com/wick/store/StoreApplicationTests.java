@@ -36,7 +36,7 @@ class StoreApplicationTests {
 	void userRegistration(){
 		try {
 			UserEntity user = new UserEntity();
-			user.setUsername("howard");
+			user.setUsername("wick1");
 			user.setPassword("12345");
 			userService.reg(user);
 			System.out.println("ok");
@@ -44,6 +44,18 @@ class StoreApplicationTests {
 			System.out.println(e.getClass().getSimpleName());
 			System.out.println(e.getMessage());
 		}
+	}
+	@Test
+	void update(){
+		userService.changePassword("4840e0ffa5604333156ec732f6a964a1","wick1","12345","2222222");
+	}
+	@Test
+	void changeInfoUser(){
+		UserEntity user=new UserEntity();
+		user.setPhone("12");
+		user.setGender(1);
+		user.setEmail("13213@1212");
+		userService.changeInfoUser("4840e0ffa5604333156ec732f6a964a1",user);
 	}
 
 }

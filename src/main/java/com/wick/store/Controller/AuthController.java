@@ -22,30 +22,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/auth")
 public class AuthController {
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-    @PostMapping("/login")
-    public JsonResult login(@RequestBody LoginForm loginForm) throws AuthenticationException {
-        final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginForm.getUsername(),
-                        loginForm.getPassword()
-                )
-        );
-
-        //生成JWT
-        final String token = jwtTokenUtil.createToken(authentication);
-
-        //从数据库中查找用户信息
-        UserEntity user = userService.findByUid(loginForm.getUsername());
-
-        //返回JWT和用户信息
-        return new JsonResult(new AuthResponse(token,user));
-    }
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
+//
+//    @Autowired
+//    private UserService userService;
+//
+//    @Autowired
+//    private JwtTokenUtil jwtTokenUtil;
+//    @PostMapping("/login")
+//    public JsonResult login(@RequestBody LoginForm loginForm) throws AuthenticationException {
+//        final Authentication authentication = authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(
+//                        loginForm.getUsername(),
+//                        loginForm.getPassword()
+//                )
+//        );
+//
+//        //生成JWT
+//        final String token = jwtTokenUtil.createToken(authentication);
+//
+//        //从数据库中查找用户信息
+//        UserEntity user = userService.findByUid(loginForm.getUsername());
+//
+//        //返回JWT和用户信息
+//        return new JsonResult(new AuthResponse(token,user));
+//    }
 }

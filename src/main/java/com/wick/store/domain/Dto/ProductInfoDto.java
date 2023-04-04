@@ -22,6 +22,10 @@ public class ProductInfoDto extends BasePageDto{
     private String pubCode;
     /** 产品图 */
     private String coverUrl;
+    /**
+     * 权重
+     */
+    private Integer weight;
 
 
 }

@@ -84,7 +84,7 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
     @Override
     public void delete(String productId) {
         log.info("删除产品：id===>{}", productId);
-        ProductInfoEntity productInfoEntity = getOne(new QueryWrapper<ProductInfoEntity>().eq("id", productId).eq("is_deleted", 0).in("status", Arrays.asList(2,3,4)));
+        ProductInfoEntity productInfoEntity = getOne(new QueryWrapper<ProductInfoEntity>().eq("id", productId).eq("is_deleted", 0).in("status", Arrays.asList(0,3,4)));
         productInfoMapper.deleteRemovedProduct(productInfoEntity.getId());
     }
 

@@ -3,21 +3,21 @@
 <mapper namespace="com.wick.store.repository.UserMapper">
     <update id="updatePasswordByUid">
         update t_user set
-        password=#{password}
-        where uid=#{uid}
+        password=#{newPassword}
+        where id=#{uid}
     </update>
     <update id="updateInfoByUid">
         update t_user set
-        <if test="phone!=null">phone=#{phone}</if>
-        <if test="phone!=null">email=#{email}</if>
-        <if test="phone!=null">gender=#{gender}</if>
-        where uid=#{uid}
+        <if test="phone!=null">phone=#{phone},</if>
+        <if test="email!=null">email=#{email},</if>
+        <if test="gender!=null">gender=#{gender}</if>
+        where id=#{id}
     </update>
     <update id="updateAvatarByUid">
         update t_user
         set
         avatar=#{avatar}
-        where uid=#{uid}
+        where id=#{uid}
     </update>
     <!--    另外的update代码，先注释，以自己的逻辑操作先-->
 <!--    <update id="updateOtherPasswordByUid">-->
@@ -32,7 +32,7 @@
     <select id="findByUserName" resultType="com.wick.store.domain.entity.UserEntity">
         select * from t_user where username=#{username}
     </select>
-    <select id="findByUid" resultType="com.wick.store.domain.entity.UserEntity">
-        select * from t_user where uid=#{uid}
+    <select id="findByUid" resultType="com.wick.store.domain.vo.UserVo">
+        select * from t_user where id=#{uid}
     </select>
 </mapper>

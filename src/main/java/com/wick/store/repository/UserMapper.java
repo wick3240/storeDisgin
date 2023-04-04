@@ -2,6 +2,7 @@ package com.wick.store.repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wick.store.domain.entity.UserEntity;
+import com.wick.store.domain.vo.UserVo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -21,7 +22,7 @@ public interface UserMapper extends BaseMapper<UserEntity> {
      */
     UserEntity findByUserName(String username);
 
-    UserEntity findByUid(String uid);
+    UserVo findByUid(String uid);
 
     Integer updatePasswordByUid(String uid, String username, String newPassword);
 

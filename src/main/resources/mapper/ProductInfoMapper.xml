@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wick.store.repository.ProductInfoMapper">
+    <resultMap id="BaseResultMap" type="com.wick.store.domain.entity.ProductInfoEntity">
+        <result property="pubCode" column="pub_code" jdbcType="VARCHAR"/>
+    </resultMap>
     <update id="updateByStatus">
         update product_info set status=#{status} where id=#{productId}
     </update>
@@ -20,13 +23,10 @@
         select * from product_info pi where pi.cid=#{cid} and is_deleted=0 and status=2
     </select>
     <select id="selectByProduct" resultType="com.wick.store.domain.vo.ProductInfoVo">
-        select * from product_info where pi.id=#{productId} and is_deleted=0
+        select * from product_info pi where pi.id=#{productId} and is_deleted=0
     </select>
     <select id="queryPage" resultType="com.wick.store.domain.vo.ProductInfoVo">
         select * from product_info where is_deleted=0
-        <if test="productInfoDto.createUser != null">
-            AND create_user=#{createUser,javaType=VARCHAR}
-        </if>
         <if test="productInfoDto.cid != null">
             AND cid=#{cid,javaType=VARCHAR}
         </if>
