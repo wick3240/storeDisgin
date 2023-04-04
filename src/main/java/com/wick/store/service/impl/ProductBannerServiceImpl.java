@@ -23,7 +23,7 @@ public class ProductBannerServiceImpl extends ServiceImpl<ProductInfoMapper, Pro
 
     @Override
     public List<ProductBannerProductVo> listProductBanner() {
-        QueryWrapper<ProductInfoEntity> qw = new QueryWrapper<ProductInfoEntity>().eq("is_deleted", "0").eq("status", "1").orderByAsc("sort");
+        QueryWrapper<ProductInfoEntity> qw = new QueryWrapper<ProductInfoEntity>().eq("is_deleted", "0").eq("status", "2").orderByAsc("sort");
         List<ProductInfoEntity> productInfoEntities = list(qw);
         return productInfoEntities.stream().map(productInfoEntity -> {
             ProductBannerProductVo productBannerProductVo = new ProductBannerProductVo();
