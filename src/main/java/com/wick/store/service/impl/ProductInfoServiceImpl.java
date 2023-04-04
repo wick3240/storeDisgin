@@ -43,6 +43,7 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
     private PublishApproveMapper publishApproveMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ProductInfoVo save(ProductInfoDto productInfoDto) {
 
         ProductInfoEntity productInfoEntity=new ProductInfoEntity();
@@ -89,6 +90,7 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateByStatus(String productId) {
         log.info("下架产品=====>",productId);
         productInfoMapper.updateByStatus(productId, ProductStatusType.UNDERCARRIAGE.getCode());

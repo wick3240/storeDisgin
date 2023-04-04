@@ -69,7 +69,11 @@ public class ProductCategoryImpl extends ServiceImpl<ProductCategoryMapper,Produ
 
     @Override
     public void update(ProductCategoryDto productCategoryDto) {
-        ProductCategoryEntity productCategoryEntity=new ProductCategoryEntity();
+        ProductCategoryEntity productCategoryEntity=getOne(new QueryWrapper<ProductCategoryEntity>()
+                .eq("id",productCategoryDto.getId()).eq("is_deleted",0));
+        if (ObjectUtil.isEmpty(productCategoryEntity)){
+            throw new CategoryNotFoundException("找不到对应的分类数据");
+        }
         BeanUtils.copyProperties(productCategoryDto, productCategoryEntity);
         this.updateById(productCategoryEntity);
     }

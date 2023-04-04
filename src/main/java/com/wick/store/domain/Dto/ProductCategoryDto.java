@@ -25,4 +25,13 @@ public class ProductCategoryDto extends BasePageDto{
     @ApiModelProperty("分类描述")
     private String description;
 
+    @ApiModelProperty("分类公式")
+    private String workflowFormula;
+
+    @ApiModelProperty("分类数据接口")
+    private String url;
+
+    @ApiModelProperty("公式id")
+    private Integer workflowId;
+
 }
