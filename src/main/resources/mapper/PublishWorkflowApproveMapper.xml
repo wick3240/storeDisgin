@@ -3,16 +3,21 @@
 
 
     <update id="updatePublishStatus">
-        update publish_workflow_approve set node_approval_status=#{approveStatus},
-        node_approval_user=#{approveUser},node_approval_time=#{approveTime}
-        where request_no=#{pubCode} and wf_handle_node_id=#{nodeId} and cid=#{cid}
+        update workflow_publish_approve set node_approve_status=#{approveStatus},
+        node_approver=#{approveUser},approve_time=#{approveTime}
+        where pub_code=#{pubCode} and node_id=#{nodeId} and cid=#{cid}
     </update>
     <select id="selectByPubCodeAndUserList"
             resultType="com.wick.store.domain.entity.PublishWorkflowApproveEntity">
-        select * from publish_workflow_approve where
+        select * from workflow_publish_approve where
         pub_code = #{pubCode}
     </select>
-    <select id="selectByWorkflowId" resultType="java.lang.String">
-        select workflow_id from product_category where id=#{cid}
+    <select id="selectNodeMessage"
+            resultType="com.wick.store.domain.Dto.PublishApproveNode">
+        select node_id as wfNodeId,cid,pub_code as pubCode from workflow_publish_approve where id=#{id}
+    </select>
+    <select id="selectByCode" resultType="com.wick.store.domain.entity.PublishWorkflowApproveEntity">
+        select * from workflow_publish_approve where
+        pub_code = #{pubCode}
     </select>
 </mapper>

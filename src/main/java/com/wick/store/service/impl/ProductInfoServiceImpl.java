@@ -121,7 +121,7 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
         }
         private void calcAndSaveNextApproval(String cid,Set<String> handleNodeIdsSet,String pubCode){
             String workflowFormula=productCategoryMapper.selectByWorkflow(cid);
-            String workflowId=publishWorkflowApproveMapper.selectByWorkflowId(cid);
+            Integer workflowId=productCategoryMapper.selectByWorkflowId(cid);
             WorkflowJsonListener listener = new WorkflowJsonListener(workflowFormula,true);
             List<WorkflowHandleNodeDto> nextPendingHandleNodeList = listener.nextPendingHandleNode(handleNodeIdsSet);
             Set<String> nodeIdSet = new HashSet<>();

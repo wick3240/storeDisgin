@@ -64,7 +64,7 @@ public interface ProductInfoMapper extends BaseMapper<ProductInfoEntity> {
      * @param pubCodeSet
      * @return
      */
-    List<String> getProductIdsByPubCode(Set<String> pubCodeSet);
+    List<String> getProductIdsByPubCode(@Param("pubCodes") Set<String> pubCodeSet);
 
     /**
      * 测试用到的查询语句

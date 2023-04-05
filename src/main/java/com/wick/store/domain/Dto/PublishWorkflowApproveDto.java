@@ -18,28 +18,13 @@ public class PublishWorkflowApproveDto {
     @ApiModelProperty(value = "分类id")
     private String cid;
 
-    @ApiModelProperty(value = "note节点的审批者")
-    private String userList;
-
     @ApiModelProperty(value = "审批流id")
-    private String workflowId;
+    private Integer workflowId;
 
     @ApiModelProperty(value = "审批通过时间")
     private Date approvalTime;
 
     @ApiModelProperty(value = "拿到封装的信息")
     private List<PublishApproveNode> publishApproveNodes;
-    @Data
-    public static class PublishApproveNode{
 
-        @ApiModelProperty("订单号")
-        private String pubCode;
-
-        @ApiModelProperty("审批节点名称")
-        private String wfNodeId;
-
-        @ApiModelProperty("获取分类id")
-        private String cid;
-
-    }
 }

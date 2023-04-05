@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wick.store.domain.Dto.PublishApproveDto;
+import com.wick.store.domain.Dto.PublishApproveNode;
 import com.wick.store.domain.Dto.PublishWorkflowApproveDto;
 import com.wick.store.domain.Dto.WorkflowHandleNodeDto;
 import com.wick.store.domain.entity.PublishWorkflowApproveEntity;
@@ -88,7 +89,7 @@ public class PublishApproveServiceImpl implements PublishApproveService {
         int wfHandleFinish = 0;    //节点完成的数据
 
         publishWorkflowApproveDto.setApprovalTime(new Date());
-        for (PublishWorkflowApproveDto.PublishApproveNode publishApproveNode : publishWorkflowApproveDto.getPublishApproveNodes()
+        for (PublishApproveNode publishApproveNode : publishWorkflowApproveDto.getPublishApproveNodes()
         ) {
 
             String pubCode = publishApproveNode.getPubCode();
@@ -146,6 +147,7 @@ public class PublishApproveServiceImpl implements PublishApproveService {
 
             handledApprovalNodeIdsSet.add(nodeId);
             String workflowFormula=productCategoryMapper.selectByWorkflow(cid);
+            Integer workflowId=productCategoryMapper.selectByWorkflowId(cid);
             WorkflowJsonListener listener = new WorkflowJsonListener(workflowFormula, true);
             List<WorkflowHandleNodeDto> nextPendingHandleNodeList = listener.nextPendingHandleNode(handledApprovalNodeIdsSet);
             if (CollectionUtils.isNotEmpty(nextPendingHandleNodeList)) {
@@ -162,6 +164,7 @@ public class PublishApproveServiceImpl implements PublishApproveService {
                         List<String> wfHandleUserList = workflowHandleNodeDto.getUserIdList();
                         PublishWorkflowApproveEntity publishWorkflowApproveEntity=new PublishWorkflowApproveEntity();
                         publishWorkflowApproveEntity.setCid(cid);
+                        publishWorkflowApproveEntity.setWorkflowId(workflowId);
                         publishWorkflowApproveEntity.setNodeId(workflowHandleNodeDto.getNodeId());
                         publishWorkflowApproveEntity.setNodeApproveStatus(0);
                         publishWorkflowApproveEntity.setUserList(JSON.toJSONString(wfHandleUserList));

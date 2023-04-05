@@ -1,6 +1,7 @@
 package com.wick.store.service.impl;
 
 import com.wick.store.domain.Dto.ProductInfoDto;
+import com.wick.store.domain.vo.ProductInfoVo;
 import com.wick.store.service.ProductInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ class ProductInfoServiceImplTest {
     @Test
     void save() {
         ProductInfoDto productInfoDto=new ProductInfoDto();
-        productInfoDto.setName("productTest1");
+        productInfoDto.setName("productTest3");
         productInfoDto.setCid("3f6f70b4c342aad8f45a9818d713ce87");
         productInfoDto.setStatus(0);
         productInfoDto.setSort(1);
@@ -48,7 +49,8 @@ class ProductInfoServiceImplTest {
     @Test
     void findById() {
 
-        productInfoService.findById("3c38f73b7ea3411a6cf7a75149dae628");
+      ProductInfoVo productInfoVo= productInfoService.findById("4b58fdd2f78dcb8f888e3706b8a6641e");
+        System.out.println(productInfoVo);
     }
 
     @Test
