@@ -19,6 +19,8 @@ public class SubscribeWorkflowApproveDto {
 
     @ApiModelProperty(value = "审批通过时间")
     private Date approvalTime;
+    @ApiModelProperty
+    private String productId;
 
     @ApiModelProperty(value = "拿到封装的信息")
     private List<SubscribeApproveNode> SubscribeApproveNodes;

@@ -80,4 +80,11 @@ public interface ProductInfoMapper extends BaseMapper<ProductInfoEntity> {
      * @return
      */
     List<CreateSubscribeRecordDto> selectBySubscriber(String pubCode);
+
+    /**
+     * 更行订阅权重
+     * @param weight
+     * @param productId
+     */
+    void updateByWeight(int weight, String productId);
 }

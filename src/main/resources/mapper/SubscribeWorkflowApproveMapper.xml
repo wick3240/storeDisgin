@@ -14,6 +14,6 @@
         workflow_subscribe_approve where sub_code=#{subscribeCode}
     </select>
     <select id="selectNode" resultType="com.wick.store.domain.Dto.SubscribeApproveNode">
-        select sub_code,cid,node_id as wfNodeId from workflow_subscribe_approve
+        select sub_code,cid,node_id as wfNodeId from workflow_subscribe_approve where id=#{subId}
     </select>
 </mapper>

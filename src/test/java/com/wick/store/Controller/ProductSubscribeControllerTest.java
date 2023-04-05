@@ -41,10 +41,10 @@ class ProductSubscribeControllerTest {
     void workflowUpdateApprove() {
         SubscribeWorkflowApproveDto subscribeWorkflowApproveDto=new SubscribeWorkflowApproveDto();
         subscribeWorkflowApproveDto.setApprovalTime(new Date());
-        subscribeWorkflowApproveDto.setNodeApprover("b4dc7f77955968db5b953c95f89afd7b");
+        subscribeWorkflowApproveDto.setNodeApprover("09d18e4fd3d2e7b956748cf9d4008339");
         subscribeWorkflowApproveDto.setWorkflowId(0);
         subscribeWorkflowApproveDto.setNodeApproveStatus(1);
-        subscribeWorkflowApproveDto.setSubscribeApproveNodes(subscribeWorkflowApproveMapper.selectNode("d90fffa43ffc7bd348ea3b2bfc33bfb8"));
+        subscribeWorkflowApproveDto.setSubscribeApproveNodes(subscribeWorkflowApproveMapper.selectNode("ed02aa76ea6c7d9ac7faa8f2729cddc5"));
         subscribeRecordService.workflowUpdateApprove(subscribeWorkflowApproveDto);
     }
 }

@@ -5,12 +5,14 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wick.store.domain.Dto.*;
+import com.wick.store.domain.entity.ProductInfoEntity;
 import com.wick.store.domain.entity.SubscribeApproveEntity;
 import com.wick.store.domain.entity.SubscribeWorkflowApproveEntity;
 import com.wick.store.domain.vo.PageVO;
 import com.wick.store.domain.vo.SubscribeRecordAndProductVO;
 import com.wick.store.domain.vo.SubscribeRecordVO;
 import com.wick.store.repository.ProductCategoryMapper;
+import com.wick.store.repository.ProductInfoMapper;
 import com.wick.store.repository.SubscribeApproveMapper;
 import com.wick.store.repository.SubscribeWorkflowApproveMapper;
 import com.wick.store.service.SubscribeRecordService;
@@ -35,6 +37,8 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
     private SubscribeApproveMapper subscribeApproveMapper;
     @Autowired
     private SubscribeWorkflowApproveMapper subscribeWorkflowApproveMapper;
+    @Autowired
+    private ProductInfoMapper productInfoMapper;
     @Override
     public PageVO<SubscribeRecordAndProductVO> selectPageBySubscribeUser(SubscribeRecordRequstDto requstDto) {
         log.info("进入产品订阅信息分页查询逻辑 selectPageData, param==={}", JSON.toJSONString(requstDto));
@@ -93,6 +97,7 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
         int nodeHadRejectCount = 0;  // 已经被reject的node个数
         int nodeHandledCount = 0;  //已经approve的node个数
         int wfHandleFinish = 0;    //已经审核的node的个数
+        int weight=0; //订阅权重
 
         subscribeWorkflowApproveDto.setApprovalTime(new Date());
         for (SubscribeApproveNode subscribeApproveNode : subscribeWorkflowApproveDto.getSubscribeApproveNodes()
@@ -103,6 +108,7 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
             String cid = subscribeApproveNode.getCid();
             Date approvalTime = subscribeWorkflowApproveDto.getApprovalTime();
             String approveUser = subscribeWorkflowApproveDto.getNodeApprover();
+            String productId=subscribeWorkflowApproveDto.getProductId();
             // get wf_node_status
             List<SubscribeWorkflowApproveEntity> handledNodeList = subscribeWorkflowApproveMapper.selectBySubCodesAndNodeId(subscribeCode);
             log.info("查看数据====>" + handledNodeList);
@@ -189,6 +195,9 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
                     //当查到下一个nodeid为空的时候更新总表的状态为1
                     subscribeApproveMapper.updateByApproveStatus(1, subscribeCode, approvalTime, approveUser);
                     wfHandleFinish++;
+                    weight++;
+                    productInfoMapper.updateByWeight(weight,productId);
+
             }
         }
     }
