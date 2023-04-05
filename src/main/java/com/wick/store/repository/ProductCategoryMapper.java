@@ -40,4 +40,10 @@ public interface ProductCategoryMapper extends BaseMapper<ProductCategoryEntity>
      * @return
      */
     List<ProductCategoryListVo> selectByCidList();
+    /**
+     * 通过cid查找对应的workflowId
+     * @param cid
+     * @return
+     */
+    Integer selectByWorkflowId(String cid);
 }

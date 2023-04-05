@@ -24,4 +24,7 @@
     <select id="selectByCidList" resultType="com.wick.store.domain.vo.ProductCategoryListVo">
         select id,name from product_category where is_deleted=0
     </select>
+    <select id="selectByWorkflowId" resultType="java.lang.Integer">
+        select workflow_id from product_category where id=#{cid}
+    </select>
 </mapper>
