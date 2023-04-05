@@ -121,6 +121,7 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
         }
         private void calcAndSaveNextApproval(String cid,Set<String> handleNodeIdsSet,String pubCode){
             String workflowFormula=productCategoryMapper.selectByWorkflow(cid);
+            String workflowId=publishWorkflowApproveMapper.selectByWorkflowId(cid);
             WorkflowJsonListener listener = new WorkflowJsonListener(workflowFormula,true);
             List<WorkflowHandleNodeDto> nextPendingHandleNodeList = listener.nextPendingHandleNode(handleNodeIdsSet);
             Set<String> nodeIdSet = new HashSet<>();
@@ -133,6 +134,7 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
                 publishWorkflowApproveEntity.setNodeApproveStatus(0);
                 publishWorkflowApproveEntity.setUserList(JSON.toJSONString(wfHandleUserList));
                 publishWorkflowApproveEntity.setPubCode(pubCode);
+                publishWorkflowApproveEntity.setWorkflowId(workflowId);
                 publishWorkflowApproveMapper.insert(publishWorkflowApproveEntity);
 
             }
@@ -147,6 +149,8 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
             publishApproveEntity.setPubCode(entity.getPubCode());
             publishApproveEntity.setApproveStatus(0);
             publishApproveEntity.setPubCode(entity.getPubCode());
+            publishApproveEntity.setCid(entity.getCid());
+            publishApproveEntity.setProductName(entity.getName());
             publishApproveMapper.insert(publishApproveEntity);
         }
     }

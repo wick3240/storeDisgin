@@ -12,4 +12,7 @@
         select * from publish_workflow_approve where
         pub_code = #{pubCode}
     </select>
+    <select id="selectByWorkflowId" resultType="java.lang.String">
+        select workflow_id from product_category where id=#{cid}
+    </select>
 </mapper>

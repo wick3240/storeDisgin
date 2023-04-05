@@ -29,4 +29,11 @@ public interface PublishWorkflowApproveMapper extends BaseMapper<PublishWorkflow
      * @return
      */
     List<PublishWorkflowApproveEntity> selectByPubCodeAndUserList(String pubCode);
+
+    /**
+     * 通过cid查找对应的workflowId
+     * @param cid
+     * @return
+     */
+    String selectByWorkflowId(String cid);
 }
