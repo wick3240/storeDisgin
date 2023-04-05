@@ -39,5 +39,8 @@
             #{item}
         </foreach>
     </select>
+    <select id="getCidAndId" resultType="com.wick.store.domain.Dto.ProductInfoDto">
+        select id,cid from product_info where name=#{name}
+    </select>
 
 </mapper>

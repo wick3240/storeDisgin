@@ -28,7 +28,7 @@ class ProductCategoryControllerTest {
         productCategoryDto.setDescription("穷途末路");
         productCategoryDto.setUrl("www.baidu.com");
         productCategoryDto.setName("policy");
-        productCategoryDto.setWorkflowFormula(String.valueOf(UUID.randomUUID()));
+        productCategoryDto.setWorkflowFormula("eyAicGFyYWxsZWxOb2RlIjogWyB7ICJzZXJpYWxOb2RlIjogWyB7ICJoYW5kbGVOb2RlIjogeyAibm9kZWlkIjogIjE2NzkyOTYyOTQyNDEiLCAiaWQiOiAiMTY3OTI5NjI5NDI0MSIsICJ1c2VySWRMaXN0IjogWyAiMDlkMThlNGZkM2QyZTdiOTU2NzQ4Y2Y5ZDQwMDgzMzkiIF0gfSB9LCB7ICJoYW5kbGVOb2RlIjogeyAibm9kZWlkIjogIjE2NzkyOTYyOTYwNzgiLCAiaWQiOiAiMTY3OTI5NjI5NjA3OCIsICJ1c2VySWRMaXN0IjogWyAiYjRkYzdmNzc5NTU5NjhkYjViOTUzYzk1Zjg5YWZkN2IiIF0gfSB9IF0gfSBdIH0=");
         productCategoryDto.setWorkflowId((int) Math.random());
         productCategoryService.save(productCategoryDto);
     }

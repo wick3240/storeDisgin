@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wick.store.domain.entity.UserEntity;
 import com.wick.store.domain.vo.UserVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 @Mapper
+@Component
 public interface UserMapper extends BaseMapper<UserEntity> {
     /**
      * 插入用户的数据

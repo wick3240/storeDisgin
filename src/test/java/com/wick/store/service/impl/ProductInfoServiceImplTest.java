@@ -17,13 +17,11 @@ class ProductInfoServiceImplTest {
     @Test
     void save() {
         ProductInfoDto productInfoDto=new ProductInfoDto();
-        productInfoDto.setName("howard1");
-        productInfoDto.setCid("claim");
-        productInfoDto.setStatus(1);
+        productInfoDto.setName("productTest1");
+        productInfoDto.setCid("3f6f70b4c342aad8f45a9818d713ce87");
+        productInfoDto.setStatus(0);
         productInfoDto.setSort(1);
-        productInfoDto.setPubCode("FWD123456");
         productInfoDto.setDescription("howard地锅");
-        productInfoDto.setWeight(1);
         productInfoService.save(productInfoDto);
     }
 
