@@ -1,5 +1,5 @@
 CREATE TABLE `t_user` (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `id` VARCHAR(64) NOT NULL  COMMENT '用户id',
   `username` varchar(20) NOT NULL COMMENT '用户名',
   `password` char(32) NOT NULL COMMENT '密码',
   `salt` char(36) DEFAULT NULL COMMENT '盐值',

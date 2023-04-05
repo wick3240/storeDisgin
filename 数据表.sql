@@ -27,6 +27,7 @@ CREATE TABLE `product_category` (
   `workflow_id` VARCHAR(64)  NULL COMMENT '分类对应审批流程id',
   `workflow_formula` TEXT  NULL COMMENT '审批流程公式',
   `description` TEXT  NULL COMMENT '描述',
+  `url` varchar(100) DEFAULT NULL COMMENT '数据api接口',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
