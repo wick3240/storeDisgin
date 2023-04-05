@@ -2,6 +2,7 @@ package com.wick.store.repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wick.store.domain.Dto.CreateSubscribeRecordDto;
 import com.wick.store.domain.Dto.ProductInfoDto;
 import com.wick.store.domain.entity.ProductInfoEntity;
 import com.wick.store.domain.vo.ProductHotVo;
@@ -72,4 +73,11 @@ public interface ProductInfoMapper extends BaseMapper<ProductInfoEntity> {
      * @return
      */
     List<ProductInfoDto> getCidAndId(String name);
+
+    /**
+     * 测试订阅的查询语句
+     * @param pubCode
+     * @return
+     */
+    List<CreateSubscribeRecordDto> selectBySubscriber(String pubCode);
 }

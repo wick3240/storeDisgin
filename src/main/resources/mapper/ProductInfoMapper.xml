@@ -42,5 +42,8 @@
     <select id="getCidAndId" resultType="com.wick.store.domain.Dto.ProductInfoDto">
         select id,cid from product_info where name=#{name}
     </select>
+    <select id="selectBySubscriber" resultType="com.wick.store.domain.Dto.CreateSubscribeRecordDto">
+        select pi.id as productId, pi.name as productName,pi.cid from product_info pi where pi.pub_code=#{pubCode}
+    </select>
 
 </mapper>

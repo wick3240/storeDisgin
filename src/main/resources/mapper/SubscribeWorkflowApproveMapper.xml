@@ -4,13 +4,16 @@
 
 
     <update id="updateSubscribeStatus">
-        update subscribe_workflow_approve set
-        node_approval_status=#{approveStatus},node_approval_time=#{approvalTime},node_approval_user=#{approveUser},node_approval_reason=#{approvalReason}
-        where subscribe_code=#{subscribeCode} and wf_handle_node_id=#{nodeId} and cid=#{cid}
+        update workflow_subscribe_approve set
+        node_approval_status=#{approveStatus},approve_time=#{approvalTime},node_approver=#{approveUser}
+        where sub_code=#{subscribeCode} and node_id=#{nodeId} and cid=#{cid}
     </update>
     <select id="selectBySubCodesAndNodeId"
             resultType="com.wick.store.domain.entity.SubscribeWorkflowApproveEntity">
         select * from
-        subscribe_workflow_approve where subscribe_code=#{subscribeCode}
+        workflow_subscribe_approve where sub_code=#{subscribeCode}
+    </select>
+    <select id="selectNode" resultType="com.wick.store.domain.Dto.SubscribeApproveNode">
+        select sub_code,cid,node_id as wfNodeId from workflow_subscribe_approve
     </select>
 </mapper>

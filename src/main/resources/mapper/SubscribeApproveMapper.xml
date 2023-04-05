@@ -6,9 +6,8 @@
     <update id="updateByApproveStatus">
         update subscribe_approve set approve_status=#{approveStatus},
         approver=#{approveUser},
-        approved_message=#{approvalReason},
-        approved_time=#{approvalTime}
-        where subscribe_code=#{subscribeCode}
+        approve_time=#{approvalTime}
+        where sub_code=#{subscribeCode}
     </update>
 
     <select id="selectPageData" resultType="com.wick.store.domain.vo.SubscribeRecordAndProductVO">

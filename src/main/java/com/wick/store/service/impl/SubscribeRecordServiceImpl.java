@@ -4,11 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wick.store.domain.Dto.CreateSubscribeRecordDto;
-import com.wick.store.domain.Dto.SubscribeRecordRequstDto;
-import com.wick.store.domain.Dto.SubscribeWorkflowApproveDto;
-import com.wick.store.domain.Dto.WorkflowHandleNodeDto;
-import com.wick.store.domain.entity.PublishWorkflowApproveEntity;
+import com.wick.store.domain.Dto.*;
 import com.wick.store.domain.entity.SubscribeApproveEntity;
 import com.wick.store.domain.entity.SubscribeWorkflowApproveEntity;
 import com.wick.store.domain.vo.PageVO;
@@ -99,7 +95,7 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
         int wfHandleFinish = 0;    //已经审核的node的个数
 
         subscribeWorkflowApproveDto.setApprovalTime(new Date());
-        for (SubscribeWorkflowApproveDto.subscribeApproveNode subscribeApproveNode : subscribeWorkflowApproveDto.getSubscribeApproveNodes()
+        for (SubscribeApproveNode subscribeApproveNode : subscribeWorkflowApproveDto.getSubscribeApproveNodes()
         ) {
 
             String subscribeCode = subscribeApproveNode.getSubCode();
@@ -160,6 +156,7 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
             // save handle status
             // 将当前节点加到已经处理的列表 handledApprovalNodeIdsSet.add()
             String workflowFormula= productCategoryMapper.selectByWorkflow(cid);
+            Integer workflowId=productCategoryMapper.selectByWorkflowId(cid);
             WorkflowJsonListener listener = new WorkflowJsonListener(workflowFormula, true);
             List<WorkflowHandleNodeDto> nextPendingHandleNodeList = listener.nextPendingHandleNode(handledApprovalNodeIdsSet);
             if (CollectionUtils.isNotEmpty(nextPendingHandleNodeList)) {
@@ -177,6 +174,7 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
                         SubscribeWorkflowApproveEntity subscribeWorkflowApproveEntity = new SubscribeWorkflowApproveEntity();
                         subscribeWorkflowApproveEntity.setNodeApprovalStatus(0);
                         subscribeWorkflowApproveEntity.setCid(cid);
+                        subscribeWorkflowApproveEntity.setWorkflowId(workflowId);
                         subscribeWorkflowApproveEntity.setSubCode(subscribeCode);
                         subscribeWorkflowApproveEntity.setNodeId(workflowHandleNodeDto.getNodeId());
                         subscribeWorkflowApproveEntity.setUserList(JSON.toJSONString(wfHandleUserList));
@@ -202,7 +200,7 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
     public void batchSave(List<CreateSubscribeRecordDto> createSubscribeRecordDtos) {
         List<SubscribeApproveEntity> subscribeApproveRecords = new ArrayList<>();
         log.info("进入批量订阅信息逻辑batchSave=====param{}::", JSON.toJSONString(createSubscribeRecordDtos));
-        assembleRecordSecretsApprove(createSubscribeRecordDtos.get(0).getUserId(),createSubscribeRecordDtos,
+        assembleRecordSecretsApprove(createSubscribeRecordDtos,
                 subscribeApproveRecords);
         this.saveBatch(subscribeApproveRecords);
 
@@ -210,7 +208,7 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
 
 
 
-    private void assembleRecordSecretsApprove(String userId,List<CreateSubscribeRecordDto> createSubscribeRecordDtos,List<SubscribeApproveEntity> subscribeApproveRecords){
+    private void assembleRecordSecretsApprove(List<CreateSubscribeRecordDto> createSubscribeRecordDtos,List<SubscribeApproveEntity> subscribeApproveRecords){
         for (CreateSubscribeRecordDto createSubscribeRecordDto : createSubscribeRecordDtos) {
             SecureRandom r = new SecureRandom();
             int number = r.nextInt(10);
@@ -229,6 +227,7 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
     }
     private void calcAndSaveNextApproval(String cid,Set<String> handleNodeIdsSet,String subCode){
         String workflowFormula= productCategoryMapper.selectByWorkflow(cid);
+        Integer workflowId=productCategoryMapper.selectByWorkflowId(cid);
         WorkflowJsonListener listener = new WorkflowJsonListener(workflowFormula,true);
         List<WorkflowHandleNodeDto> nextPendingHandleNodeList = listener.nextPendingHandleNode(handleNodeIdsSet);
         Set<String> nodeIdSet = new HashSet<>();
@@ -239,6 +238,7 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
             subscribeWorkflowApproveEntity.setCid(cid);
             subscribeWorkflowApproveEntity.setNodeId(workflowHandleNodeDto.getNodeId());
             subscribeWorkflowApproveEntity.setNodeApprovalStatus(0);
+            subscribeWorkflowApproveEntity.setWorkflowId(workflowId);
             subscribeWorkflowApproveEntity.setUserList(JSON.toJSONString(wfHandleUserList));
             subscribeWorkflowApproveEntity.setSubCode(subCode);
             subscribeWorkflowApproveMapper.insert(subscribeWorkflowApproveEntity);

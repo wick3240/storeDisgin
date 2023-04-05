@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class CreateSubscribeRecordDto {
-    @ApiModelProperty(value = "订阅者id")
-    private String userId;
+//    @ApiModelProperty(value = "订阅者id")
+//    private String userId;
 
     @ApiModelProperty(value = "分类id")
     private String cid;

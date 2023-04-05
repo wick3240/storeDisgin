@@ -14,7 +14,7 @@ public class SubscribeWorkflowApproveEntity extends BaseEntity implements Serial
     @TableField(value = "sub_code")
     private String subCode;
     /** 节点审批状态 */
-    @TableField(value = "approve_status")
+    //@TableField(value = "node_approve_status")
     private Integer nodeApprovalStatus;
     /** 节点审批人 */
     @TableField(value = "node_approver")
@@ -26,15 +26,15 @@ public class SubscribeWorkflowApproveEntity extends BaseEntity implements Serial
     private String userList;
     /** 审批流id */
     @TableField(value = "workflow_id")
-    private String workflowId;
+    private Integer workflowId;
     /** 审批流节点*/
     @TableField(value = "node_id")
     private String nodeId;
     /**
      * 审批时间
      */
-    @TableField(value = "approval_time")
-    private Date approvalTime;
+    //@TableField(value = "approval_time")
+    private Date approveTime;
 
 
 
