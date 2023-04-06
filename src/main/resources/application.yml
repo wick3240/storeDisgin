@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     username: root
-    password: ypf123
+    password: 123456
     url: jdbc:mysql://localhost:3306/store
     driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
@@ -12,6 +12,15 @@ spring:
       enabled: true
       max-file-size: 10MB
       max-request-size: 10MB
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+  application:
+    name: store
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
 
 mybatis-plus:
 
