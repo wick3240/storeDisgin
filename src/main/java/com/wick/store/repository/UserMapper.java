@@ -3,6 +3,7 @@ package com.wick.store.repository;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wick.store.domain.entity.UserEntity;
 import com.wick.store.domain.vo.UserVo;
+import com.wick.store.util.JsonResult;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -26,10 +27,11 @@ public interface UserMapper extends BaseMapper<UserEntity> {
 
     UserVo findByUid(String uid);
 
-    Integer updatePasswordByUid(String uid, String username, String newPassword);
+    Integer updatePasswordByUid( String username, String newPassword);
 
     Integer updateInfoByUid(UserEntity user);
 
     Integer updateAvatarByUid(String uid, String avatar, String username);
 
+    JsonResult getUser(String username);
 }

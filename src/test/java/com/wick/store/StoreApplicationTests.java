@@ -47,7 +47,7 @@ class StoreApplicationTests {
 	}
 	@Test
 	void update(){
-		userService.changePassword("4840e0ffa5604333156ec732f6a964a1","wick1","12345","2222222");
+		userService.changePassword("wick1","12345","2222222");
 	}
 	@Test
 	void changeInfoUser(){

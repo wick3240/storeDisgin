@@ -30,18 +30,15 @@ public class UserController extends BaseController{
     }
     @ApiOperation(value = "登录操作",notes = "登录操作")
     @PostMapping("/login")
-    public JsonResult login(String username, String password, HttpSession session){
-        UserEntity data=userService.login(username,password);
-        session.setAttribute("uid",data.getId());
-        session.setAttribute("uaername",data.getUsername());
+    public JsonResult login(String username, String password){
+        JsonResult data=userService.login(username,password);
+
         return new JsonResult(data);
     }
     @ApiOperation(value = "修改密码",notes = "修改密码")
     @PostMapping("/changePassword")
-    public JsonResult changePassword(String oldPassword,String newPassword,HttpSession session){
-        String uid=getUidFromSession(session);
-        String username=getUserNameFromSession(session);
-        userService.changePassword(uid,username,oldPassword,newPassword);
+    public JsonResult changePassword(String username,String oldPassword,String newPassword){
+        userService.changePassword(username,oldPassword,newPassword);
         return new JsonResult<>();
     }
     @ApiOperation("查找用户的uid")
@@ -66,5 +63,10 @@ public class UserController extends BaseController{
         userService.updateAvatar(session,uid,username,file);
         return new JsonResult();
 
+    }
+    @ApiOperation(value = "登出，删除token",notes = "登出，删除token")
+    public JsonResult logout(String userId){
+        userService.logout(userId);
+        return new JsonResult();
     }
 }

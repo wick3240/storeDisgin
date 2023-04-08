@@ -4,7 +4,7 @@
     <update id="updatePasswordByUid">
         update t_user set
         password=#{newPassword}
-        where id=#{uid}
+        where uaername=#{username}
     </update>
     <update id="updateInfoByUid">
         update t_user set
@@ -34,5 +34,8 @@
     </select>
     <select id="findByUid" resultType="com.wick.store.domain.vo.UserVo">
         select * from t_user where id=#{uid}
+    </select>
+    <select id="getUser" resultType="com.wick.store.util.JsonResult">
+        select * from t_user where username=#{username}
     </select>
 </mapper>

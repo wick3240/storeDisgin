@@ -41,6 +41,16 @@ public class UserEntity extends BaseEntity implements Serializable {
      */
     private String avatar;
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * token过期时间
+     */
+    private long ExpireTime;
+    /**
+     * token 有效时间
+     */
+    private long LoginTime;
+
 }
     //实体类省略了三个方法，一个是get，set方法，一个是equals和hashCode()方法，一个是toString方法。
 

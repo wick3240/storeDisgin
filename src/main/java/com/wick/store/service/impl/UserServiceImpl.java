@@ -7,6 +7,9 @@ import com.wick.store.service.UserService;
 import com.wick.store.service.ex.*;
 import com.wick.store.service.ex.fileEx.*;
 import com.wick.store.util.GetPassWord;
+import com.wick.store.util.JsonResult;
+import com.wick.store.util.JwtTokenUtil;
+import com.wick.store.util.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 @Service
@@ -58,6 +58,8 @@ public class UserServiceImpl implements UserService {
         String md5Password = GetPassWord.getmd5PassWord(oldPassword, salt);
         userEntity.setPassword(md5Password);
         userEntity.setSalt(salt);
+        userEntity.setAvatar(result.getAvatar());
+        userEntity.setUsername(result.getUsername());
         Integer row = userMapper.insert(userEntity);
         if (row != 1) {
             throw new InsertException("用户在注册过程中产生为止异常");
@@ -66,7 +68,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity login(String username, String password) {
+    public JsonResult login(String username, String password) {
         UserEntity result = userMapper.findByUserName(username);
         if (result != null) {
             throw new UserNameDuplicatedException("用户数据不存在");
@@ -86,19 +88,37 @@ public class UserServiceImpl implements UserService {
         }
         if (result.getIsDeleted() == true) {
             throw new UserNameDuplicatedException("用户数据不存在");
-
         }
-        UserEntity user = new UserEntity();
-        user.setUsername(result.getUsername());
-        user.setId(result.getId());
-        user.setAvatar(result.getAvatar());
-        return user;
-    }
+            try{
+                JsonResult resultData = userMapper.getUser(username);
+                if(resultData !=null){
+                    UserEntity info = (UserEntity) resultData.getData();
+                    //需要存放的负载信息
+                    Map<String,Object> map = new HashMap<>();
+                    map.put("id",info.getId());
+                    //生成jwtToken
+                    String jwtToken = JwtTokenUtil.createJwtToken(map);
+                    //设置用户的登录时间和过期时间，并存入redis
+                    info.setLoginTime(System.currentTimeMillis());
+                    info.setExpireTime(info.getLoginTime()+1000L * 60 * 30);
+                    RedisUtils.saveValue(info.getId(),info,30, TimeUnit.MINUTES);
+                    //将token返回
+                    map.put("Authorization",jwtToken);
+                    resultData.setData(map);
+                }
+                return resultData;
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+
 
     @Override
-    public void changePassword(String uid, String username, String oldPassword, String newPassword) {
-        UserVo result = userMapper.findByUid(uid);
-        if (result == null || result.getIsDeleted() == 1) {
+    public void changePassword(String username, String oldPassword, String newPassword) {
+        UserEntity result = userMapper.findByUserName(username);
+        if (result == null || result.getIsDeleted()==false) {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
         String oldMd5Password = GetPassWord.getmd5PassWord(oldPassword, result.getSalt());
@@ -106,7 +126,7 @@ public class UserServiceImpl implements UserService {
             throw new PasswordNotMatchException("密码错误");
         }
         String newMd5Password = GetPassWord.getmd5PassWord(newPassword, result.getSalt());
-        Integer row = userMapper.updatePasswordByUid(uid, username, newMd5Password);
+        Integer row = userMapper.updatePasswordByUid(username, newMd5Password);
         if (row != 1) {
             throw new UpdateException("更新密码错误");
 
@@ -188,6 +208,11 @@ public class UserServiceImpl implements UserService {
             throw new UpdateException("更新用户头像时产生未知异常");
         }
 
+    }
+
+    @Override
+    public void logout(String userId) {
+        RedisUtils.deleteValue(userId);
     }
 
 
