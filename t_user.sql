@@ -11,7 +11,7 @@ CREATE TABLE `t_user` (
   `created_date` datetime DEFAULT NULL COMMENT '日志-创建时间',
   `update_date` datetime DEFAULT NULL COMMENT '日志-最后修改时间',
   `expire_time` bigint DEFAULT NULL COMMENT 'token过期时间',
-  `LoginTime` bigint DEFAULT NULL COMMENT 'token开始时间',` bigint DEFAULT NULL COMMENT 'token开始时间',
+  `login_time` bigint DEFAULT NULL COMMENT 'token开始时间',` bigint DEFAULT NULL COMMENT 'token开始时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
