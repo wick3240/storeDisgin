@@ -108,7 +108,7 @@ CREATE TABLE `product_cover` (
   `is_deleted` INT NOT NULL COMMENT '是否删除',
   `name` varchar(100)  NULL COMMENT '图片名字',
   `address` VARCHAR(100)  NULL COMMENT 'url地址',
-  `status` INT  NULL COMMENT '图片转态',
+  `status` INT  NULL COMMENT '图片状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
