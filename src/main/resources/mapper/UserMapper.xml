@@ -35,7 +35,7 @@
     <select id="findByUid" resultType="com.wick.store.domain.vo.UserVo">
         select * from t_user where id=#{uid}
     </select>
-    <select id="getUser" resultType="com.wick.store.util.JsonResult">
+    <select id="getUser" resultType="com.wick.store.domain.entity.UserEntity">
         select * from t_user where username=#{username}
     </select>
 </mapper>

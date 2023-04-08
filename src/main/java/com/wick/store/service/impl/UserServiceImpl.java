@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+
     @Override
     public void reg(UserEntity userEntity) {
 
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public JsonResult login(String username, String password) {
         UserEntity result = userMapper.findByUserName(username);
-        if (result != null) {
+        if (result == null) {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
         /**
@@ -90,7 +91,7 @@ public class UserServiceImpl implements UserService {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
             try{
-                JsonResult resultData = userMapper.getUser(username);
+                JsonResult resultData =new JsonResult<>(result);
                 if(resultData !=null){
                     UserEntity info = (UserEntity) resultData.getData();
                     //需要存放的负载信息
@@ -105,6 +106,7 @@ public class UserServiceImpl implements UserService {
                     //将token返回
                     map.put("Authorization",jwtToken);
                     resultData.setData(map);
+                    log.info("token=====>",jwtToken);
                 }
                 return resultData;
             }catch (Exception e){
@@ -213,6 +215,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void logout(String userId) {
         RedisUtils.deleteValue(userId);
+    }
+
+    @Override
+    public JsonResult getUserId(String username) {
+        return new JsonResult<>(userMapper.getUser(username));
     }
 
 
