@@ -6,10 +6,7 @@ import com.wick.store.util.JsonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -65,8 +62,16 @@ public class UserController extends BaseController{
 
     }
     @ApiOperation(value = "登出，删除token",notes = "登出，删除token")
-    public JsonResult logout(String userId){
+    @DeleteMapping("/delete/{userId}")
+    public JsonResult logout(@PathVariable  String userId){
         userService.logout(userId);
         return new JsonResult();
+    }
+
+    @ApiOperation(value = "获取用户信息",notes = "获取用户信息")
+    @GetMapping("/userInfo/{token}")
+    public JsonResult userInfo(@PathVariable  String token){
+        UserEntity user=userService.userInfo(token);
+        return new JsonResult(user);
     }
 }

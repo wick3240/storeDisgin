@@ -222,5 +222,10 @@ public class UserServiceImpl implements UserService {
         return new JsonResult<>(userMapper.getUser(username));
     }
 
+    @Override
+    public UserEntity userInfo(String token) {
+        return  JwtTokenUtil.verifyJwtToken(token);
+    }
+
 
 }

@@ -24,4 +24,6 @@ public interface UserService {
     void logout(String userId);
 
     JsonResult getUserId(String username);
+
+    UserEntity userInfo(String token);
 }
