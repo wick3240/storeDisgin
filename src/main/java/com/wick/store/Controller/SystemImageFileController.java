@@ -16,7 +16,8 @@ import java.util.List;
 
 @Slf4j
 @Api(tags = "图片上传服务")
-@RestController("/api/upload")
+@RestController
+@RequestMapping("/api/upload")
 public class SystemImageFileController {
     @Autowired
     private SystemImageService systemImageService;
@@ -24,9 +25,8 @@ public class SystemImageFileController {
 
     @ApiOperation(value = "上传文件数据", notes = "上传文件数据")
     @PostMapping("/uploadfile/data")
-    public JsonResult saveFileData(@RequestParam("file") MultipartFile file) throws IOException {
-        systemImageService.saveFileData(file);
-        return new JsonResult();
+    public String saveFileData(@RequestParam(value = "file") MultipartFile file) throws IOException {
+        return  systemImageService.saveFileData(file);
     }
 
 

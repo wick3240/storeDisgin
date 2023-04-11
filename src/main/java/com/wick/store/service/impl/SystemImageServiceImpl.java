@@ -27,10 +27,10 @@ public class SystemImageServiceImpl extends ServiceImpl<SystemImageMapper,System
     public static final List<String> AVATAR_TYPE = new ArrayList<>();
 
     static {
-        AVATAR_TYPE.add("images/jpeg");
-        AVATAR_TYPE.add("images/png");
-        AVATAR_TYPE.add("images/bmp");
-        AVATAR_TYPE.add("images/gif");
+        AVATAR_TYPE.add("image/jpeg");
+        AVATAR_TYPE.add("image/png");
+        AVATAR_TYPE.add("image/bmp");
+        AVATAR_TYPE.add("image/gif");
     }
 
     @Autowired
