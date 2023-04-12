@@ -56,7 +56,7 @@ public class JwtTokenUtil {
      * @param token  jwtToken
      * */
     public static UserEntity verifyJwtToken(String token){
-        Claims claims = parseToken(replaceTokenPrefix(token));
+        Claims claims = parseToken(token);
         String id = String.valueOf(claims.get("id"));
         //从redis中获取用户信息
         UserEntity user = JSON.parseObject(JSON.toJSONString(RedisUtils.getValue(id)),UserEntity.class);
