@@ -40,3 +40,5 @@ mybatis-plus:
 logging:
   level:
     root: info
+
+file-save-path: D:/images/

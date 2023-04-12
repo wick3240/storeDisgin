@@ -2,6 +2,7 @@ package com.wick.store.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wick.store.domain.entity.SystemImageEntity;
+import com.wick.store.util.JsonResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ public interface SystemImageService extends IService<SystemImageEntity> {
      *
      * @param file
      */
-    String saveFileData(MultipartFile file, HttpServletRequest request) throws IOException;
+    JsonResult saveFileData(MultipartFile file, HttpServletRequest request) throws IOException;
 
 
 

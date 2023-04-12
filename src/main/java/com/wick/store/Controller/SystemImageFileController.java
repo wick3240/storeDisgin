@@ -26,8 +26,8 @@ public class SystemImageFileController {
 
     @ApiOperation(value = "上传文件数据", notes = "上传文件数据")
     @PostMapping("/data")
-    public String saveFileData(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) throws IOException {
-        return  systemImageService.saveFileData(file,request);
+    public JsonResult saveFileData(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) throws IOException {
+        return new JsonResult( systemImageService.saveFileData(file,request));
     }
 
 
