@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -22,8 +23,8 @@ import java.util.UUID;
 @Slf4j
 public class SystemImageServiceImpl extends ServiceImpl<SystemImageMapper,SystemImageEntity>
         implements SystemImageService {
-    private String fileimg = "src/main/resources/static/images";
-    private String UREIMG = "http://localhost:8080/";
+    private String fileimg = "D:\\work\\store\\src\\main\\resources\\static\\images\\";
+    private String UREIMG = "http://images/";
     public static final List<String> AVATAR_TYPE = new ArrayList<>();
 
     static {
@@ -37,7 +38,7 @@ public class SystemImageServiceImpl extends ServiceImpl<SystemImageMapper,System
     private SystemImageMapper systemImageMapper;
 
     @Override
-    public String saveFileData(MultipartFile file) throws IOException {
+    public String saveFileData(MultipartFile file, HttpServletRequest request) throws IOException {
         //我们简单验证一下file文件是否为空
         if (file.equals("")) {
             return null;
@@ -45,7 +46,7 @@ public class SystemImageServiceImpl extends ServiceImpl<SystemImageMapper,System
         Date date = new Date();
         //获取当前系统时间年月这里获取到月如果要精确到日修改("yyyy-MM-dd")
         String dateForm = new SimpleDateFormat("yyyy-MM").format(date);
-        String casePath = fileimg + dateForm;
+        String casePath = fileimg;
         //获取图片后缀
         String imgFormat = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         String contentType = file.getContentType();
@@ -53,21 +54,21 @@ public class SystemImageServiceImpl extends ServiceImpl<SystemImageMapper,System
             throw new FileTypeException("文件类型不支持");
         }
         //判断文件是否存在
-        File f = new File(casePath);
-        try {
-            if (!f.exists()) {
-                f.mkdirs();
-            }
-        } catch (Exception e) {
-            return null;
-        }
+//        File f = new File(casePath);
+//        try {
+//            if (!f.exists()) {
+//                f.mkdirs();
+//            }
+//        } catch (Exception e) {
+//            return null;
+//        }
         //给图片重新随机生成名字
         String name = UUID.randomUUID()+ imgFormat;
         //保存图片
         file.transferTo(new File(casePath  + name));
         //拼接要保存在数据中的图片地址
         //dateForm 这是动态的文件夹所以要和地址一起存入数据库中
-        String urlImg = UREIMG + "show?fileUrl=" + dateForm + "/" + name;
+        String urlImg = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + "/work/store/src/main/resources/static/images/"  + name;
         //放入对应的字段中
         return urlImg;
     }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,9 +25,9 @@ public class SystemImageFileController {
 
 
     @ApiOperation(value = "上传文件数据", notes = "上传文件数据")
-    @PostMapping("/uploadfile/data")
-    public String saveFileData(@RequestParam(value = "file") MultipartFile file) throws IOException {
-        return  systemImageService.saveFileData(file);
+    @PostMapping("/data")
+    public String saveFileData(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) throws IOException {
+        return  systemImageService.saveFileData(file,request);
     }
 
 

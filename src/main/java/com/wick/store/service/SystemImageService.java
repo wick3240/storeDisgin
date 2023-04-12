@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.wick.store.domain.entity.SystemImageEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 public interface SystemImageService extends IService<SystemImageEntity> {
@@ -12,7 +13,7 @@ public interface SystemImageService extends IService<SystemImageEntity> {
      *
      * @param file
      */
-    String saveFileData(MultipartFile file) throws IOException;
+    String saveFileData(MultipartFile file, HttpServletRequest request) throws IOException;
 
 
 
