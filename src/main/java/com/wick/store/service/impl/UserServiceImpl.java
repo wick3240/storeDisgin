@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JsonResult login(String username, String password) {
+    public Map<String,Object> login(String username, String password) {
         UserEntity result = userMapper.findByUserName(username);
         if (result == null) {
             throw new UserNameDuplicatedException("用户数据不存在");
@@ -84,6 +84,7 @@ public class UserServiceImpl implements UserService {
         String oldPassword = result.getPassword();
         String salt = result.getSalt();
         String newMd5Password = GetPassWord.getmd5PassWord(password, salt);
+        Map<String,Object> mapList = new HashMap<>();
         if (!newMd5Password.equals(oldPassword)) {
             throw new PasswordNotMatchException("用户密码错误");
         }
@@ -91,9 +92,9 @@ public class UserServiceImpl implements UserService {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
             try{
-                JsonResult resultData =new JsonResult<>(result);
-                if(resultData !=null){
-                    UserEntity info = (UserEntity) resultData.getData();
+
+                if(result !=null){
+                    UserEntity info = result;
                     //需要存放的负载信息
                     Map<String,Object> map = new HashMap<>();
                     map.put("id",info.getId());
@@ -105,10 +106,10 @@ public class UserServiceImpl implements UserService {
                     RedisUtils.saveValue(info.getId(),info,30, TimeUnit.MINUTES);
                     //将token返回
                     map.put("Authorization",jwtToken);
-                    resultData.setData(map);
+                    mapList.putAll(map);
                     log.info("token=====>",jwtToken);
                 }
-                return resultData;
+                return  mapList;
             }catch (Exception e){
                 e.printStackTrace();
                 return null;

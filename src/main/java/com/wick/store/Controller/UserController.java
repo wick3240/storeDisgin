@@ -28,9 +28,9 @@ public class UserController extends BaseController{
     @ApiOperation(value = "登录操作",notes = "登录操作")
     @GetMapping("/login")
     public JsonResult login(String username, String password){
-        JsonResult data=userService.login(username,password);
 
-        return new JsonResult(data);
+
+        return new JsonResult(userService.login(username,password));
     }
     @ApiOperation(value = "修改密码",notes = "修改密码")
     @PostMapping("/changePassword")

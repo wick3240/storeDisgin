@@ -5,11 +5,12 @@ import com.wick.store.util.JsonResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 public interface UserService {
     void reg(UserEntity userEntity);
 
-    JsonResult login(String username, String password);
+    Map<String,Object> login(String username, String password);
 
     void changePassword(String username, String oldPassword, String newPassword);
 
