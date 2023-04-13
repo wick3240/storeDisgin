@@ -12,8 +12,6 @@ public class ProductInfoVo {
     private String cid;
     /** 产品状态 */
     private Integer status;
-    /** 创建者 */
-    private String createdUser;
     /** 是否删除 */
     private Integer isDeleted;
     /** 用于轮播图的排序 */

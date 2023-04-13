@@ -14,9 +14,9 @@ public class BasePageDto {
     @TableField(select = false)
     private Integer page = 1;
 
-    @ApiModelProperty(value = "页行数", example = "10")
+    @ApiModelProperty(value = "页行数", example = "5")
     @TableField(select = false)
-    private Integer row = 10;
+    private Integer row = 5;
 
     @ApiModelProperty("排序字段")
     private String field;

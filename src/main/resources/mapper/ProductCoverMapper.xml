@@ -5,6 +5,6 @@
     <select id="queryPage" resultType="com.wick.store.domain.vo.ProductCoverVo">
         select * from product_cover pc
         where is_deleted =0
-        order by pc.create_date
+        order by pc.created_date
     </select>
 </mapper>

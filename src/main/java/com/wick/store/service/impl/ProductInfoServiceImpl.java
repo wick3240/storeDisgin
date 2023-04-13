@@ -50,7 +50,7 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
         BeanUtils.copyProperties(productInfoDto,productInfoEntity);
         productInfoMapper.insert(productInfoEntity);
         ProductInfoVo productInfoVo=new ProductInfoVo();
-        BeanUtils.copyProperties(productInfoVo,productInfoDto);
+        BeanUtils.copyProperties(productInfoEntity,productInfoVo);
         return productInfoVo;
     }
 
