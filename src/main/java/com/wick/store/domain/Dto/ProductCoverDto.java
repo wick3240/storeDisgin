@@ -24,6 +24,6 @@ public class ProductCoverDto extends BasePageDto{
     /**
      * 图片地址
      */
-    private String url;
+    private String address;
 
 }
