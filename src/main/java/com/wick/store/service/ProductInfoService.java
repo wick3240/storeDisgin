@@ -57,5 +57,5 @@ public interface ProductInfoService  extends IService<ProductInfoEntity> {
      *
      * @param productInfoDto
      */
-    void batchPublish(List<ProductInfoDto> productInfoDto);
+    void batchPublish( ProductInfoDto productInfoDto);
 }

@@ -98,13 +98,13 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void batchPublish(List<ProductInfoDto> productInfoDto) {
+    public void batchPublish(ProductInfoDto productInfoDto) {
         singleClassificationProcess(productInfoDto);
     }
-    private void singleClassificationProcess(List<ProductInfoDto> productInfoDto){
-        String cid = productInfoDto.get(0).getCid();
-        List<String> productIds = productInfoDto.stream().map(ProductInfoDto::getId).collect(Collectors.toList());
-        List<ProductInfoEntity> productInfoEntities = list(new QueryWrapper<ProductInfoEntity>().in("id", productIds).eq("is_deleted", 0));
+    private void singleClassificationProcess(ProductInfoDto productInfoDto){
+        String cid = productInfoDto.getCid();
+        String productId=productInfoDto.getId();
+        List<ProductInfoEntity> productInfoEntities = list(new QueryWrapper<ProductInfoEntity>().in("id", productId).eq("is_deleted", 0));
         SecureRandom i =new SecureRandom();
         int number=i.nextInt(10);
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyyMMdd");

@@ -38,7 +38,7 @@ public class ProductPublishController {
     }
     @ApiOperation(value = "发布产品（针对发布者）", notes = "发布产品（针对发布者）")
     @PostMapping("/batch/update")
-    public JsonResult batchUpdateApprove(@RequestBody List<ProductInfoDto> productInfoDto) {
+    public JsonResult batchUpdateApprove(@RequestBody ProductInfoDto productInfoDto) {
         JsonResult jsonResult = new JsonResult(JsonResultStatus.OK);
         productInfoService.batchPublish(productInfoDto);
         return jsonResult;
