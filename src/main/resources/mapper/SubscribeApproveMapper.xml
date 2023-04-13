@@ -24,9 +24,6 @@
     <if test="param.cidName != null and param.cidName != '' ">
         AND pc.name = #{param.cidName,jdbcType=VARCHAR}
     </if>
-    <if test="param.createBy  != null and param.createBy != ''">
-        AND t.create_by = #{param.createBy,jdbcType=VARCHAR}
-    </if>
 
     order by sa.created_date
     </select>
@@ -38,6 +35,6 @@
         <foreach collection ="statusList" open="(" close=")" item="item" separator=",">
             #{item}
         </foreach>)
-        order by sw.create_date
+        order by sw.created_date
     </select>
 </mapper>
