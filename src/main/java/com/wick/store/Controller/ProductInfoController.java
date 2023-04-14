@@ -68,4 +68,8 @@ public class ProductInfoController {
         productInfoService.delete(productId);
         return new JsonResult();
     }
+    @GetMapping("/apikey")
+    public String getKey(){
+        return "PMAK-64392fd0465bc800393b907f-14ea2bebb04e759ae6308023c38e5c5217";
+    }
 }
