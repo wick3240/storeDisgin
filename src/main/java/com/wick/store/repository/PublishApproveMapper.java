@@ -6,6 +6,7 @@ import com.wick.store.domain.Dto.PublishApproveDto;
 import com.wick.store.domain.entity.PublishApproveEntity;
 import com.wick.store.domain.vo.ProductPublishApproveVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -23,7 +24,11 @@ public interface PublishApproveMapper extends BaseMapper<PublishApproveEntity> {
      * @param requestDto
      * @return
      */
-    Page<ProductPublishApproveVo> selectPublisherApproveNodeData(Page<ProductPublishApproveVo> page, String approver, List<Integer> statusList, List<Integer> nodeStatusList, PublishApproveDto requestDto);
+    Page<ProductPublishApproveVo> selectPublisherApproveNodeData(Page<ProductPublishApproveVo> page,
+                                                                 String approver,
+                                                                 @Param("statusList") List<Integer> statusList,
+                                                                 @Param("nodeStatusList") List<Integer> nodeStatusList,
+                                                                 PublishApproveDto requestDto);
 
     /**
      * 更新发布者审批表的状态

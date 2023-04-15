@@ -51,7 +51,7 @@ public class ProductCategoryImpl extends ServiceImpl<ProductCategoryMapper,Produ
         BeanUtils.copyProperties(productCategoryDto,productCategoryEntity);
         productCategoryMapper.insert(productCategoryEntity);
         ProductCategoryVo productCategoryVo=new ProductCategoryVo();
-        BeanUtils.copyProperties(productCategoryVo,productCategoryDto);
+        BeanUtils.copyProperties(productCategoryDto,productCategoryVo);
         return productCategoryVo;
     }
 

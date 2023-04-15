@@ -13,9 +13,9 @@ import java.util.List;
 public interface SubscribeRecordService extends IService<SubscribeApproveEntity> {
     /**
      * 批量订阅
-     * @param createSubscribeRecordDtos
+     * @param createSubscribeRecordDto
      */
-    void batchSave(List<CreateSubscribeRecordDto> createSubscribeRecordDtos);
+    void batchSave(CreateSubscribeRecordDto createSubscribeRecordDto);
 
     /**
      * 分页查询订阅者订阅信息

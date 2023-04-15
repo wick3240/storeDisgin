@@ -34,7 +34,11 @@ public interface SubscribeApproveMapper extends BaseMapper<SubscribeApproveEntit
      * @return
      */
 
-    Page<SubscribeRecordAndProductVO> selectApproveNodePageData(Page<SubscribeRecordVO> page, String approver, List<Integer> approveStatusList, List<Integer> nodeStatusList, SubscribeRecordRequstDto requstDto);
+    Page<SubscribeRecordAndProductVO> selectApproveNodePageData(Page<SubscribeRecordVO> page,
+                                                                String approver,
+                                                                @Param("nodeStatusList") List<Integer> approveStatusList,
+                                                                @Param("statusList")List<Integer> nodeStatusList,
+                                                                SubscribeRecordRequstDto requstDto);
 
     /**
      * 更新订阅审批表的状态

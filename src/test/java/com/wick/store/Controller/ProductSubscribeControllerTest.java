@@ -24,9 +24,10 @@ class ProductSubscribeControllerTest {
     @Test
     void batchSave() {
         String pubCode="FWD202304056";
+        CreateSubscribeRecordDto createSubscribeRecordDto=new CreateSubscribeRecordDto();
         List<CreateSubscribeRecordDto> createSubscribeRecordDtoList= productInfoMapper.selectBySubscriber(pubCode);
         System.out.println(createSubscribeRecordDtoList);
-        subscribeRecordService.batchSave(createSubscribeRecordDtoList);
+        subscribeRecordService.batchSave(createSubscribeRecordDto);
     }
 
     @Test
@@ -42,7 +43,6 @@ class ProductSubscribeControllerTest {
         SubscribeWorkflowApproveDto subscribeWorkflowApproveDto=new SubscribeWorkflowApproveDto();
         subscribeWorkflowApproveDto.setApprovalTime(new Date());
         subscribeWorkflowApproveDto.setNodeApprover("09d18e4fd3d2e7b956748cf9d4008339");
-        subscribeWorkflowApproveDto.setWorkflowId(0);
         subscribeWorkflowApproveDto.setNodeApproveStatus(1);
         subscribeWorkflowApproveDto.setSubscribeApproveNodes(subscribeWorkflowApproveMapper.selectNode("ed02aa76ea6c7d9ac7faa8f2729cddc5"));
         subscribeRecordService.workflowUpdateApprove(subscribeWorkflowApproveDto);

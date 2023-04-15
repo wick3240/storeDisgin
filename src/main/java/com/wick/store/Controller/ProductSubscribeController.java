@@ -28,8 +28,8 @@ public class ProductSubscribeController {
 
     @ApiOperation(value = "批量订阅", notes = "批量订阅")
     @PostMapping("/batch/save")
-    public JsonResult batchSave(@RequestBody List<CreateSubscribeRecordDto> createSubscribeRecordDtos) {
-        subscribeRecordService.batchSave(createSubscribeRecordDtos);
+    public JsonResult batchSave(@RequestBody CreateSubscribeRecordDto createSubscribeRecordDto) {
+        subscribeRecordService.batchSave(createSubscribeRecordDto);
         return new JsonResult(JsonResultStatus.OK);
     }
 

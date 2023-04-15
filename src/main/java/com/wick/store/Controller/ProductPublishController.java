@@ -51,7 +51,7 @@ public class ProductPublishController {
     }
 
     @ApiOperation("下架操作")
-    @GetMapping("/updateByStatus/{productId}")
+    @PostMapping("/updateByStatus/{productId}")
     public JsonResult updateByStatus(@PathVariable String productId){
         productInfoService.updateByStatus(productId);
         return new JsonResult();

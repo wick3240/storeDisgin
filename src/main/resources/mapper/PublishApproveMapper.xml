@@ -6,6 +6,17 @@
         ,approve_time = #{approveTime} where pub_code = #{pubCode}
     </update>
     <select id="selectPublisherApproveNodeData" resultType="com.wick.store.domain.vo.ProductPublishApproveVo">
+        select * from workflow_publish_approve wpa
+        inner join publish_approve pa on pa.pub_code =wpa .pub_code
+        where
+        pa.approve_status in
 
+        <foreach collection ="statusList" open="(" close=")" item="item" separator=",">
+            #{item}
+        </foreach>)
+        and wpa .node_approval_status in
+        <foreach collection="nodeStatusList" open="(" close=")" item="item" separator=",">
+            #{item}
+        </foreach>
     </select>
 </mapper>

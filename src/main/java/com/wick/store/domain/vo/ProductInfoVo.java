@@ -24,4 +24,8 @@ public class ProductInfoVo {
      * 权重，用于热门推荐
      */
     private Integer weight;
+
+    private String cidName;
+
+    private String api;
 }

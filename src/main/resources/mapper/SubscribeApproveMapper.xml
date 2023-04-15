@@ -28,13 +28,18 @@
     order by sa.created_date
     </select>
     <select id="selectApproveNodePageData" resultType="com.wick.store.domain.vo.SubscribeRecordAndProductVO">
-        select * from subscribe_workflow sw
-        inner join(select * from subscribe_approve sa2 where sa2.id in (select max(id) as id from subscribe_approve as sa1 group by sa1.sub_code)) as sa on sa.sub_code=sw.sub_code
-        where sw.id in( select sw.id  from subscribe_workflow CROSS APPLY OPENJSON(user_list)
-        where value= #{userId} and sa .approve_status in
+        select * from workflow_subscribe_approve wsa
+        inner join subscribe_approve sa on sa.sub_code =wsa .sub_code
+        where
+        sa.approve_status in
+
         <foreach collection ="statusList" open="(" close=")" item="item" separator=",">
             #{item}
         </foreach>)
+        and wsa .node_approval_status in
+        <foreach collection="nodeStatusList" open="(" close=")" item="item" separator=",">
+            #{item}
+        </foreach>
         order by sw.created_date
     </select>
 </mapper>

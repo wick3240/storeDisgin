@@ -206,19 +206,15 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void batchSave(List<CreateSubscribeRecordDto> createSubscribeRecordDtos) {
-        List<SubscribeApproveEntity> subscribeApproveRecords = new ArrayList<>();
-        log.info("进入批量订阅信息逻辑batchSave=====param{}::", JSON.toJSONString(createSubscribeRecordDtos));
-        assembleRecordSecretsApprove(createSubscribeRecordDtos,
-                subscribeApproveRecords);
-        this.saveBatch(subscribeApproveRecords);
+    public void batchSave(CreateSubscribeRecordDto createSubscribeRecordDto) {
+        log.info("进入批量订阅信息逻辑batchSave=====param{}::", JSON.toJSONString(createSubscribeRecordDto));
+        assembleRecordSecretsApprove(createSubscribeRecordDto);
 
     }
 
 
 
-    private void assembleRecordSecretsApprove(List<CreateSubscribeRecordDto> createSubscribeRecordDtos,List<SubscribeApproveEntity> subscribeApproveRecords){
-        for (CreateSubscribeRecordDto createSubscribeRecordDto : createSubscribeRecordDtos) {
+    private void assembleRecordSecretsApprove(CreateSubscribeRecordDto createSubscribeRecordDto){
             SecureRandom r = new SecureRandom();
             int number = r.nextInt(10);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -229,11 +225,11 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
             subscribeApprove.setSubCode(subCode);
             subscribeApprove.setProductName(createSubscribeRecordDto.getProductName());
             subscribeApprove.setCid(createSubscribeRecordDto.getCid());
-            subscribeApproveRecords.add(subscribeApprove);
+            subscribeApproveMapper.insert(subscribeApprove);
             Set<String> handledNodeIdsSet = new HashSet<>();
             calcAndSaveNextApproval(createSubscribeRecordDto.getCid(), handledNodeIdsSet, subCode);
         }
-    }
+
     private void calcAndSaveNextApproval(String cid,Set<String> handleNodeIdsSet,String subCode){
         String workflowFormula= productCategoryMapper.selectByWorkflow(cid);
         Integer workflowId=productCategoryMapper.selectByWorkflowId(cid);
