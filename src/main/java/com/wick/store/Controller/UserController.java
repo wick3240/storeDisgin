@@ -21,8 +21,8 @@ public class UserController extends BaseController{
 
     @ApiOperation(value = "注册操作",notes = "注册操作")
     @PostMapping("/org")
-    public JsonResult org(UserEntity user){
-        userService.reg(user);
+    public JsonResult org( @RequestBody UserEntity userEntity){
+        userService.reg(userEntity);
         return new JsonResult();
     }
     @ApiOperation(value = "登录操作",notes = "登录操作")

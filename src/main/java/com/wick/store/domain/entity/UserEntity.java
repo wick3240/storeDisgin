@@ -45,11 +45,11 @@ public class UserEntity extends BaseEntity implements Serializable {
     /**
      * token过期时间
      */
-    private long ExpireTime;
+    private long expireTime;
     /**
      * token 有效时间
      */
-    private long LoginTime;
+    private long loginTime;
 
 }
     //实体类省略了三个方法，一个是get，set方法，一个是equals和hashCode()方法，一个是toString方法。

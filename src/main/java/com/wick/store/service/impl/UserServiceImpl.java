@@ -59,8 +59,6 @@ public class UserServiceImpl implements UserService {
         String md5Password = GetPassWord.getmd5PassWord(oldPassword, salt);
         userEntity.setPassword(md5Password);
         userEntity.setSalt(salt);
-        userEntity.setAvatar(result.getAvatar());
-        userEntity.setUsername(result.getUsername());
         Integer row = userMapper.insert(userEntity);
         if (row != 1) {
             throw new InsertException("用户在注册过程中产生为止异常");

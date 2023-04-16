@@ -32,14 +32,13 @@
         inner join subscribe_approve sa on sa.sub_code =wsa .sub_code
         where
         sa.approve_status in
-
         <foreach collection ="statusList" open="(" close=")" item="item" separator=",">
             #{item}
-        </foreach>)
+        </foreach>
         and wsa .node_approval_status in
         <foreach collection="nodeStatusList" open="(" close=")" item="item" separator=",">
             #{item}
         </foreach>
-        order by sw.created_date
+        order by wsa .created_date
     </select>
 </mapper>
