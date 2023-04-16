@@ -71,5 +71,7 @@ public class ProductInfoController {
     @GetMapping("/apikey")
     public String getKey(){
         return "PMAK-64392fd0465bc800393b907f-14ea2bebb04e759ae6308023c38e5c5217";
+        //家里电脑
+        //return "PMAK-643bbd443ab1b50043a4586e-fa31b1dd7aff84cf3e02d33344d813e769";
     }
 }
