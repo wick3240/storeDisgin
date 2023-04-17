@@ -13,7 +13,7 @@
     <select id="selectPageData" resultType="com.wick.store.domain.vo.SubscribeRecordAndProductVO">
         select sa.*,pc.name from subscribe_approve sa
     inner join product_category  pc on pc.id=sa.cid
-    where user_id=#{userId}
+    where sa.user_id=#{param.userId}
     AND sa.is_deleted=0
     <if test="param.subCode != null and param.subCode != '' ">
         AND sa.sub_code = #{param.subCode,jdbcType=VARCHAR}

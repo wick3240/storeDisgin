@@ -221,7 +221,7 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
 
     private void assembleRecordSecretsApprove(CreateSubscribeRecordDto createSubscribeRecordDto){
             SecureRandom r = new SecureRandom();
-            int number = r.nextInt(10);
+            int number = r.nextInt(100);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             String subCode = "FWD" + sdf.format(new Date()) + number;
             SubscribeApproveEntity subscribeApprove = new SubscribeApproveEntity();

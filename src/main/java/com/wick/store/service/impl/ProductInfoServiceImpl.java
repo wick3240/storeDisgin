@@ -106,13 +106,13 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
         String productId=productInfoDto.getId();
         List<ProductInfoEntity> productInfoEntities = list(new QueryWrapper<ProductInfoEntity>().in("id", productId).eq("is_deleted", 0));
         SecureRandom i =new SecureRandom();
-        int number=i.nextInt(10);
+        int number=i.nextInt(100);
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyyMMdd");
         String pubCode="FWD"+dateFormat.format(new Date())+number;
         for (ProductInfoEntity productInfoEntity:productInfoEntities
              ) {
             productInfoEntity.setPubCode(pubCode);
-            productInfoEntity.setStatus(0);
+            productInfoEntity.setStatus(1);
             productInfoMapper.updateById(productInfoEntity);
         }
         saveApproveRecord(productInfoEntities);

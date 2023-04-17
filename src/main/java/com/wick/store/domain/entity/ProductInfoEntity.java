@@ -15,7 +15,11 @@ public class ProductInfoEntity extends BaseEntity implements Serializable {
     private String description;
     /** 分类id */
     private String cid;
-    /** 产品状态 */
+    /** 产品状态
+     * 未发布是 0
+     * 发布中的状态是 1
+     * 发布成功是 2
+     * 拒绝和下架都是 3*/
     private Integer status;
     /** 用于轮播图的排序 */
     private Integer sort;
