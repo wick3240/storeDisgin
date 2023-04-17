@@ -17,4 +17,7 @@ public class CreateSubscribeRecordDto {
     @ApiModelProperty(value = "产品名称")
     private String productName;
 
+    @ApiModelProperty(value = "订阅者")
+    private String subscriber;
+
 }

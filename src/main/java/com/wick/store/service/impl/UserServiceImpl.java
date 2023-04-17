@@ -151,11 +151,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeInfoUser(String uid, UserEntity user) {
-        UserVo result = userMapper.findByUid(uid);
+        UserVo result = userMapper.findByUid(user.getId());
         if (result == null || result.getIsDeleted() == 1) {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
-        user.setId(uid);
         Integer rows = userMapper.updateInfoByUid(user);
         if (rows != 1) {
             throw new UpdateException("更新数据时产生异常");

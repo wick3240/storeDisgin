@@ -29,5 +29,8 @@ public class SubscribeApproveEntity extends BaseEntity implements Serializable {
     /** 审批通过时 */
     @TableField(value = "approve_time")
     private Date approveTime;
-
+    /**
+     * 订阅者
+     */
+    private String subscriber;
 }

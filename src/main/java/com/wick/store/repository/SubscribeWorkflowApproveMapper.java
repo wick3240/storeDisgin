@@ -35,4 +35,5 @@ public interface SubscribeWorkflowApproveMapper extends BaseMapper<SubscribeWork
     List<SubscribeApproveNode> selectNode(String subId);
 
 
+    String selectByName(String userList);
 }

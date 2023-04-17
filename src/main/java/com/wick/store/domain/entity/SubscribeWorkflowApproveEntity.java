@@ -35,6 +35,10 @@ public class SubscribeWorkflowApproveEntity extends BaseEntity implements Serial
      */
     //@TableField(value = "approval_time")
     private Date approveTime;
+    /**
+     * 审批者
+     */
+    private String ownerName;
 
 
 

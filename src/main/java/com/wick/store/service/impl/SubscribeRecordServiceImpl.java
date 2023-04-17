@@ -177,14 +177,19 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
                         nodeIdSet.add(workflowHandleNodeDto.getNodeId());
 
                         List<String> wfHandleUserList = workflowHandleNodeDto.getUserIdList();
-                        SubscribeWorkflowApproveEntity subscribeWorkflowApproveEntity = new SubscribeWorkflowApproveEntity();
-                        subscribeWorkflowApproveEntity.setNodeApprovalStatus(0);
-                        subscribeWorkflowApproveEntity.setCid(cid);
-                        subscribeWorkflowApproveEntity.setWorkflowId(workflowId);
-                        subscribeWorkflowApproveEntity.setSubCode(subscribeCode);
-                        subscribeWorkflowApproveEntity.setNodeId(workflowHandleNodeDto.getNodeId());
-                        subscribeWorkflowApproveEntity.setUserList(JSON.toJSONString(wfHandleUserList));
-                        subscribeWorkflowApproveMapper.insert(subscribeWorkflowApproveEntity);
+                        for (String userList:wfHandleUserList
+                             ) {
+                            SubscribeWorkflowApproveEntity subscribeWorkflowApproveEntity = new SubscribeWorkflowApproveEntity();
+                            subscribeWorkflowApproveEntity.setNodeApprovalStatus(0);
+                            subscribeWorkflowApproveEntity.setCid(cid);
+                            subscribeWorkflowApproveEntity.setWorkflowId(workflowId);
+                            subscribeWorkflowApproveEntity.setSubCode(subscribeCode);
+                            subscribeWorkflowApproveEntity.setNodeId(workflowHandleNodeDto.getNodeId());
+                            subscribeWorkflowApproveEntity.setOwnerName(subscribeWorkflowApproveMapper.selectByName(userList));
+                            subscribeWorkflowApproveEntity.setUserList(userList);
+                            subscribeWorkflowApproveMapper.insert(subscribeWorkflowApproveEntity);
+                        }
+
                     }
                 }
                 //添加新的pendingnode，需要 判断 新pending node 是否在handled_node
@@ -223,6 +228,7 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
             subscribeApprove.setProductId(createSubscribeRecordDto.getProductId());
             subscribeApprove.setApproveStatus(0);
             subscribeApprove.setSubCode(subCode);
+            subscribeApprove.setSubscriber(createSubscribeRecordDto.getSubscriber());
             subscribeApprove.setProductName(createSubscribeRecordDto.getProductName());
             subscribeApprove.setCid(createSubscribeRecordDto.getCid());
             subscribeApproveMapper.insert(subscribeApprove);
@@ -239,14 +245,19 @@ public class SubscribeRecordServiceImpl extends ServiceImpl<SubscribeApproveMapp
         for (WorkflowHandleNodeDto workflowHandleNodeDto : nextPendingHandleNodeList) {
             nodeIdSet.add(workflowHandleNodeDto.getNodeId());
             List<String> wfHandleUserList = workflowHandleNodeDto.getUserIdList();
-            SubscribeWorkflowApproveEntity subscribeWorkflowApproveEntity=new SubscribeWorkflowApproveEntity();
-            subscribeWorkflowApproveEntity.setCid(cid);
-            subscribeWorkflowApproveEntity.setNodeId(workflowHandleNodeDto.getNodeId());
-            subscribeWorkflowApproveEntity.setNodeApprovalStatus(0);
-            subscribeWorkflowApproveEntity.setWorkflowId(workflowId);
-            subscribeWorkflowApproveEntity.setUserList(JSON.toJSONString(wfHandleUserList));
-            subscribeWorkflowApproveEntity.setSubCode(subCode);
-            subscribeWorkflowApproveMapper.insert(subscribeWorkflowApproveEntity);
+            for (String userList:wfHandleUserList
+                 ) {
+                SubscribeWorkflowApproveEntity subscribeWorkflowApproveEntity=new SubscribeWorkflowApproveEntity();
+                subscribeWorkflowApproveEntity.setCid(cid);
+                subscribeWorkflowApproveEntity.setNodeId(workflowHandleNodeDto.getNodeId());
+                subscribeWorkflowApproveEntity.setNodeApprovalStatus(0);
+                subscribeWorkflowApproveEntity.setWorkflowId(workflowId);
+                subscribeWorkflowApproveEntity.setUserList(userList);
+                subscribeWorkflowApproveEntity.setOwnerName(subscribeWorkflowApproveMapper.selectByName(userList));
+                subscribeWorkflowApproveEntity.setSubCode(subCode);
+                subscribeWorkflowApproveMapper.insert(subscribeWorkflowApproveEntity);
+
+            }
 
         }
 

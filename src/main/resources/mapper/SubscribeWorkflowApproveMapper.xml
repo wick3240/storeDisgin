@@ -16,4 +16,9 @@
     <select id="selectNode" resultType="com.wick.store.domain.Dto.SubscribeApproveNode">
         select sub_code,cid,node_id as wfNodeId from workflow_subscribe_approve where id=#{subId}
     </select>
+        <select id="selectByName" resultType="java.lang.String">
+        SELECT tu.username from t_user tu
+        inner join workflow_subscribe_approve wsa on wsa.user_list =tu.id
+        WHERE wsa.user_list =#{userList}
+    </select>
 </mapper>

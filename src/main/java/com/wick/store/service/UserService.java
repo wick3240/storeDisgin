@@ -16,7 +16,7 @@ public interface UserService {
 
     UserEntity findByUid(String uid);
 
-    void changeInfoUser(String uid, UserEntity user);
+    void changeInfoUser(String uid,UserEntity user);
 
 
     void updateAvatar(HttpSession session,String uid, String username, MultipartFile file);

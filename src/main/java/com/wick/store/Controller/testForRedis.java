@@ -1,7 +1,6 @@
 package com.wick.store.Controller;
 
 
-import com.wick.store.domain.entity.Student;
 import com.wick.store.domain.entity.UserEntity;
 import com.wick.store.repository.UserMapper;
 import com.wick.store.util.JsonResult;

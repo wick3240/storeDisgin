@@ -46,8 +46,8 @@ public class UserController extends BaseController{
     }
     @ApiOperation(value = "修改当前用户的信息",notes = "修改当前用户的信息")
     @PostMapping("/changeInfo")
-    public JsonResult changeInfoUser(UserEntity user,HttpSession session){
-        String  uid=getUidFromSession(session);
+    public JsonResult changeInfoUser(String uid,UserEntity user){
+        user.setId(uid);
         userService.changeInfoUser(uid,user);
         return new JsonResult();
     }

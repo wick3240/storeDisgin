@@ -128,14 +128,20 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
             for (WorkflowHandleNodeDto workflowHandleNodeDto : nextPendingHandleNodeList) {
                 nodeIdSet.add(workflowHandleNodeDto.getNodeId());
                 List<String> wfHandleUserList = workflowHandleNodeDto.getUserIdList();
-                PublishWorkflowApproveEntity publishWorkflowApproveEntity=new PublishWorkflowApproveEntity();
-                publishWorkflowApproveEntity.setCid(cid);
-                publishWorkflowApproveEntity.setNodeId(workflowHandleNodeDto.getNodeId());
-                publishWorkflowApproveEntity.setNodeApproveStatus(0);
-                publishWorkflowApproveEntity.setUserList(JSON.toJSONString(wfHandleUserList));
-                publishWorkflowApproveEntity.setPubCode(pubCode);
-                publishWorkflowApproveEntity.setWorkflowId(workflowId);
-                publishWorkflowApproveMapper.insert(publishWorkflowApproveEntity);
+                for (String userList:wfHandleUserList
+                     ) {
+                    PublishWorkflowApproveEntity publishWorkflowApproveEntity=new PublishWorkflowApproveEntity();
+                    publishWorkflowApproveEntity.setCid(cid);
+                    publishWorkflowApproveEntity.setNodeId(workflowHandleNodeDto.getNodeId());
+                    publishWorkflowApproveEntity.setNodeApproveStatus(0);
+                    publishWorkflowApproveEntity.setUserList(userList);
+                    publishWorkflowApproveEntity.setPubCode(pubCode);
+                    publishWorkflowApproveEntity.setWorkflowId(workflowId);
+                    String ownerName=publishWorkflowApproveMapper.selectByName(userList);
+                    publishWorkflowApproveEntity.setOwnerName(ownerName);
+                    publishWorkflowApproveMapper.insert(publishWorkflowApproveEntity);
+                }
+
 
             }
 

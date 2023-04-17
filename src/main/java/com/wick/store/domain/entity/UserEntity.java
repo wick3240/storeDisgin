@@ -50,6 +50,10 @@ public class UserEntity extends BaseEntity implements Serializable {
      * token 有效时间
      */
     private long loginTime;
+    /**
+     * 用户权限 0是管理员，1是发布者，2是审批者，3是订阅者
+     */
+    private Integer roleCode;
 
 }
     //实体类省略了三个方法，一个是get，set方法，一个是equals和hashCode()方法，一个是toString方法。

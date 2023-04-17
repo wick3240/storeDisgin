@@ -34,4 +34,8 @@ public class PublishWorkflowApproveEntity extends BaseEntity implements Serializ
      */
    // @TableField(value = "approve_time")
     private String approveTime;
+    /**
+     * 审批人
+     */
+    private String ownerName;
 }

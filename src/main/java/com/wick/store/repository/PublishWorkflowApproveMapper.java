@@ -40,4 +40,6 @@ public interface PublishWorkflowApproveMapper extends BaseMapper<PublishWorkflow
     List<PublishApproveNode> selectNodeMessage(String id);
 
     PublishWorkflowApproveEntity selectByCode(String pubCode);
+
+    String selectByName(String userList);
 }

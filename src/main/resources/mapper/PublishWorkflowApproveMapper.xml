@@ -20,4 +20,9 @@
         select * from workflow_publish_approve where
         pub_code = #{pubCode}
     </select>
+    <select id="selectByName" resultType="java.lang.String">
+        SELECT tu.username from t_user tu
+        inner join workflow_publish_approve wps on wpa.user_list =tu.id
+        WHERE wpa.user_list =#{userList}
+    </select>
 </mapper>
