@@ -25,17 +25,20 @@
     <select id="queryHotProduct" resultType="com.wick.store.domain.vo.ProductHotVo">
         select * from product_info pi where pi.cid=#{cid} and is_deleted=0 and status=2
     </select>
+
     <select id="selectByProduct" resultType="com.wick.store.domain.vo.ProductInfoVo">
         select pi.*,pc.name as cidName,pc.url as api from product_info pi
         inner join product_category pc on pc.id=pi.cid
          where pi.id=#{productId} and pi.is_deleted=0
     </select>
+
     <select id="queryPage" resultType="com.wick.store.domain.vo.ProductInfoVo">
         select * from product_info where is_deleted=0
         <if test="productInfoDto.cid != null">
             AND cid=#{cid,javaType=VARCHAR}
         </if>
     </select>
+
     <select id="getProductIdsByPubCode" resultType="java.lang.String">
         select id
         from product_info
@@ -44,9 +47,11 @@
             #{item}
         </foreach>
     </select>
+
     <select id="getCidAndId" resultType="com.wick.store.domain.Dto.ProductInfoDto">
         select id,cid from product_info where name=#{name}
     </select>
+
     <select id="selectBySubscriber" resultType="com.wick.store.domain.Dto.CreateSubscribeRecordDto">
         select pi.id as productId, pi.name as productName,pi.cid from product_info pi where pi.pub_code=#{pubCode}
     </select>

@@ -22,5 +22,9 @@ public class ProductPublishApproveVo {
     private String cid;
     /** 审批通过时间 */
     private Date approveTime;
+    /**
+     * 分类名字
+     */
+    private String cidName;
 
 }

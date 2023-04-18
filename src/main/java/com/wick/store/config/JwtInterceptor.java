@@ -40,7 +40,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             UserEntity user  = JwtTokenUtil.verifyJwtToken(jwtToken);
             //验证成功后,如果令牌有效时间<=5分钟,则签发新的令牌,刷新令牌时间
             if(user != null){
-                if(user.getExpireTime() - System.currentTimeMillis() <= 3000L * 60 * 5){
+                if(user.getExpireTime() - System.currentTimeMillis() <= 1000L * 60 * 5){
                     JwtTokenUtil.refreshToken(user);
                 }
                 return  true ;

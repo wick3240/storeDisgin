@@ -30,6 +30,7 @@
     <select id="selectApproveNodePageData" resultType="com.wick.store.domain.vo.SubscribeRecordAndProductVO">
         select * from workflow_subscribe_approve wsa
         inner join subscribe_approve sa on sa.sub_code =wsa .sub_code
+        inner join product_category pc on pc.id=pa.cid
         where
         sa.approve_status in
         <foreach collection ="statusList" open="(" close=")" item="item" separator=",">
@@ -39,6 +40,15 @@
         <foreach collection="nodeStatusList" open="(" close=")" item="item" separator=",">
             #{item}
         </foreach>
+        <if test="requstDto.subCode != null and requstDto.subCode != '' ">
+            AND wsa.sub_code = #{requstDto.subCode,jdbcType=VARCHAR}
+        </if>
+        <if test="requstDto.productName != null and requstDto.productName != '' ">
+            AND wsa.product_name = #{requstDto.productName,jdbcType=VARCHAR}
+        </if>
+        <if test="requstDto.cidName != null and requstDto.cidName != '' ">
+            AND pc.name = #{requstDto.cidName,jdbcType=VARCHAR}
+        </if>
         order by wsa .created_date
     </select>
 </mapper>

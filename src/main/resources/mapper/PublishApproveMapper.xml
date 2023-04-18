@@ -8,9 +8,9 @@
     <select id="selectPublisherApproveNodeData" resultType="com.wick.store.domain.vo.ProductPublishApproveVo">
         select * from workflow_publish_approve wpa
         inner join publish_approve pa on pa.pub_code =wpa .pub_code
+        inner join product_category pc on pc.id=pa.cid
         where
         pa.approve_status in
-
         <foreach collection ="statusList" open="(" close=")" item="item" separator=",">
             #{item}
         </foreach>)
@@ -18,5 +18,14 @@
         <foreach collection="nodeStatusList" open="(" close=")" item="item" separator=",">
             #{item}
         </foreach>
+        <if test="requstDto.pubCode != null and requstDto.subCode != '' ">
+            AND wpa.pub_code = #{requstDto.subCode,jdbcType=VARCHAR}
+        </if>
+        <if test="requstDto.productName != null and requstDto.productName != '' ">
+            AND wpa.product_name = #{requstDto.productName,jdbcType=VARCHAR}
+        </if>
+        <if test="requstDto.cidName != null and requstDto.cidName != '' ">
+            AND pc.name = #{requstDto.cidName,jdbcType=VARCHAR}
+        </if>
     </select>
 </mapper>
