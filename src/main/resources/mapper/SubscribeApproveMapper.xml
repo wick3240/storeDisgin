@@ -30,7 +30,7 @@
     <select id="selectApproveNodePageData" resultType="com.wick.store.domain.vo.SubscribeRecordAndProductVO">
         select * from workflow_subscribe_approve wsa
         inner join subscribe_approve sa on sa.sub_code =wsa .sub_code
-        inner join product_category pc on pc.id=pa.cid
+        inner join product_category pc on pc.id=sa.cid
         where
         sa.approve_status in
         <foreach collection ="statusList" open="(" close=")" item="item" separator=",">

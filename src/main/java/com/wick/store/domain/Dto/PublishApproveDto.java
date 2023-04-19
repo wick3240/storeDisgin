@@ -27,5 +27,9 @@ public class PublishApproveDto extends BasePageDto{
      * 审批状态
      */
     private Integer Status;
+    /**
+     * 分类名字
+     */
+    private String cidName;
 
 }

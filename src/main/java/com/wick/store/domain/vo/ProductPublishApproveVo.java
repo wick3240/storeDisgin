@@ -26,5 +26,9 @@ public class ProductPublishApproveVo {
      * 分类名字
      */
     private String cidName;
+    /**
+     * nodeId
+     */
+    private String nodeId;
 
 }

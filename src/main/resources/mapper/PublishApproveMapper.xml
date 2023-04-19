@@ -13,19 +13,19 @@
         pa.approve_status in
         <foreach collection ="statusList" open="(" close=")" item="item" separator=",">
             #{item}
-        </foreach>)
-        and wpa .node_approval_status in
+        </foreach>
+        and wpa.node_approve_status in
         <foreach collection="nodeStatusList" open="(" close=")" item="item" separator=",">
             #{item}
         </foreach>
-        <if test="requstDto.pubCode != null and requstDto.subCode != '' ">
-            AND wpa.pub_code = #{requstDto.subCode,jdbcType=VARCHAR}
+        <if test="requestDto.pubCode != null and requestDto.subCode != '' ">
+            AND wpa.pub_code = #{requestDto.subCode,jdbcType=VARCHAR}
         </if>
-        <if test="requstDto.productName != null and requstDto.productName != '' ">
-            AND wpa.product_name = #{requstDto.productName,jdbcType=VARCHAR}
+        <if test="requestDto.productName != null and requestDto.productName != '' ">
+            AND wpa.product_name = #{requestDto.productName,jdbcType=VARCHAR}
         </if>
-        <if test="requstDto.cidName != null and requstDto.cidName != '' ">
-            AND pc.name = #{requstDto.cidName,jdbcType=VARCHAR}
+        <if test="requestDto.cidName != null and requestDto.cidName != '' ">
+            AND pc.name = #{requestDto.cidName,jdbcType=VARCHAR}
         </if>
     </select>
 </mapper>

@@ -33,9 +33,11 @@
     </select>
 
     <select id="queryPage" resultType="com.wick.store.domain.vo.ProductInfoVo">
-        select * from product_info where is_deleted=0
+        select pi.*,pc.name as cidName from product_info pi
+        inner join product_category pc on pc.id=pi.cid
+        where is_deleted=0
         <if test="productInfoDto.cid != null">
-            AND cid=#{cid,javaType=VARCHAR}
+            AND pc.name=#{productInfoDto.cidName,javaType=VARCHAR}
         </if>
     </select>
 
