@@ -35,7 +35,7 @@
     <select id="queryPage" resultType="com.wick.store.domain.vo.ProductInfoVo">
         select pi.*,pc.name as cidName from product_info pi
         inner join product_category pc on pc.id=pi.cid
-        where is_deleted=0
+        where pi.is_deleted=0
         <if test="productInfoDto.cid != null">
             AND pc.name=#{productInfoDto.cidName,javaType=VARCHAR}
         </if>

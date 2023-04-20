@@ -33,4 +33,8 @@ public class SubscribeApproveEntity extends BaseEntity implements Serializable {
      * 订阅者
      */
     private String subscriber;
+    /**
+     * 订阅者id
+     */
+    private String userId;
 }

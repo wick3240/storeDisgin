@@ -20,4 +20,7 @@ public class CreateSubscribeRecordDto {
     @ApiModelProperty(value = "订阅者")
     private String subscriber;
 
+    @ApiModelProperty(value = "订阅者id")
+    private String userId;
+
 }

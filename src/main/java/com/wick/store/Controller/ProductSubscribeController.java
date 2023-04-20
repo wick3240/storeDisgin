@@ -51,7 +51,7 @@ public class ProductSubscribeController {
         return jsonResult;
     }
     @ApiOperation(value = "流程审批",notes = "流程审批")
-    @PutMapping("/workflow/update")
+    @PostMapping("/workflow/update")
     public JsonResult workflowUpdateApprove( @RequestBody SubscribeWorkflowApproveDto subscribeWorkflowApproveDto){
         subscribeRecordService.workflowUpdateApprove(subscribeWorkflowApproveDto);
         return new JsonResult();

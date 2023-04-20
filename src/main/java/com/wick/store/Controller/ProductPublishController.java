@@ -43,7 +43,7 @@ public class ProductPublishController {
         productInfoService.batchPublish(productInfoDto);
         return jsonResult;
     }
-    @PutMapping("/workflow/publish")
+    @PostMapping("/workflow/publish")
     @ApiOperation("批量审批发布的产品（针对审批者）")
     public JsonResult workflowPublishApprove(@RequestBody PublishWorkflowApproveDto publishWorkflowApproveDto) {
         approveService.workflowPublishApprove(publishWorkflowApproveDto);
