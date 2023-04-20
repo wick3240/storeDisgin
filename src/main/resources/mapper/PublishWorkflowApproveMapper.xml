@@ -21,7 +21,7 @@
         pub_code = #{pubCode}
     </select>
     <select id="selectByName" resultType="java.lang.String">
-        SELECT tu.username as ownerName from t_user tu
+        SELECT distinct tu.username as ownerName from t_user tu
         inner join workflow_publish_approve wpa on wpa.user_list =tu.id
         WHERE wpa.user_list =#{userList}
     </select>
