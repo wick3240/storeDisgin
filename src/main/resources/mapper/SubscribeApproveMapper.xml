@@ -28,7 +28,7 @@
     order by sa.created_date
     </select>
     <select id="selectApproveNodePageData" resultType="com.wick.store.domain.vo.SubscribeRecordAndProductVO">
-        select * from workflow_subscribe_approve wsa
+        select wsa.*,pc.name as cidName,sa.product_id,sa.product_name,sa.user_id from workflow_subscribe_approve wsa
         inner join subscribe_approve sa on sa.sub_code =wsa .sub_code
         inner join product_category pc on pc.id=sa.cid
         where

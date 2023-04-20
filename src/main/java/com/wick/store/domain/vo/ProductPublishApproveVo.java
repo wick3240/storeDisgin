@@ -30,5 +30,9 @@ public class ProductPublishApproveVo {
      * nodeId
      */
     private String nodeId;
+    /**
+     * 审批者
+     */
+    private String ownerName;
 
 }
