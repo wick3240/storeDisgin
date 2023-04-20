@@ -26,6 +26,10 @@ public class ProductInfoDto extends BasePageDto{
      * 权重
      */
     private Integer weight;
+    /**
+     * 产品api
+     */
+    private String api;
 
 
 }

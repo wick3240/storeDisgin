@@ -28,4 +28,6 @@ public class ProductInfoVo {
     private String cidName;
 
     private String api;
+
+    private String id;
 }

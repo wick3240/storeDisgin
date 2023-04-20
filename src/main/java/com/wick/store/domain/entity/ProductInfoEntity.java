@@ -33,4 +33,8 @@ public class ProductInfoEntity extends BaseEntity implements Serializable {
      * 权重，用于热门推荐
      */
     private Integer weight;
+    /**
+     * 产品api
+     */
+    private String api;
 }
