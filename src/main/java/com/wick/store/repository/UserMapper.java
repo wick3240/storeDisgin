@@ -7,6 +7,8 @@ import com.wick.store.util.JsonResult;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Mapper
 @Component
 public interface UserMapper extends BaseMapper<UserEntity> {
@@ -35,5 +37,5 @@ public interface UserMapper extends BaseMapper<UserEntity> {
 
     UserEntity getUser(String username);
 
-    UserVo selectAllUser();
+    List<UserVo> selectAllUser();
 }
