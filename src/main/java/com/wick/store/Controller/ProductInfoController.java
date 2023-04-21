@@ -4,6 +4,7 @@ package com.wick.store.Controller;
 import com.wick.store.domain.Dto.ProductInfoDto;
 import com.wick.store.domain.vo.PageVO;
 import com.wick.store.domain.vo.ProductInfoVo;
+import com.wick.store.domain.vo.apiVo;
 import com.wick.store.service.ProductInfoService;
 import com.wick.store.util.JsonResult;
 import io.swagger.annotations.Api;
@@ -69,8 +70,13 @@ public class ProductInfoController {
         return new JsonResult();
     }
     @GetMapping("/apikey")
-    public String getKey(){
-        return "PMAK-64392fd0465bc800393b907f-14ea2bebb04e759ae6308023c38e5c5217";
+    public apiVo getKey(String productId){
+        apiVo apiVo=new apiVo();
+        apiVo.setApi(productInfoService.findByApi(productId));
+        apiVo.setKey("PMAK-643bbd443ab1b50043a4586e-fa31b1dd7aff84cf3e02d33344d813e769");
+        return apiVo;
+        //公司电脑
+        //return "PMAK-64392fd0465bc800393b907f-14ea2bebb04e759ae6308023c38e5c5217";
         //家里电脑
         //return "PMAK-643bbd443ab1b50043a4586e-fa31b1dd7aff84cf3e02d33344d813e769";
     }

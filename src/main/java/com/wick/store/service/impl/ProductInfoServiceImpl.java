@@ -101,6 +101,12 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
     public void batchPublish(ProductInfoDto productInfoDto) {
         singleClassificationProcess(productInfoDto);
     }
+
+    @Override
+    public String findByApi(String productId) {
+        return productInfoMapper.selectByApi(productId);
+    }
+
     private void singleClassificationProcess(ProductInfoDto productInfoDto){
         String cid = productInfoDto.getCid();
         String productId=productInfoDto.getId();

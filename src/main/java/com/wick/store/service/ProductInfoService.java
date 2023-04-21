@@ -58,4 +58,6 @@ public interface ProductInfoService  extends IService<ProductInfoEntity> {
      * @param productInfoDto
      */
     void batchPublish( ProductInfoDto productInfoDto);
+
+    String findByApi(String productId);
 }

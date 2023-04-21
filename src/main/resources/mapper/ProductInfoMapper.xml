@@ -57,5 +57,8 @@
     <select id="selectBySubscriber" resultType="com.wick.store.domain.Dto.CreateSubscribeRecordDto">
         select pi.id as productId, pi.name as productName,pi.cid from product_info pi where pi.pub_code=#{pubCode}
     </select>
+    <select id="selectByApi" resultType="java.lang.String">
+        select api from product_info where id=#{productId}
+    </select>
 
 </mapper>

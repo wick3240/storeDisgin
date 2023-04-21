@@ -87,4 +87,6 @@ public interface ProductInfoMapper extends BaseMapper<ProductInfoEntity> {
      * @param productId
      */
     void updateByWeight(int weight, String productId);
+
+    String selectByApi(String productId);
 }
