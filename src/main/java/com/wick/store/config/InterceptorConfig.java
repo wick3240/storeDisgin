@@ -27,7 +27,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry
                 .addInterceptor(new JwtInterceptor())
                 .addPathPatterns("/api/**") //拦截的地址
-                .excludePathPatterns("/user/**"); //不需要拦截的地址，如登录接口
+                .excludePathPatterns("/user/**")
+                .excludePathPatterns("/swagger-ui.html/**"); //不需要拦截的地址，如登录接口,swagger地址
     }
 
     /**
