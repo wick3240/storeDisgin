@@ -30,6 +30,7 @@
         select pi.*,pc.name as cidName,pc.url as api from product_info pi
         inner join product_category pc on pc.id=pi.cid
          where pi.id=#{productId} and pi.is_deleted=0
+         and status=2
     </select>
 
     <select id="queryPage" resultType="com.wick.store.domain.vo.ProductInfoVo">

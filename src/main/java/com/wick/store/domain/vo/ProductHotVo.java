@@ -23,7 +23,7 @@ public class ProductHotVo {
     /**
      * 产品图片
      */
-    private String img;
+    private String coverUrl;
 
 
 

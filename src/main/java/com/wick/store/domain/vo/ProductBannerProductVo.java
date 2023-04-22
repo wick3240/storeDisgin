@@ -18,7 +18,7 @@ public class ProductBannerProductVo {
      * 产品图片
      *
      */
-    private String img;
+    private String coverUrl;
     /**
      * 排序
      */

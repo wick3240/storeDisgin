@@ -25,7 +25,7 @@ public class SubscribeRecordRequstDto extends BasePageDto{
     /**
      * 审批状态
      */
-    private Integer Status;
+    private Integer status;
     /**
      * 分类名字
      */
