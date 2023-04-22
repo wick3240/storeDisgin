@@ -1,5 +1,6 @@
 package com.wick.store.service.impl;
 
+import com.wick.store.domain.Dto.ChangInfoPasswordDto;
 import com.wick.store.domain.entity.UserEntity;
 import com.wick.store.domain.vo.UserVo;
 import com.wick.store.repository.UserMapper;
@@ -7,7 +8,6 @@ import com.wick.store.service.UserService;
 import com.wick.store.service.ex.*;
 import com.wick.store.service.ex.fileEx.*;
 import com.wick.store.util.GetPassWord;
-import com.wick.store.util.JsonResult;
 import com.wick.store.util.JwtTokenUtil;
 import com.wick.store.util.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -117,17 +117,17 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void changePassword(String username, String oldPassword, String newPassword) {
-        UserEntity result = userMapper.findByUserName(username);
-        if (result == null || result.getIsDeleted()==false) {
+    public void changePassword(ChangInfoPasswordDto changInfoPasswordDto) {
+        UserEntity result = userMapper.findByUserName(changInfoPasswordDto.getUsername());
+        if (result == null || result.getIsDeleted()==true) {
             throw new UserNameDuplicatedException("用户数据不存在");
         }
-        String oldMd5Password = GetPassWord.getmd5PassWord(oldPassword, result.getSalt());
+        String oldMd5Password = GetPassWord.getmd5PassWord(changInfoPasswordDto.getOldPassword(), result.getSalt());
         if (!result.getPassword().equals(oldMd5Password)) {
             throw new PasswordNotMatchException("密码错误");
         }
-        String newMd5Password = GetPassWord.getmd5PassWord(newPassword, result.getSalt());
-        Integer row = userMapper.updatePasswordByUid(username, newMd5Password);
+        String newMd5Password = GetPassWord.getmd5PassWord(changInfoPasswordDto.getNewPassword(), result.getSalt());
+        Integer row = userMapper.updatePasswordByUid(changInfoPasswordDto.getUsername(), newMd5Password);
         if (row != 1) {
             throw new UpdateException("更新密码错误");
 
@@ -216,8 +216,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JsonResult getUserId(String username) {
-        return new JsonResult<>(userMapper.getUser(username));
+    public UserVo getUserId(String id) {
+        return userMapper.getUser(id);
     }
 
     @Override

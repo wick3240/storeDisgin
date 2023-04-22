@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -44,9 +45,15 @@ public class RoleController {
         //家里电脑
         //return "PMAK-643bbd443ab1b50043a4586e-fa31b1dd7aff84cf3e02d33344d813e769";
     }
+    @ApiOperation(value = "获取用户信息",notes = "获取用户信息")
+    @GetMapping("/get/{id}")
+    public JsonResult getUid(@PathVariable String id){
+        return new JsonResult(userService.getUserId(id));
+    }
+
     @ApiOperation(value = "修改当前用户的信息",notes = "修改当前用户的信息")
-    @PostMapping("/changeInfo")
-    public JsonResult changeInfoUser(String uid, @RequestBody UserEntity user){
+    @PostMapping("/changeInfo/{uid}")
+    public JsonResult changeInfoUser(@PathVariable String uid, @RequestBody @Valid UserEntity user){
         user.setId(uid);
         userService.changeInfoUser(uid,user);
         return new JsonResult();

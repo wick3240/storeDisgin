@@ -33,7 +33,7 @@ public class ProductCategoryController extends BaseController{
         return new JsonResult<>(productCategoryService.save(productCategoryDto));
     }
     @ApiOperation(value = "删除分类", notes = "删除分类")
-    @PostMapping("/delete/{cid}")
+    @PostMapping("/delete/{id}")
     public JsonResult delete(@PathVariable String id) {
         productCategoryService.delete(id);
         return new JsonResult();
@@ -44,5 +44,11 @@ public class ProductCategoryController extends BaseController{
         productCategoryDto.setId(productCategoryId);
         productCategoryService.update(productCategoryDto);
         return new JsonResult();
+    }
+    @ApiOperation(value = "获取单个分类信息",notes ="获取单个分类信息" )
+    @GetMapping("/get/{id}")
+    public JsonResult getCidMessage(@PathVariable String id){
+
+        return new JsonResult(productCategoryService.getCidMessage(id));
     }
 }

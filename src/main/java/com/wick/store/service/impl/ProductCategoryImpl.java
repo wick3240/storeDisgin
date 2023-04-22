@@ -84,5 +84,14 @@ public class ProductCategoryImpl extends ServiceImpl<ProductCategoryMapper,Produ
         return productCategoryListVos;
     }
 
+    @Override
+    public ProductCategoryVo getCidMessage(String id) {
+        ProductCategoryVo productCategoryVo=new ProductCategoryVo();
+        ProductCategoryEntity productCategoryEntity=getOne(new QueryWrapper<ProductCategoryEntity>()
+                .eq("id",id).eq("is_deleted",0));
+        BeanUtils.copyProperties(productCategoryEntity,productCategoryVo);
+        return productCategoryVo;
+    }
+
 
 }

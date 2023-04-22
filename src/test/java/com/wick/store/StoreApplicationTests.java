@@ -1,5 +1,6 @@
 package com.wick.store;
 
+import com.wick.store.domain.Dto.ChangInfoPasswordDto;
 import com.wick.store.domain.entity.UserEntity;
 import com.wick.store.repository.UserMapper;
 import com.wick.store.service.UserService;
@@ -47,7 +48,8 @@ class StoreApplicationTests {
 	}
 	@Test
 	void update(){
-		userService.changePassword("wick1","12345","2222222");
+		ChangInfoPasswordDto changInfoPasswordDto=new ChangInfoPasswordDto();
+		userService.changePassword(changInfoPasswordDto);
 	}
 	@Test
 	void changeInfoUser(){

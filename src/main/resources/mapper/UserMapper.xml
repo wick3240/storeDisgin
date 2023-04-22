@@ -4,13 +4,15 @@
     <update id="updatePasswordByUid">
         update t_user set
         password=#{newPassword}
-        where uaername=#{username}
+        where username=#{username}
     </update>
     <update id="updateInfoByUid">
         update t_user set
         <if test="phone!=null">phone=#{phone},</if>
         <if test="email!=null">email=#{email},</if>
-        <if test="gender!=null">gender=#{gender}</if>
+        <if test="gender!=null">gender=#{gender},</if>
+        <if test="avatar!=null">avatar=#{avatar},</if>
+        <if test="roleCode!=null">role_code=#{roleCode}</if>
         where id=#{id}
     </update>
     <update id="updateAvatarByUid">
@@ -38,11 +40,12 @@
     <select id="findByUid" resultType="com.wick.store.domain.vo.UserVo">
         select * from t_user where id=#{uid}
     </select>
-    <select id="getUser" resultType="com.wick.store.domain.entity.UserEntity">
-        select * from t_user where username=#{username}
+    <select id="getUser" resultType="com.wick.store.domain.vo.UserVo">
+        select * from t_user where id=#{id}
     </select>
     <select id="selectAllUser" resultType="com.wick.store.domain.vo.UserVo">
         select * from t_user
+        where is_deleted=0
         order by created_date
     </select>
 </mapper>

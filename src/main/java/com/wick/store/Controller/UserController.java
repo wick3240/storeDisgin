@@ -1,5 +1,6 @@
 package com.wick.store.Controller;
 
+import com.wick.store.domain.Dto.ChangInfoPasswordDto;
 import com.wick.store.domain.entity.UserEntity;
 import com.wick.store.service.UserService;
 import com.wick.store.util.JsonResult;
@@ -34,8 +35,8 @@ public class UserController extends BaseController{
     }
     @ApiOperation(value = "修改密码",notes = "修改密码")
     @PostMapping("/changePassword")
-    public JsonResult changePassword(String username,String oldPassword,String newPassword){
-        userService.changePassword(username,oldPassword,newPassword);
+    public JsonResult changePassword(@RequestBody ChangInfoPasswordDto changInfoPasswordDto){
+        userService.changePassword(changInfoPasswordDto);
         return new JsonResult<>();
     }
     @ApiOperation("查找用户的uid")

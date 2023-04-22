@@ -1,7 +1,8 @@
 package com.wick.store.service;
 
+import com.wick.store.domain.Dto.ChangInfoPasswordDto;
 import com.wick.store.domain.entity.UserEntity;
-import com.wick.store.util.JsonResult;
+import com.wick.store.domain.vo.UserVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -12,7 +13,7 @@ public interface UserService {
 
     Map<String,Object> login(String username, String password);
 
-    void changePassword(String username, String oldPassword, String newPassword);
+    void changePassword(ChangInfoPasswordDto changInfoPasswordDto);
 
     UserEntity findByUid(String uid);
 
@@ -24,7 +25,7 @@ public interface UserService {
 
     void logout(String userId);
 
-    JsonResult getUserId(String username);
+    UserVo getUserId(String id);
 
     UserEntity userInfo(String token);
 

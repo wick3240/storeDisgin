@@ -17,4 +17,6 @@ public interface ProductCategoryService {
     void update(ProductCategoryDto productCategoryDto);
 
     List<ProductCategoryListVo> listProductCategory();
+
+    ProductCategoryVo getCidMessage(String id);
 }

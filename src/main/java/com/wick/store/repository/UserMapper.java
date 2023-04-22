@@ -35,7 +35,7 @@ public interface UserMapper extends BaseMapper<UserEntity> {
 
     Integer updateAvatarByUid(String uid, String avatar, String username);
 
-    UserEntity getUser(String username);
+    UserVo getUser(String id);
 
     List<UserVo> selectAllUser();
 
