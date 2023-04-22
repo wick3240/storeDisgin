@@ -27,4 +27,6 @@ public interface UserService {
     JsonResult getUserId(String username);
 
     UserEntity userInfo(String token);
+
+    void deletedByUser(String id);
 }

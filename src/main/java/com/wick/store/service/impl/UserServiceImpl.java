@@ -225,5 +225,10 @@ public class UserServiceImpl implements UserService {
         return  JwtTokenUtil.verifyJwtToken(token);
     }
 
+    @Override
+    public void deletedByUser(String id) {
+        userMapper.deltedByuser(id);
+    }
+
 
 }

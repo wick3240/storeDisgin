@@ -44,13 +44,13 @@ public class UserController extends BaseController{
         UserEntity data=userService.findByUid(getUidFromSession(session));
         return new JsonResult(data);
     }
-    @ApiOperation(value = "修改当前用户的信息",notes = "修改当前用户的信息")
-    @PostMapping("/changeInfo")
-    public JsonResult changeInfoUser(String uid,UserEntity user){
-        user.setId(uid);
-        userService.changeInfoUser(uid,user);
-        return new JsonResult();
-    }
+//    @ApiOperation(value = "修改当前用户的信息",notes = "修改当前用户的信息")
+//    @PostMapping("/changeInfo")
+//    public JsonResult changeInfoUser(String uid,UserEntity user){
+//        user.setId(uid);
+//        userService.changeInfoUser(uid,user);
+//        return new JsonResult();
+//    }
 
     @ApiOperation(value = "上传头像",notes = "上传头像")
     @PostMapping("/uploadAvatar")

@@ -5,6 +5,10 @@ import lombok.Data;
 
 @Data
 public class UserVo {
+    /**
+     * userId
+     */
+    private String id;
 
     private String username;
     /**
@@ -36,5 +40,9 @@ public class UserVo {
      * 是否删除
      */
     private int isDeleted;
+    /**
+     * 权限
+     */
+    private String roleCode;
 
 }

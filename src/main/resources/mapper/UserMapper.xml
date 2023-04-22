@@ -19,6 +19,9 @@
         avatar=#{avatar}
         where id=#{uid}
     </update>
+    <delete id="deltedByuser">
+        update t_user set is_deleted=1 where id=#{id}
+    </delete>
     <!--    另外的update代码，先注释，以自己的逻辑操作先-->
 <!--    <update id="updateOtherPasswordByUid">-->
 <!--        update t_user set password=#{password},-->

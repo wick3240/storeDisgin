@@ -38,4 +38,6 @@ public interface UserMapper extends BaseMapper<UserEntity> {
     UserEntity getUser(String username);
 
     List<UserVo> selectAllUser();
+
+    void deltedByuser(String id);
 }
