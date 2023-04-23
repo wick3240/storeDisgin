@@ -16,7 +16,7 @@ public interface ProductCoverService extends IService<ProductCoverEntity> {
      * 保存产品封面信息
      * @param productCoverDto
      */
-    void save(ProductCoverDto productCoverDto);
+    ProductCoverVo save(ProductCoverDto productCoverDto);
 
     /**
      * 修改产品信息

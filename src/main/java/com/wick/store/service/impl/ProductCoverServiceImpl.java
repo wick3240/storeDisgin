@@ -23,13 +23,14 @@ public class ProductCoverServiceImpl extends ServiceImpl<ProductCoverMapper, Pro
     @Autowired
     private ProductCoverMapper productCoverMapper;
     @Override
-    public void save(ProductCoverDto productCoverDto) {
+    public ProductCoverVo save(ProductCoverDto productCoverDto) {
         ProductCoverEntity productCoverEntity=new ProductCoverEntity();
         BeanUtils.copyProperties(productCoverDto,productCoverEntity);
         productCoverEntity.setStatus(1);
         this.save(productCoverEntity);
-
-
+        ProductCoverVo productCoverVo=new ProductCoverVo();
+        BeanUtils.copyProperties(productCoverDto,productCoverVo);
+        return productCoverVo;
 
     }
 

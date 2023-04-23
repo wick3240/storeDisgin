@@ -24,8 +24,8 @@ public class ProductCoverController {
     @PostMapping("/save")
     public JsonResult save(
             @RequestBody @Validated ProductCoverDto productCoverDto) {
-        productCoverService.save(productCoverDto);
-        return new JsonResult();
+
+        return new JsonResult( productCoverService.save(productCoverDto));
     }
     @ApiOperation(value = "修改产品封面信息", notes = "修改产品封面信息")
     @PostMapping("/update/{attachmentId}")
