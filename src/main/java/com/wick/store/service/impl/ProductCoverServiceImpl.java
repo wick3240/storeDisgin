@@ -9,12 +9,15 @@ import com.wick.store.domain.vo.PageVO;
 import com.wick.store.domain.vo.ProductCoverVo;
 import com.wick.store.repository.ProductCoverMapper;
 import com.wick.store.service.ProductCoverService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 @Service
+@Slf4j
 public class ProductCoverServiceImpl extends ServiceImpl<ProductCoverMapper, ProductCoverEntity>
         implements ProductCoverService {
     @Autowired
@@ -52,9 +55,13 @@ public class ProductCoverServiceImpl extends ServiceImpl<ProductCoverMapper, Pro
     }
 
     @Override
-    public void delete(List<String> ids) {
+    public void delete(String id) {
         ProductCoverEntity productCoverEntity = new ProductCoverEntity();
-        productCoverEntity.setIsDeleted(true);
-        ids.forEach(id -> update(productCoverEntity, new UpdateWrapper<ProductCoverEntity>().eq("id", id)));
+        log.info("id===========>"+id);
+        //productCoverEntity.setIsDeleted(true);
+//        UpdateWrapper<ProductCoverEntity> updateWrapper=new UpdateWrapper<>();
+//        updateWrapper.eq("id",id);
+        update(productCoverEntity, new UpdateWrapper<ProductCoverEntity>().set("is_deleted",1).eq("id", id));
+    //ids.forEach(id -> update(productCoverEntity, new UpdateWrapper<ProductCoverEntity>().eq("id", id)));
     }
 }

@@ -43,10 +43,10 @@ public class ProductCoverController {
         return new JsonResult<PageVO<ProductCoverVo>>(productCoverService.queryPage(productCoverDto));
     }
 
-    @ApiOperation(value = "批量删除", notes = "批量删除")
-    @PostMapping("/batch/delete")
-    public JsonResult delete(@RequestBody List<String> ids) {
-        productCoverService.delete(ids);
+    @ApiOperation(value = "删除", notes = "删除")
+    @PostMapping("/batch/delete/{id}")
+    public JsonResult delete(@PathVariable  String id) {
+        productCoverService.delete(id);
         return new JsonResult();
     }
 }

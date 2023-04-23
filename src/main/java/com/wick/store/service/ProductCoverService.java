@@ -33,7 +33,7 @@ public interface ProductCoverService extends IService<ProductCoverEntity> {
 
     /**
      * 批量删除
-     * @param ids
+     * @param id
      */
-    void delete(List<String> ids);
+    void delete(String id);
 }
