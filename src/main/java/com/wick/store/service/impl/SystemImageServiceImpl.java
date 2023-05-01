@@ -75,7 +75,8 @@ public class SystemImageServiceImpl extends ServiceImpl<SystemImageMapper,System
            //dateForm 这是动态的文件夹所以要和地址一起存入数据库中
            //放入对应的字段中
            file.transferTo(newFile);
-           String urlImg = "http://192.168.2.11:9290" + "/images/"+dateForm+newFileName;
+           String urlImg="http://"+request.getServerName()+":"+request.getServerPort()+"/images/"+dateForm+newFileName;
+          // String urlImg = "http://192.168.2.11:9290" + "/images/"+dateForm+newFileName;
            log.info("图片上传，url为:"+urlImg);
            return new JsonResult(urlImg);
        }catch (IOException e){
